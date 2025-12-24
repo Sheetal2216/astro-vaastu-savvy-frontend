@@ -42,38 +42,105 @@ function HomeHero() {
           </div>
 
           {/* Achievements */}
-          <div className="mt-12 flex gap-10 text-[#1B2624]">
+          <div className="mt-12 flex gap-15 text-[#1B2624]">
             <div>
-              <p className="text-3xl font-['Playfair_Display']">12+</p>
-              <p className="text-sm font-['Poppins']">Global Awards</p>
+              <p className="text-3xl font-['Playfair_Display']">50+</p>
+              <p className="text-sm font-['Poppins']">Global Awards & Recognition 
+</p>
             </div>
             <div>
-              <p className="text-3xl font-['Playfair_Display']">6+</p>
-              <p className="text-sm font-['Poppins']">Countries Served</p>
+              <p className="text-3xl font-['Playfair_Display']">15+</p>
+              <p className="text-sm font-['Poppins']">Clients Served Across</p>
             </div>
-            <div>
+           
+              <div>
               <p className="text-3xl font-['Playfair_Display']">50K+</p>
-              <p className="text-sm font-['Poppins']">Followers</p>
+              <p className="text-sm font-['Poppins']">Views & Reach</p>
             </div>
           </div>
         </div>
 
         {/* RIGHT VISUAL */}
-        <div className="relative flex justify-center">
-          <div className="absolute w-80 h-80 rounded-full bg-[#606C33]/20 blur-3xl"></div>
+     {/* DESKTOP VISUAL (Unchanged) */}
+<div className="relative hidden md:flex justify-center items-center w-full min-h-[420px]">
 
-          <img
-            src="/images/astro-savvy-main.jpeg"
-            alt="Astro Vaastu Savvy"
-            className="relative z-10 w-64 md:w-80 rounded-2xl shadow-xl border border-[#BC6C25]/40"
-          />
+  {/* Background Wash */}
+  <div className="absolute w-[420px] h-[420px] rounded-full bg-[#606C33]/12"></div>
 
-          <img
-            src="/images/astro-savvy-award.jpeg"
-            alt="Awards"
-            className="absolute bottom-0 right-0 translate-x-1/3 w-32 rounded-lg border border-[#BC6C25] shadow-md hidden md:block"
-          />
-        </div>
+  {/* Main Image */}
+  <div className="relative z-10">
+    <div className="w-72 h-72 md:w-80 md:h-80 rounded-full border-2 border-[#BC6C25]/40 flex items-center justify-center bg-[#F5EBE0]">
+      <img
+        src="/images/astro-savvy-main.jpeg"
+        alt="Astro Vaastu Savvy"
+        className="w-64 h-64 md:w-72 md:h-72 object-cover rounded-full border border-[#606C33]/40"
+      />
+    </div>
+  </div>
+
+  {/* Secondary Image – Top Right */}
+  <div className="absolute top-4 right-6 md:right-10">
+    <div className="relative w-44 h-44 rounded-full bg-[#DDA158]/35 flex items-center justify-center">
+      <div className="absolute inset-0 rounded-full bg-[#606C33]/20 blur-md"></div>
+      <img
+        src="/images/speech-3.jpeg"
+        alt="Award Recognition"
+        className="relative w-36 h-36 object-cover rounded-full border border-[#606C33]/50"
+      />
+    </div>
+  </div>
+
+  {/* Secondary Image – Bottom Left */}
+  <div className="absolute bottom-6 left-8 md:left-0">
+    <div className="w-48 h-48 rounded-full bg-[#606C33]/20 flex items-center justify-center">
+      <img
+        src="/images/media/media-1.jpeg"
+        alt="Media Appearance"
+        className="w-40 h-40 object-cover rounded-full border border-[#606C33]/40"
+      />
+    </div>
+  </div>
+
+</div>
+
+{/* MOBILE IMAGE LAYOUT – 3 Images Only */}
+<div className="md:hidden flex flex-col items-center gap-8 mt-0">
+
+  {/* Main Image */}
+  <div className="relative mb-0">
+    <div className="w-64 h-64 rounded-full bg-[#606C33]/15 flex items-center justify-center">
+      <img
+        src="/images/astro-savvy-main.jpeg"
+        alt="Astro Vaastu Savvy"
+        className="w-56 h-56 object-cover rounded-full border border-[#606C33]/40 bg-[#F5EBE0]"
+      />
+    </div>
+  </div>
+
+  {/* Supporting Images */}
+  <div className="flex gap-6">
+
+    {/* Image 2 */}
+    <div className="w-32 h-32 rounded-full bg-[#DDA158]/30 flex items-center justify-center">
+      <img
+        src="/images/speech-3.jpeg"
+        alt="Award Ceremony"
+        className="w-24 h-24 object-cover rounded-full border border-[#606C33]/40"
+      />
+    </div>
+
+    {/* Image 3 */}
+    <div className="w-32 h-32 rounded-full bg-[#606C33]/20 flex items-center justify-center">
+      <img
+        src="/images/media/media-1.jpeg"
+        alt="Media Presence"
+        className="w-24 h-24 object-cover rounded-full border border-[#606C33]/40"
+      />
+    </div>
+
+  </div>
+</div>
+
       </div>
     </section>
   );
