@@ -21,7 +21,7 @@ function HomeAbout() {
           <div className="mt-4 h-px w-20 bg-[#606C33]/60"></div>
 
           <p className="mt-6 font-['Poppins'] text-[#1B2624]/85 leading-relaxed max-w-xl">
-            Dr. Savvvy Siinghh, widely known as{" "}
+             Acharya Dr.Savvy Singh, widely known as{" "}
             <strong>Astro Vaastu Savvy</strong>, is a renowned celebrity
             astrologer and medal-winning scientific vastu expert with over
             six years of professional practice.
@@ -53,19 +53,17 @@ function HomeAbout() {
   <div className="relative w-72 h-72 md:w-80 md:h-80 flex items-center justify-center">
 
     {/* Organic Background Shape 1 */}
-    <div className="absolute w-64 h-64 bg-[#DDA158]/35 rounded-full -top-6 -left-6"></div>
+    <div className="absolute w-64 h-64 bg-[#DDA158]/35 rounded-full -top-6 -left-15"></div>
 
     {/* Organic Background Shape 2 */}
-    <div className="absolute w-52 h-52 bg-[#606C33]/20 rounded-full bottom-0 right-0"></div>
+    <div className="absolute w-52 h-52 bg-[#606C33]/20 rounded-full bottom-0 -right-10"></div>
 
-    {/* Organic Background Shape 3 (optional depth) */}
-    <div className="absolute w-40 h-40 bg-[#BC6C25]/20 rounded-full top-10 right-6"></div>
-
+    
     {/* Main Circular Image */}
     <img
-      src="/images/astro-savvy-main.jpeg"
+      src="/images/astro-savvy-main-4.jpeg"
       alt="Astro Vaastu Savvy"
-      className="relative z-10 w-60 h-60 md:w-64 md:h-64 object-cover rounded-full border border-[#606C33]/40 bg-[#F5EBE0]"
+      className="relative z-10 w-100 h-100 md:w-64 md:h-90 object-cover rounded-full border border-[#606C33]/40 bg-[#F5EBE0]"
     />
   </div>
 </div>

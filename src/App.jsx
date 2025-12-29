@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navigation/navbar-temp.jsx";
-
 import Home from "./pages/Home.jsx";
 import About from "./pages/About.jsx";
 import Services from "./pages/Services.jsx";
@@ -10,6 +9,8 @@ import Blogs from "./pages/Blogs.jsx";
 import Contact from "./pages/Contact.jsx";
 import PaymentSuccess from "./pages/PaymentSuccess.jsx";
 import PaymentFailure from "./pages/PaymentFailure.jsx";
+import PromptBox from "./components/PromptBox/PromptBox";
+
 
 function App() {
   return (
@@ -26,7 +27,9 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/payment-success" element={<PaymentSuccess />} />
         <Route path="/payment-failure" element={<PaymentFailure />} />
+ 
       </Routes>
+           <PromptBox />
     </BrowserRouter>
   );
 }

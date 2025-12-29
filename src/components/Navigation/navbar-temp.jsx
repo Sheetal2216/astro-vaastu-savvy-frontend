@@ -12,7 +12,7 @@ function Navbar() {
           {/* Logo */}
           <Link
             to="/"
-            className="text-xl md:text-2xl font-['Playfair_Display'] text-[#1B2624]"
+            className="text-xl font-bold md:text-2xl font-['Playfair_Display'] text-[#1B2624]"
           >
             Astro Vaastu Savvy
           </Link>

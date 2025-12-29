@@ -5,7 +5,7 @@ function AwardsSection() {
 
         {/* Header */}
         <div className="mb-16 max-w-3xl">
-          <h2 className="text-3xl md:text-4xl font-['Playfair_Display'] text-[#BC6C25]">
+          <h2 className="text-3xl font-bold md:text-4xl font-['Playfair_Display'] text-[#BC6C25]">
             Awards & Media Presence
           </h2>
           <p className="mt-4 font-['Poppins'] text-[#1B2624]/80">
@@ -48,7 +48,7 @@ function AwardsSection() {
               },
             ].map((item, index) => (
               <div key={index}>
-                <span className="text-sm font-['Poppins'] text-[#BC6C25]">
+                <span className="text-sm font-bold font-['Poppins'] text-[#BC6C25]">
                   {item.year}
                 </span>
                 <h3 className="text-lg font-['Playfair_Display'] text-[#1B2624]">
@@ -132,7 +132,7 @@ function AwardsSection() {
 
     {/* LEFT CONTENT */}
     <div>
-      <h3 className="text-2xl md:text-3xl font-['Playfair_Display'] text-[#BC6C25] mb-6">
+      <h3 className="text-2xl font-bold md:text-3xl font-['Playfair_Display'] text-[#BC6C25] mb-6">
         Media Presence & Public Discourse
       </h3>
 
@@ -145,27 +145,27 @@ function AwardsSection() {
       {/* Media List */}
       <ul className="space-y-4 font-['Poppins'] text-[#1B2624]/85">
         <li className="flex items-start gap-3">
-          <span className="mt-1 w-2 h-2 bg-[#BC6C25] rounded-full"></span>
+          <span className="mt-1 w-2 h-2 bg-[#18322d] rounded-full"></span>
           Zee Media — National Television
         </li>
 
         <li className="flex items-start gap-3">
-          <span className="mt-1 w-2 h-2 bg-[#BC6C25] rounded-full"></span>
+          <span className="mt-1 w-2 h-2 bg-[#18322d] rounded-full"></span>
           Sadhna TV — Spiritual & Social Discourse
         </li>
 
         <li className="flex items-start gap-3">
-          <span className="mt-1 w-2 h-2 bg-[#BC6C25] rounded-full"></span>
+          <span className="mt-1 w-2 h-2 bg-[#18322d]] rounded-full"></span>
           NDTV — News & Special Panels
         </li>
 
         <li className="flex items-start gap-3">
-          <span className="mt-1 w-2 h-2 bg-[#BC6C25] rounded-full"></span>
+          <span className="mt-1 w-2 h-2 bg-[#18322d] rounded-full"></span>
           Network 10 — Expert Commentary
         </li>
 
         <li className="flex items-start gap-3">
-          <span className="mt-1 w-2 h-2 bg-[#BC6C25] rounded-full"></span>
+          <span className="mt-1 w-2 h-2 bg-[#18322d] rounded-full"></span>
           Political prediction program{" "}
           <em>“2024 की कुंडली”</em> on JKL 24×7 News & Gulistan
         </li>

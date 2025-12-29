@@ -1,162 +1,304 @@
+import AboutHero from "../components/AboutHero";
+import MediaSlider from "../components/MediaSlider";
+
+
 function About() {
   return (
     <section className="bg-[#F5EBE0]">
-      <div className="max-w-7xl mx-auto px-6 py-10 space-y-15">
+      <div className="max-w-7xl mx-auto px-6 py-10 space-y-0">
 
        {/* 1. HERO INTRO */}
-<div className="relative mt-0">
+      <AboutHero />
+      
+{/* AwARDS & RECOGNITIONS */}
+{/* AWARDS & RECOGNITIONS */}
+<section className="py-10 bg-[#F5EBE0]">
+  <div className="max-w-6xl mx-auto px-6">
 
-  {/* Background Accent */}
-  <div className="absolute inset-0 bg-[#DDA158]/10 rounded-xl"></div>
-
-  <div className="relative grid grid-cols-1 md:grid-cols-2 gap-16 items-center px-5 py-10">
-
-    {/* Text */}
-    <div>
-      <h1 className="text-4xl md:text-5xl font-['Playfair_Display'] text-[#BC6C25] leading-tight">
-        About the Astrologer
-      </h1>
-
-      {/* Decorative Divider */}
-      <div className="mt-4 h-px w-20 bg-[#606C33]/60"></div>
-
-      <p className="mt-6 font-['Poppins'] text-[#1B2624]/85 leading-relaxed max-w-xl">
-        Dr. Savvvy Siinghh, professionally known as{" "}
-        <strong className="text-[#1B2624]">Astro Vaastu Savvy</strong>,
-        is a renowned celebrity astrologer and medal-winning scientific
-        vastu expert. Her work reflects a disciplined blend of classical
-        knowledge, modern reasoning, and ethical responsibility.
-      </p>
-
-      <p className="mt-4 font-['Poppins'] text-[#1B2624]/85 leading-relaxed max-w-xl">
-        With over six years of professional experience and a global client
-        portfolio, she is known for her calm, analytical approach to
-        astrology, vastu, numerology, and space strategy.
+    {/* Header */}
+    <div className="mb-6">
+      <h2 className="text-3xl md:text-4xl font-bold font-['Playfair_Display'] text-[#1B2624]">
+        Awards & Recognitions
+      </h2>
+      <div className="mt-2 h-[2px] w-14 bg-[#BC6C25]"></div>
+      <p className="mt-2 max-w-2xl text-sm font-['Poppins'] text-[#1B2624]/75">
+        Due to her precise predictions and achievements at a young age, she has
+        been honoured with several prestigious national and international awards.
       </p>
     </div>
 
-    {/* Image */}
-    <div className="flex justify-center">
-      <div className="relative">
+    {/* Timeline */}
+    <div className="relative mt-8">
 
-        {/* Soft Shadow Frame */}
-        <div className="absolute inset-0 translate-x-2 translate-y-2 bg-[#606C33]/15 rounded-lg"></div>
+      {/* Center Vertical Line */}
+      <div className="absolute left-1/2 top-0 bottom-0 w-[2px] bg-[#606C33]/30 hidden md:block"></div>
 
-        <img
-          src="/images/astro-savvy-main.jpeg"
-          alt="Astro Vaastu Savvy"
-          className="relative w-64 md:w-80 rounded-lg border border-[#606C33]/40 bg-[#F5EBE0]"
-        />
+      <div className="space-y-14">
+
+        {[
+          { year: "2025", title: "Jyotish Gaurav Samman", place: "Uttarakhand, India", img: "/images/celeb-3.jpeg" },
+          { year: "2024", title: "Yuva Yodha Award", place: "National Akali Dal, India", img: "/images/award-6.jpeg" },
+          { year: "2023", title: "Innovative Youth Icon Award", place: "House of Lords, London, UK", img: "/images/award-5.jpeg" },
+          { year: "2023", title: "Bharat Gaurav Samman", place: "Times Square, New York, USA", img: "/images/award-3.jpeg" },
+          { year: "2023", title: "Jyotish Ratna Award", place: "India", img: "/images/award-2.jpeg" },
+          { year: "2022", title: "Bharat Gaurav Samman", place: "House of Lords, London, UK", img: "/images/award-10.jpeg" },
+          { year: "2022", title: "Special Guest – ERAS Festival", place: "Oslo, Norway", img: "/images/award-7.jpeg" },
+          { year: "2022", title: "Voice of Nation Award", place: "National Akali Dal, India", img: "/images/award-8.jpeg" },
+          { year: "2021", title: "Social Awareness Influencer", place: "Zürich, Switzerland", img: "/images/award-1.jpeg" },
+          { year: "2021", title: "Bharat Vikas Ratan", place: "All India Business Development Association", img: "/images/speech-3.jpeg" },
+        ].map((award, index) => {
+          const isLeft = index % 2 === 0;
+
+          return (
+            <div key={index} className="relative flex items-center">
+
+              {/* CENTER DOT – FIXED */}
+              <span className="hidden md:block absolute left-1/2 top-4 -translate-x-1/2
+                               w-3 h-3 rounded-full bg-[#BC6C25] ring-4 ring-[#F5EBE0] z-10">
+              </span>
+
+              {/* LEFT IMAGE */}
+              {isLeft && (
+                <div className="hidden md:flex w-1/2 justify-end pr-20">
+                  <img
+                    src={award.img}
+                    alt={award.title}
+                    className="w-72 h-56 object-cover rounded-xl shadow-lg"
+                  />
+                </div>
+              )}
+
+              {/* TEXT (NEAR CENTER WITH GAP) */}
+              <div
+                className={`relative w-full md:w-[22rem] ${
+                  isLeft
+                    ? "md:mr-auto md:pr-14"
+                    : "md:ml-auto md:pl-20"
+                }`}
+              >
+                <p className="text-xs font-bold text-[#606C33]">
+                  {award.year}
+                </p>
+
+                <h3 className="font-['Playfair_Display'] font-bold text-[#1B2624] leading-snug">
+                  {award.title}
+                </h3>
+
+                <p className="text-sm font-['Poppins'] text-[#1B2624]/70">
+                  {award.place}
+                </p>
+              </div>
+
+              {/* RIGHT IMAGE */}
+              {!isLeft && (
+                <div className="hidden md:flex w-1/2 justify-start pl-20">
+                  <img
+                    src={award.img}
+                    alt={award.title}
+                    className="w-72 h-56 object-cover rounded-xl shadow-lg"
+                  />
+                </div>
+              )}
+
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </div>
+</section>
+
+{/* MEDIA PRESENCE */}
+<section className="py-16 bg-[#FDF6EC]">
+  <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+
+    {/* LEFT CONTENT */}
+    <div>
+      <h2 className="text-3xl md:text-4xl font-bold font-['Playfair_Display'] text-[#1B2624]">
+        Media Presence
+      </h2>
+      <div className="mt-3 h-[2px] w-20 bg-[#BC6C25]"></div>
+
+      <p className="mt-5 font-['Poppins'] text-[#1B2624]/80 leading-relaxed">
+        With her authentic skills, deep astrological knowledge, and precise
+        political predictions, Acharya Dr. Savvvy Singh has become a recognised
+        household name across India.
+      </p>
+
+      <p className="mt-4 font-['Poppins'] text-[#1B2624]/80 leading-relaxed">
+        She has appeared on leading national television networks including{" "}
+        <strong>Zee Media</strong>, <strong>Sadhna TV</strong>,{" "}
+        <strong>NDTV</strong>, <strong>Network 10</strong>, and many more.
+      </p>
+
+      <p className="mt-4 font-['Poppins'] text-[#1B2624]/80 leading-relaxed">
+        Her popular prediction-based show{" "}
+        <strong>“2024 की कुंडली”</strong>, aired on{" "}
+        <strong>JKL 24x7 News</strong> and <strong>Gulistan</strong>, gained
+        widespread recognition for its accurate political forecasts.
+      </p>
+
+      {/* CHANNEL TAGS */}
+      <div className="mt-6 flex flex-wrap gap-3">
+        {[
+          "Zee Media",
+          "Sadhna TV",
+          "NDTV",
+          "Network 10",
+          "JKL 24x7 News",
+          "Gulistan",
+        ].map((channel, i) => (
+          <span
+            key={i}
+            className="px-4 py-1.5 text-sm rounded-full bg-white
+                       border border-[#BC6C25]/30 text-[#1B2624]
+                       shadow-sm"
+          >
+            {channel}
+          </span>
+        ))}
       </div>
     </div>
 
+    {/* RIGHT SLIDER */}
+    <MediaSlider />
+
   </div>
-</div>
+</section>
 
+     
+{/* 3. AREAS OF PRACTICE */}
+<div className="mt-24 px-4 max-w-7xl mx-auto">
+  <div className="flex flex-col items-center mb-16">
+    <h2 className="text-3xl font-bold md:text-4xl font-['Playfair_Display'] text-[#1B2624] text-center">
+      Areas of Practice
+    </h2>
+    <div className="h-1 w-20 bg-[#BC6C25] mt-4 rounded-full"></div>
+  </div>
 
-        {/* 2. PHILOSOPHY */}
-        <div className="max-w-4xl">
-          <h2 className="text-2xl md:text-3xl font-['Playfair_Display'] text-[#BC6C25] mb-6">
-            Professional Philosophy
-          </h2>
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+    {[
+      {
+        img: "/images/space-consultation.png",
+        title: "Astro Vastu Consultation & Scientific Space Strategy",
+        desc: "Harmonising living and working spaces through traditional vastu principles aligned with planetary energies.",
+      },
+      {
+        img: "/images/birth-chart-analysis.png",
+        title: "Birth Chart Analysis",
+        desc: "Detailed kundali interpretation focusing on career, relationships, education, and long-term life patterns.",
+      },
+      {
+        img: "/images/name-analysis.png",
+        title: "Numerology & Name Analysis",
+        desc: "Understanding numerical vibrations of names and dates to guide decisions and personal alignment.",
+      },
+      {
+        img: "/images/palmistry.jpeg",
+        title: "Astro-Palmistry",
+        desc: "Looking beyond just the lines to understand your karmic blueprints, helping you navigate life's challenges.",
+      },
+    ].map((item, index) => (
+      <div 
+        key={index}
+        className="group relative border border-[#606C33]/20 p-8 rounded-xl bg-[#F5EBE0] 
+                   transition-all duration-500 ease-out hover:shadow-2xl hover:-translate-y-2 
+                   hover:bg-[#FDF8F3] hover:border-[#BC6C25]/40 overflow-hidden flex flex-col h-full"
+      >
+        {/* Decorative Background Shade on Hover */}
+        <div className="absolute top-0 right-0 -mr-8 -mt-8 w-24 h-24 bg-[#BC6C25]/5 rounded-full transition-transform duration-700 group-hover:scale-[6]"></div>
 
-          <p className="font-['Poppins'] text-[#1B2624]/80 leading-relaxed">
-            The foundation of Dr. Savvvy Siinghh’s practice lies in the belief that
-            astrology and vastu are not mystical shortcuts, but structured
-            sciences that require patience, study, and contextual understanding.
-            Each consultation begins with careful analysis, followed by
-            customized guidance and continued support.
+        <div className="relative z-10 flex flex-col h-full">
+          {/* Enhanced Image Container - Ensures all icons occupy the same space */}
+          <div className="mb-10 flex items-center justify-start h-50">
+            <img 
+              src={item.img} 
+              alt={item.title} 
+              className="w-50 h-50 object-contain filter drop-shadow-md group-hover:scale-110 transition-transform duration-500" 
+            />
+          </div>
+          
+          <p className="font-['Playfair_Display'] text-[#BC6C25] font-bold text-lg mb-4 leading-tight">
+            {item.title}
+          </p>
+          
+          <div className="h-px w-12 bg-[#606C33]/30 mb-4 group-hover:w-20 transition-all duration-500 group-hover:bg-[#BC6C25]"></div>
+          
+          <p className="text-sm font-['Poppins'] text-[#1B2624]/80 leading-relaxed flex-grow">
+            {item.desc}
           </p>
         </div>
-
-      {/* 3. AREAS OF PRACTICE */}
-<div className="mt-24">
-  <h2 className="text-2xl md:text-3xl font-['Playfair_Display'] text-[#BC6C25] mb-12">
-    Areas of Practice
-  </h2>
-
-  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-
-    {/* Astro Vastu */}
-    <div className="border border-[#606C33]/40 p-8 rounded-md bg-[#F5EBE0]">
-     <img src="/icons/astrology.png" alt="Icon" />
-      <p className="font-['Playfair_Display'] text-[#1B2624] mb-3">
-        Astro Vastu Consultation
-      </p>
-      <div className="h-px w-10 bg-[#606C33]/40 mb-3"></div>
-      <p className="text-sm font-['Poppins'] text-[#1B2624]/75">
-        Harmonising living and working spaces through traditional vastu
-        principles aligned with planetary energies.
-      </p>
-    </div>
-
-    {/* Birth Chart */}
-    <div className="border border-[#606C33]/40 p-8 rounded-md bg-[#F5EBE0]">
-    <img src="/icons/moon.png" alt="Icon" />
-      <p className="font-['Playfair_Display'] text-[#BC6C25] mb-3">
-        Birth Chart Analysis
-      </p>
-      <div className="h-px w-10 bg-[#606C33]/40 mb-3"></div>
-      <p className="text-sm font-['Poppins'] text-[#BC6C25]/75">
-        Detailed kundali interpretation focusing on career, relationships,
-        education, and long-term life patterns.
-      </p>
-    </div>
-
-    {/* Numerology */}
-    <div className="border border-[#606C33]/40 p-8 rounded-md bg-[#F5EBE0]">
- <img src="/icons/chiromancy.png" alt="Icon" />
-      <p className="font-['Playfair_Display'] text-[#BC6C25] mb-3">
-        Numerology & Name Analysis
-      </p>
-      <div className="h-px w-10 bg-[#606C33]/40 mb-3"></div>
-      <p className="text-sm font-['Poppins'] text-[#1B2624]/75">
-        Understanding numerical vibrations of names and dates to guide
-        decisions and personal alignment.
-      </p>
-    </div>
-
-    {/* Space Strategy */}
-    <div className="border border-[#606C33]/40 p-8 rounded-md bg-[#F5EBE0]">
-      <img src="/icons/mystery.png" alt="Icon" />
-      <p className="font-['Playfair_Display'] text-[#BC6C25] mb-3">
-        Scientific Space Strategy
-      </p>
-      <div className="h-px w-10 bg-[#606C33]/40 mb-3"></div>
-      <p className="text-sm font-['Poppins'] text-[#1B2624]/75">
-        A modern, research-driven approach to spatial planning influenced by
-        energy flow, psychology, and vastu science.
-      </p>
-    </div>
-
+      </div>
+    ))}
   </div>
 </div>
+        {/* GLOBAL PRESENCE & TRUST */}
+<section className="py-14">
+  <div className="max-w-7xl mx-auto px-6">
 
-        {/* 4. GLOBAL REACH */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
-          <div>
-            <h2 className="text-2xl md:text-3xl font-['Playfair_Display'] text-[#BC6C25] mb-6">
-              Global Presence & Trust
-            </h2>
+      {/* LEFT – CONTENT */}
+      <div>
+        <h2 className="text-2xl md:text-3xl font-bold font-['Playfair_Display'] text-[#0f332c]">
+          Global Presence & Trust
+        </h2>
 
-            <p className="font-['Poppins'] text-[#1B2624]/80 leading-relaxed">
-              Dr. Savvvy Siinghh has built a strong and trusted client base across
-              India, the United States, the United Kingdom, Dubai, Finland,
-              Estonia, and Canada. Her insights have also been featured on
-              national and international television platforms.
-            </p>
-          </div>
+        <div className="mt-3 h-[2px] w-16 bg-[#BC6C25]"></div>
 
-          <div className="bg-[#DDA158]/20 p-8 rounded-md">
-            <ul className="space-y-3 font-['Poppins'] text-[#1B2624]/85">
-              <li>• Clients across 6+ countries</li>
-              <li>• National & international awards</li>
-              <li>• Television & public forums</li>
-              <li>• Ethical and confidential practice</li>
-            </ul>
-          </div>
+        <p className="mt-5 font-['Poppins'] text-[#1B2624]/80 leading-relaxed">
+          Acharya <strong>Dr. Savvvy Singh</strong> has built a strong and trusted
+          client base across <strong>India, the United States, the United
+          Kingdom, Dubai, Finland, Estonia, and Canada</strong>. Her work and
+          insights have also been featured on prominent national and
+          international television platforms.
+        </p>
+
+        {/* TRUST STATS */}
+        <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-5">
+          {[
+            { value: "6+", label: "Countries Served" },
+            { value: "15+", label: "Awards & Honors" },
+            { value: "National", label: "TV Presence" },
+            { value: "Ethical", label: "Confidential Practice" },
+          ].map((item, i) => (
+            <div
+              key={i}
+              className="bg-white/60 backdrop-blur-md rounded-xl p-4 text-center shadow-sm"
+            >
+              <p className="text-xl font-bold text-[#BC6C25]">
+                {item.value}
+              </p>
+              <p className="text-xs font-['Poppins'] text-[#1B2624]/70 mt-1">
+                {item.label}
+              </p>
+            </div>
+          ))}
         </div>
+      </div>
+
+      {/* RIGHT – VISUAL */}
+      <div className="relative">
+        {/* Decorative Accent */}
+        <div className="absolute -top-6 -right-6 w-32 h-32 bg-[#BC6C25]/10 rounded-full"></div>
+
+        <img
+          src="/images/celeb-5.jpeg"
+          alt="Global Presence"
+          className="relative z-10 w-full max-w-md mx-auto rounded-2xl shadow-xl object-cover"
+        />
+
+        {/* Caption */}
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white/80 backdrop-blur-md
+                        px-4 py-2 rounded-full text-xs font-semibold text-[#1B2624] shadow-md">
+          Trusted Across Borders
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 
         {/* 5. CLOSING STATEMENT */}
         <div className="max-w-4xl border-t border-[#606C33]/40 pt-12">
