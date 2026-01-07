@@ -19,7 +19,7 @@ function Navbar() {
 
           {/* Desktop Menu */}
           <ul className="hidden md:flex items-center gap-8 font-['Poppins'] text-[#1B2624]">
-            {["Home","About","Services","Courses","Shop","Blogs","Contact"].map(item => (
+            {["Home","About","Services","Blogs","Contact"].map(item => (
               <li key={item}>
                 <Link
                   to={item === "Home" ? "/" : `/${item.toLowerCase()}`}

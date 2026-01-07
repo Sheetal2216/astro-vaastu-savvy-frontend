@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 function ServicesSection() {
   const services = [
     {
-      title: "Astro Vastu Consultation",
+      title: "Astro Vastu Consultation & Scientific Space Strategy",
       desc: "Harmonising homes and workspaces using vastu principles aligned with planetary energies.",
       icon: "/icons/astrology.png",
       image: "/images/home-services-1.png",
@@ -17,14 +17,14 @@ function ServicesSection() {
     {
       title: "Numerology & Name Analysis",
       desc: "Understanding numerical vibrations of names and dates to guide life decisions.",
-      icon: "/icons/chiromancy.png",
+      icon:"/icons/mystery.png",
       image: "/images/home-services-3.png",
     },
     {
-      title: "Scientific Space Strategy",
-      desc: "A modern, research-driven approach to spatial planning and energy flow.",
-      icon: "/icons/mystery.png",
-      image: "/images/home-services-4.png",
+      title: "Astro Palmistry",
+      desc: "Looking beyond just the lines to understand your karmic blueprints, helping you navigate life's challenges",
+      icon: "/icons/chiromancy.png",
+      image: "/images/astro-palmistry.png",
     },
   ];
 

@@ -10,24 +10,31 @@ import Contact from "./pages/Contact.jsx";
 import PaymentSuccess from "./pages/PaymentSuccess.jsx";
 import PaymentFailure from "./pages/PaymentFailure.jsx";
 import PromptBox from "./components/PromptBox/PromptBox";
+import ConsultationPopup from "./components/ConsultationPopup";
+import KundliAnalysis from "./pages/KundliAnalysis";
+
+
 
 
 function App() {
   return (
     <BrowserRouter>
+      <ConsultationPopup />
       <Navbar />
 
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/services" element={<Services />} />
-        <Route path="/courses" element={<Courses />} />
-        <Route path="/shop" element={<Shop />} />
+       {/*
+<Route path="/courses" element={<Courses />} />
+<Route path="/shop" element={<Shop />} />
+*/}    
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/payment-success" element={<PaymentSuccess />} />
         <Route path="/payment-failure" element={<PaymentFailure />} />
- 
+ <Route path="/kundli-analysis" element={<KundliAnalysis />} />
       </Routes>
            <PromptBox />
     </BrowserRouter>

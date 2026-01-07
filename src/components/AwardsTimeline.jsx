@@ -1,3 +1,77 @@
+import { useEffect, useState } from "react";
+
+const mediaImages = [
+  { src: "/images/media/media-1.jpeg", caption: "National Television Appearance" },
+  { src: "/images/media/media-2.jpeg", caption: "Expert Panel Discussion" },
+  { src: "/images/media/media-3.jpeg", caption: "News Studio Session" },
+  { src: "/images/media/media-4.jpeg", caption: "Political Analysis Program" },
+  { src: "/images/media/media-5.jpeg", caption: "Live Broadcast Session" },
+  { src: "/images/media/media-6.jpeg", caption: "Studio Interaction" },
+];
+
+function MediaSlider() {
+  const imagesPerSlide = 2;
+  const totalSlides = Math.ceil(mediaImages.length / imagesPerSlide);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % totalSlides);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [totalSlides]);
+
+  return (
+    <div className="relative w-full overflow-hidden">
+      {/* Slides Wrapper */}
+      <div
+        className="flex transition-transform duration-700 ease-in-out"
+        style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+      >
+        {Array.from({ length: totalSlides }).map((_, slideIndex) => (
+          <div key={slideIndex} className="min-w-full grid grid-cols-2 gap-6 px-2">
+            {mediaImages
+              .slice(
+                slideIndex * imagesPerSlide,
+                slideIndex * imagesPerSlide + imagesPerSlide
+              )
+              .map((item, index) => (
+                <div key={index}>
+                  <img
+                    src={item.src}
+                    alt={item.caption}
+                    className="w-full h-80 object-cover rounded-md border border-[#606C33]/40"
+                  />
+                  <p className="mt-2 text-xs font-['Poppins'] text-[#1B2624]/70">
+                    {item.caption}
+                  </p>
+                </div>
+              ))}
+          </div>
+        ))}
+      </div>
+
+      {/* Dots */}
+      <div className="flex justify-center gap-2 mt-6">
+        {Array.from({ length: totalSlides }).map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentSlide(index)}
+            className={`w-2.5 h-2.5 rounded-full transition ${
+              currentSlide === index
+                ? "bg-[#BC6C25]"
+                : "bg-[#606C33]/40"
+            }`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+
+
+
 function AwardsSection() {
   return (
     <section className="bg-[#F5EBE0] py-5">
@@ -5,7 +79,7 @@ function AwardsSection() {
 
         {/* Header */}
         <div className="mb-16 max-w-3xl">
-          <h2 className="text-3xl font-bold md:text-4xl font-['Playfair_Display'] text-[#BC6C25]">
+          <h2 className="text-3xl font-bold md:text-4xl font-['Playfair_Display'] text-[#1B2624   ]">
             Awards & Media Presence
           </h2>
           <p className="mt-4 font-['Poppins'] text-[#1B2624]/80">
@@ -91,43 +165,9 @@ function AwardsSection() {
        {/* Media Presence */}
 <div className="mt-24 pt-14 border-t border-[#606C33]/40">
   <div className="grid grid-cols-1 md:grid-cols-2 gap-14 items-start">
-{/* RIGHT IMAGES – Horizontal, No Scroll */}
-<div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
 
-  <div>
-    <img
-      src="/images/media/media-1.jpeg"
-      alt="Television Appearance"
-      className="w-full h-80 object-cover rounded-md border border-[#606C33]/40"
-    />
-    <p className="mt-2 text-xs font-['Poppins'] text-[#1B2624]/70">
-      National Television Appearance
-    </p>
-  </div>
-
-  <div>
-    <img
-      src="/images/media/media-2.jpeg"
-      alt="Panel Discussion"
-      className="w-full h-80 object-cover rounded-md border border-[#606C33]/40"
-    />
-    <p className="mt-2 text-xs font-['Poppins'] text-[#1B2624]/70">
-      Expert Panel Discussion
-    </p>
-  </div>
-
-  <div>
-    <img
-      src="/images/media/media-3.jpeg"
-      alt="News Studio"
-      className="w-full h-80 object-cover rounded-md border border-[#606C33]/40"
-    />
-    <p className="mt-2 text-xs font-['Poppins'] text-[#1B2624]/70">
-      News Studio Session
-    </p>
-  </div>
-
-</div>
+{/* RIGHT IMAGES – SLIDER */}
+<MediaSlider />
 
 
     {/* LEFT CONTENT */}
@@ -137,7 +177,7 @@ function AwardsSection() {
       </h3>
 
       <p className="font-['Poppins'] text-[#1B2624]/80 leading-relaxed mb-8">
-        Dr. Savvvy Siinghh has been a regular presence on national television
+        Acharaya Dr.Savvy Singh has been a regular presence on national television
         and international platforms, particularly known for her analytical
         insights in astrology, vastu, and political forecasting.
       </p>
@@ -167,7 +207,7 @@ function AwardsSection() {
         <li className="flex items-start gap-3">
           <span className="mt-1 w-2 h-2 bg-[#18322d] rounded-full"></span>
           Political prediction program{" "}
-          <em>“2024 की कुंडली”</em> on JKL 24×7 News & Gulistan
+        “2024 की कुंडली” on JKL 24×7 News & Gulistan
         </li>
       </ul>
     </div>

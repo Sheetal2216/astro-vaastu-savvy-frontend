@@ -9,7 +9,7 @@ function HomeAbout() {
 
         {/* LEFT CONTENT */}
         <div>
-          <p className="text-sm font-['Poppins'] tracking-wide text-[#606C33] mb-3">
+          <p className="text-sm font-['Poppins'] tracking-wide text-[#485714] mb-3">
             About the Astrologer
           </p>
 
@@ -21,7 +21,7 @@ function HomeAbout() {
           <div className="mt-4 h-px w-20 bg-[#606C33]/60"></div>
 
           <p className="mt-6 font-['Poppins'] text-[#1B2624]/85 leading-relaxed max-w-xl">
-             Acharya Dr.Savvy Singh, widely known as{" "}
+             Acharaya Dr.Savvy Singh, widely known as{" "}
             <strong>Astro Vaastu Savvy</strong>, is a renowned celebrity
             astrologer and medal-winning scientific vastu expert with over
             six years of professional practice.

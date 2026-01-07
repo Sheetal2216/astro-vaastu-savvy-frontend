@@ -18,28 +18,12 @@ function HomeHero() {
             <span className="text-[#BC6C25]">Redefine Its Path.</span>
           </h1>
 
-          <p className="mt-6 font-['Poppins'] text-[#1B2624]/85 leading-relaxed">
-          <strong>Dr. Savvvy Siinghh</strong>, popularly known as{" "}
-          <strong>Astro Vaastu Savvy</strong>, is a renowned celebrity astrologer,
-          medal-winning scientific vastu expert, and space strategist. Her
-          growing social media presence and authentic practice have made her a
-          trusted name among individuals, professionals, and public figures.
-        </p>
+          {/* Description */}
+          <p className="mt-6 text-lg font-['Poppins'] text-[#1B2624]/80 max-w-xl">
+            A holistic blend of Astrology, Vastu, Numerology and scientific
+            space strategy to bring balance, prosperity and clarity to life.
+          </p>
 
-        <p className="mt-4 font-['Poppins'] text-[#1B2624]/85 leading-relaxed">
-          With over <strong>six years of professional experience</strong> and
-          qualifications from esteemed institutions, she blends traditional
-          astrological wisdom with scientific vastu principles to deliver
-          practical, ethical, and result-oriented guidance.
-        </p>
-
-        <p className="mt-4 font-['Poppins'] text-[#1B2624]/80 leading-relaxed">
-          Her work spans across <strong>India, Dubai, the United States, the
-          United Kingdom, Finland, Estonia, and Canada</strong>, supported by a
-          strong and loyal global client base. She has also been featured on
-          multiple national and international forums and has received numerous
-          awards and accolades for her contributions.
-        </p>
           {/* CTAs */}
           <div className="mt-8 flex flex-wrap gap-4">
             <Link
@@ -70,7 +54,7 @@ function HomeHero() {
             </div>
            
               <div>
-              <p className="text-3xl text-[#1B2624] font-['Playfair_Display']">50 Lakhs+</p>
+              <p className="text-3xl text-[#1B2624] font-['Playfair_Display']">50 Lakhs+ Views</p>
               <p className="text-sm font-['Poppins']">Views & Reach</p>
             </div>
           </div>
@@ -87,9 +71,9 @@ function HomeHero() {
   <div className="relative z-10">
     <div className="w-72 h-72 md:w-80 md:h-80 rounded-full border-2 border-[#BC6C25]/40 flex items-center justify-center bg-[#F5EBE0]">
       <img
-        src="/images/astro-savvy-main-5.jpeg"
+        src="/images/astro-savvy-main-6.jpeg"
         alt="Astro Vaastu Savvy"
-        className="w-64 h-64 md:w-72 md:h-72 object-cover rounded-full border border-[#606C33]/40"
+        className="w-60 h-60 md:w-72 md:h-72 object-cover rounded-full border border-[#606C33]/40"
       />
     </div>
   </div>
@@ -126,8 +110,8 @@ function HomeHero() {
   <div className="relative mb-0">
     <div className="w-64 h-64 rounded-full bg-[#606C33]/15 flex items-center justify-center">
       <img
-        src="/images/astro-savvy-main-3.jpeg"
-        alt="Astro-Savvy"
+        src="/images/astro-savvy-main.jpeg"
+        alt="Astro Vaastu Savvy"
         className="w-56 h-56 object-cover rounded-full border border-[#606C33]/40 bg-[#F5EBE0]"
       />
     </div>

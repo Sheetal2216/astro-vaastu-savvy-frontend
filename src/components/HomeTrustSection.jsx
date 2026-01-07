@@ -67,7 +67,7 @@ function HomeTrustSection() {
 
         {/* Subtle corner accent */}
       {/* Replace the old subtle corner accent div with this */}
-<div className="absolute top-4 right-4 w-12 h-15 flex items-center justify-center">
+<div className="absolute top-4 right-4 w-18 h-20 flex items-center justify-center">
   <img 
     src="/images/astro-savvy-bgless.png" 
     alt="Astro Savvy Logo" 
@@ -87,7 +87,7 @@ function HomeTrustSection() {
 
   <div className="relative px-6 py-14">
 
-    <h2 className="text-3xl font-bold md:text-4xl font-['Playfair_Display'] text-[#BC6C25] mb-14 text-center">
+    <h2 className="text-3xl font-bold md:text-4xl font-['Playfair_Display'] text-[#1B2624] font-bold mb-14 text-center">
       What Clients Say
     </h2>
 
@@ -197,25 +197,146 @@ function HomeTrustSection() {
           </div>
         </div>
 
-        {/* 4. CTA */}
-        <div className="bg-[#DDA158]/30 rounded-2xl p-12 text-center shadow-md">
-          <h3 className="text-2xl md:text-3xl font-['Playfair_Display'] text-[#1B2624] mb-4">
-            Begin Your Consultation
-          </h3>
+     {/* FINAL CTA – CONSULTATION */}
+<section className="mt-32">
+  <div className="max-w-7xl mx-auto px-6">
 
-          <p className="font-['Poppins'] text-[#1B2624]/80 max-w-3xl mx-auto mb-8">
+    <div className="relative bg-[#F5EBE0] border border-[#606C33]/30 rounded-3xl p-10 md:p-16 shadow-sm overflow-hidden">
+
+      {/* Decorative Background */}
+      <div className="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-[#DDA158]/20 blur-3xl"></div>
+      <div className="absolute -bottom-24 -left-24 w-72 h-72 rounded-full bg-[#606C33]/15 blur-3xl"></div>
+
+      <div className="relative grid grid-cols-1 md:grid-cols-2 gap-14 items-center">
+
+        {/* LEFT CONTENT */}
+        <div>
+          <h2 className="text-3xl md:text-4xl font-['Playfair_Display'] text-[#1B2624] mb-4">
+            Begin Your Consultation Journey
+          </h2>
+
+          <div className="h-px w-20 bg-[#606C33]/60 mb-6"></div>
+
+          <p className="font-['Poppins'] text-[#1B2624]/80 leading-relaxed mb-6 max-w-xl">
             Consultations are conducted with discretion, depth, and ethical
-            responsibility. Each session is tailored to your unique
-            circumstances and long-term goals.
+            responsibility. Each session is designed to provide clarity,
+            alignment, and long-term direction — never fear or dependency.
           </p>
 
-          <Link
-            to="/contact"
-            className="inline-block bg-[#BC6C25] text-white px-10 py-3 rounded-full font-['Poppins'] shadow-lg hover:opacity-90 transition"
-          >
-            Book Consultation
-          </Link>
+          {/* What You Can Expect */}
+          <ul className="space-y-3 font-['Poppins'] text-sm text-[#1B2624]/85 mb-8">
+            <li>• Personalised analysis based on your unique chart or space</li>
+            <li>• Clear guidance, not generic predictions</li>
+            <li>• Practical, non-invasive remedies</li>
+            <li>• Continued support where required</li>
+          </ul>
+
+          {/* SOCIAL MEDIA INLINE */}
+          <div className="mt-8">
+            <p className="font-['Playfair_Display'] text-[#1B2624] mb-4">
+              Stay Connected
+            </p>
+
+            <div className="flex items-center gap-4">
+
+              {/* YouTube */}
+              <a
+                href="https://www.youtube.com/@AstroVaastuSavvy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-12 h-12 rounded-full border border-[#606C33]/40 
+                           flex items-center justify-center bg-white
+                           hover:bg-[#BC6C25] transition shadow-sm"
+              >
+                <img src="/icons/youtube.png" alt="YouTube" className="w-5 h-5 invert-0 hover:invert transition" />
+              </a>
+
+              {/* Instagram */}
+              <a
+                href="https://www.instagram.com/astrovastussavvy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-12 h-12 rounded-full border border-[#606C33]/40 
+                           flex items-center justify-center bg-white
+                           hover:bg-[#BC6C25] transition shadow-sm"
+              >
+                <img src="/icons/instagram.png" alt="Instagram" className="w-5 h-5" />
+              </a>
+
+              {/* Facebook */}
+              <a
+                href="https://www.facebook.com/AstroVaastuSavvy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-12 h-12 rounded-full border border-[#606C33]/40 
+                           flex items-center justify-center bg-white
+                           hover:bg-[#BC6C25] transition shadow-sm"
+              >
+                <img src="/icons/facebook.png" alt="Facebook" className="w-5 h-5" />
+              </a>
+
+              {/* WhatsApp */}
+              <a
+                href="https://wa.me/917303014789"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-12 h-12 rounded-full border border-green-600/40 
+                           flex items-center justify-center bg-white
+                           hover:bg-green-600 transition shadow-sm"
+              >
+                <img src="/icons/whatsapp.png" alt="WhatsApp" className="w-5 h-5" />
+              </a>
+
+            </div>
+
+            <p className="mt-4 text-sm font-['Poppins'] text-[#1B2624]/70">
+              📞 Call / WhatsApp: <span className="font-medium">+91 7303014789</span>
+            </p>
+          </div>
         </div>
+
+        {/* RIGHT CTA BLOCK */}
+        <div className="bg-[#FDF8F3] border border-[#606C33]/25 rounded-2xl p-8 md:p-10">
+
+          <p className="font-['Playfair_Display'] text-lg text-[#1B2624] mb-6">
+            Choose how you’d like to proceed
+          </p>
+
+          <div className="flex flex-col gap-4">
+
+            {/* Primary CTA */}
+            <a
+              href="/contact"
+              className="text-center bg-[#BC6C25] text-white py-3 rounded-full 
+                         font-['Poppins'] shadow-md hover:opacity-90 transition"
+            >
+              Book Consultation
+            </a>
+
+            {/* Secondary CTA */}
+            <a
+              href="https://wa.me/917303014789"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-center bg-white text-[#1B2624] py-3 rounded-full 
+                         font-['Poppins'] shadow-md hover:opacity-90 transition border-2 hover:bg-green-200"
+            >
+              Talk on WhatsApp
+            </a>
+          </div>
+
+          <p className="mt-6 text-xs font-['Poppins'] text-[#1B2624]/60 text-center">
+            Not sure which consultation is right for you?  
+            We’ll guide you personally before you begin.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
 
       </div>
     </section>

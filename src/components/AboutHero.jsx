@@ -34,7 +34,7 @@ function AboutHero() {
           <div className="h-1 w-24 bg-gradient-to-r from-[#BC6C25] to-[#DDA158] rounded-full"></div>
 
            <p className="font-['Poppins'] text-[#1B2624]/85 leading-relaxed max-w-xl">
-          <strong>Acharya Dr. Savvy Singh</strong>, popularly known as{" "}
+          <strong>Acharaya Dr. Savvy Singh</strong>, popularly known as{" "}
           <strong>Astro Vaastu Savvy</strong>, is a renowned celebrity astrologer,
           medal-winning scientific vastu expert, and space strategist. Her
           growing social media presence and authentic practice have made her a

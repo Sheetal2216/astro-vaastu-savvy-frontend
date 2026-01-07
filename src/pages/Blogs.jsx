@@ -233,7 +233,7 @@ function Blogs() {
 
         {/* UPCOMING MEDIA PRESENCE */}
         <div>
-          <h2 className="text-3xl md:text-4xl font-['Playfair_Display'] text-[#BC6C25] mb-10">
+          <h2 className="text-3xl md:text-4xl font-['Playfair_Display'] text-[#1B2624] font-bold mb-10">
             Upcoming Media Presence
           </h2>
 
