@@ -90,9 +90,8 @@ function Services() {
         icon: "/icons/chiromancy.png",
       },
       {
-        title: "Astro-Palmistry",
-        desc:
-          "Looking beyond just the lines to understand your karmic blueprints, helping you navigate life's challenges",
+        title: "Astro Palmistry",
+        desc: "Looking beyond just the lines to understand your karmic blueprints, helping you navigate life's challenges",
         img: "/images/Astro-4.png",
         icon: "/icons/mystery.png",
       },

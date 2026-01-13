@@ -78,7 +78,7 @@ function AwardsSection() {
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Header */}
-        <div className="mb-16 max-w-3xl">
+        <div className="mb-14 max-w-3xl">
           <h2 className="text-3xl font-bold md:text-4xl font-['Playfair_Display'] text-[#1B2624   ]">
             Awards & Media Presence
           </h2>

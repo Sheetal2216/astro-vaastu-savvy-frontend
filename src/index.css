@@ -1,6 +1,6 @@
 @import "tailwindcss";
 body {
-  background-color: #F7F3ED;
-  color: #2F2F2F; /* charcoal text */
+  background-color: #F5EBE0; /* Soft Parchment Cream */
+  color: #1B2624;           /* Stone Charcoal */
   font-family: 'Poppins', sans-serif;
 }

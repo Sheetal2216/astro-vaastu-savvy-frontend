@@ -5,6 +5,52 @@ function HomeHero() {
     <section className="bg-[#F5EBE0]">
       <div className="max-w-7xl mx-auto px-6 py-5 grid grid-cols-1 md:grid-cols-2 gap-14 items-center">
 
+{/* MOBILE HERO – REFINED */}
+<div
+  className="md:hidden relative w-full min-h-[80vh] bg-cover bg-top flex items-end rounded-b-[32px] overflow-hidden"
+  style={{ backgroundImage: "url('/images/astro-savvy-main-6.jpeg')" }}
+>
+  {/* Soft gradient overlay */}
+  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/50 to-transparent"></div>
+
+  {/* Content */}
+  <div className="relative z-10 p-5 pb-8 text-white">
+    {/* Badge */}
+    <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-3 rounded-full bg-[#E6B566]/90 text-xs font-['Poppins'] text-[#1B2624]">
+      ✦ Award-Winning Celebrity Astrologer
+    </div>
+
+    {/* Heading */}
+    <h1 className="text-3xl font-['Playfair_Display'] leading-tight">
+      Redesign Your Life. <br />
+      <span className="text-[#F2C078]">Redefine Its Path.</span>
+    </h1>
+
+    {/* Description */}
+    <p className="mt-3 text-sm font-['Poppins'] text-white/90 leading-relaxed">
+      A holistic blend of Astrology, Vastu, Numerology and scientific
+      space strategy to bring balance, prosperity and clarity to life.
+    </p>
+
+    {/* Buttons */}
+    <div className="mt-5 flex gap-3">
+      <Link
+        to="/contact"
+        className="flex-1 text-center bg-[#BC6C25] py-3 rounded-full text-sm font-medium shadow-lg hover:opacity-90 transition"
+      >
+        Book Consultation
+      </Link>
+
+      <Link
+        to="/services"
+        className="flex-1 text-center border border-white/70 py-3 rounded-full text-sm font-medium backdrop-blur-sm hover:bg-white hover:text-[#1B2624] transition"
+      >
+        Services
+      </Link>
+    </div>
+  </div>
+</div>
+
         {/* LEFT CONTENT */}
         <div>
           {/* Badge */}
@@ -40,6 +86,10 @@ function HomeHero() {
               Explore Services
             </Link>
           </div>
+
+
+
+
 
           {/* Achievements */}
           <div className="mt-12 flex gap-15 text-[#1B2624]">
