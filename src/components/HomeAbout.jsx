@@ -1,6 +1,6 @@
 function HomeAbout() {
   return (
-    <section className="relative bg-[#F5EBE0] py-24">
+    <section className="relative bg-[#fbf8f5] py-10">
       
       {/* Soft Background Accent */}
       <div className="absolute inset-0 bg-[#DDA158]/10"></div>
@@ -13,7 +13,7 @@ function HomeAbout() {
             About the Astrologer
           </p>
 
-          <h2 className="text-3xl md:text-4xl font-['Playfair_Display'] text-[#1e3934] leading-tight">
+          <h2 className="text-3xl md:text-4xl font-bold font-['Playfair_Display'] text-[#1e3934] leading-tight">
             A Career Rooted in Knowledge, <br />
             Recognised Across the Globe
           </h2>
@@ -38,7 +38,7 @@ function HomeAbout() {
           <div className="mt-8">
             <a
               href="/about"
-              className="inline-block border border-[#606C33] px-6 py-3 rounded-md text-sm font-['Poppins'] text-[#1B2624] hover:bg-[#606C33] hover:text-white transition"
+              className="inline-block border font-bold border-[#606C33] px-6 py-3 rounded-md text-sm font-['Poppins'] text-[#1B2624] hover:bg-[#606C33] hover:text-white transition"
             >
               Read Full Profile
             </a>

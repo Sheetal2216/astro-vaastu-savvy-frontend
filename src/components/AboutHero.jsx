@@ -27,9 +27,14 @@ function AboutHero() {
 
         {/* LEFT CONTENT */}
         <div className="space-y-6">
-          <h1 className="text-4xl md:text-5xl xl:text-6xl font-bold font-['Playfair_Display'] text-[#112e29] leading-tight">
-            About the Astrologer
-          </h1>
+        <h1 className="text-4xl md:text-5xl xl:text-6xl font-bold font-['Playfair_Display'] text-[#112e29] leading-tight">
+  Meet <span className="highlight">Astro Vaastu Savvy</span>
+</h1>
+
+<p className="mt-4 text-lg md:text-xl text-[#4a6b66] max-w-xl">
+  Blending Ancient Astrology with Scientific Vaastu
+</p>
+
 
           <div className="h-1 w-24 bg-gradient-to-r from-[#BC6C25] to-[#DDA158] rounded-full"></div>
 

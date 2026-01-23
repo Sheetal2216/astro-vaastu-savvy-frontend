@@ -2,22 +2,22 @@ import { Link } from "react-router-dom";
 
 function HomeTrustSection() {
   return (
-    <section className="bg-[#F5EBE0] py-20">
-      <div className="max-w-7xl mx-auto px-6 space-y-24">
+    <section className="bg-[white] py-20">
+      <div className="max-w-7xl mx-auto px-6 ">
 
         {/* 1. WHY CHOOSE DR SAVVY */}
    {/* WHY CHOOSE DR SAVVY – Eternal, Calm, Premium */}
-<section className="relative w-screen left-1/2 -translate-x-1/2 py-10 overflow-hidden bg-[#5f8b65]">
+<section className="relative w-screen left-1/2 -translate-x-1/2 py-8 overflow-hidden bg-[#E3ECE6] ">
 
   {/* Subtle depth overlay (optional but recommended) */}
-  <div className="absolute inset-0 bg-black/5"></div>
+  <div className="absolute inset-0 "></div>
 
   {/* Content */}
   <div className="relative z-10 max-w-7xl mx-auto px-6">
     {/* Heading */}
     <div className="text-center mb-10">
-      <h2 className="text-3xl md:text-4xl font-['Playfair_Display'] 
-                     text-[#F7F3EC] tracking-wide">
+      <h2 className="text-5xl md:text-5xl font-['Playfair_Display'] 
+                     text-[#1B2624] tracking-wide">
        <b> Why Choose Acharya Dr. Savvy Singh</b>
       </h2>
       <div className="mx-auto mt-6 h-px w-20 bg-[#DDA158]/60"></div>
@@ -50,11 +50,15 @@ function HomeTrustSection() {
       ].map((item, i) => (
         <div
           key={i}
-          className="group relative bg-[#FBF7F2] border border-[#606C33]/25 
-                     rounded-3xl p-8 text-center
-                     transition-all duration-300 
-                     hover:-translate-y-2
-                     shadow-[0_18px_45px_rgba(0,0,0,0.25)]"
+          className="group relative bg-white
+rounded-3xl p-8 text-center
+border border-[#8FAF9A]/50
+shadow-[0_8px_20px_rgba(0,0,0,0.12),0_25px_60px_rgba(27,38,36,0.22),inset_0_1px_0_rgba(255,255,255,0.8)]
+transition-all duration-500 ease-out
+transform-gpu
+hover:-translate-y-4
+hover:shadow-[0_15px_35px_rgba(0,0,0,0.18),0_45px_90px_rgba(27,38,36,0.35)]"
+
         >
 
           {/* Icon */}
@@ -65,7 +69,7 @@ function HomeTrustSection() {
           </div>
 
           {/* Title */}
-          <h3 className="font-['Playfair_Display'] font-bold text-lg text-[#BC6C25] mb-3">
+          <h3 className="font-['Playfair_Display'] font-bold text-xl text-[#1B2624] mb-3">
             {item.title}
           </h3>
 
@@ -104,7 +108,7 @@ function HomeTrustSection() {
 
   <div className="relative px-0 py-14">
 
-    <h2 className="text-3xl font-bold md:text-4xl font-['Playfair_Display'] text-[#1B2624] font-bold mb-14 text-center">
+    <h2 className="text-5xl font-bold md:text-5xl font-['Playfair_Display'] text-[#1B2624] font-bold mb-10 text-center">
       What Clients Say
     </h2>
 
@@ -132,7 +136,7 @@ function HomeTrustSection() {
       ].map((t, i) => (
         <div
           key={i}
-          className="group relative bg-[#F5EBE0] border border-[#606C33]/40 rounded-2xl p-8
+          className="group relative bg-[white] border border-[#606C33]/40 rounded-2xl p-8
                      transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
         >
 
@@ -152,10 +156,10 @@ function HomeTrustSection() {
           <div className="h-px w-12 bg-[#606C33]/40 mb-4"></div>
 
           {/* Client Info */}
-          <p className="font-['Playfair_Display'] text-[#1B2624]">
+          <p className="font-['Playfair_Display'] font-bold text-[#1B2624]">
             {t.name}
           </p>
-          <p className="text-xs font-['Poppins'] text-[#606C33]">
+          <p className="text-xs font-['Poppins'] font-bold text-[#606C33]">
             {t.place}
           </p>
         </div>
@@ -166,7 +170,7 @@ function HomeTrustSection() {
     <div className="mt-12 text-center">
       <Link
         to="/services"
-        className="inline-block text-sm font-['Poppins'] text-[#BC6C25] 
+        className="inline-block text-sm font-['Poppins'] text-[#a86020] 
                    underline underline-offset-4 hover:opacity-80 transition"
       >
         Read full client stories →
@@ -176,46 +180,95 @@ function HomeTrustSection() {
   </div>
 </div>
 
-        {/* 3. CONSULTATION PROCESS */}
-        <div>
-          <h2 className="text-3xl font-bold md:text-4xl font-['Playfair_Display'] text-[#1c3934] mb-12">
-            Consultation Process
-          </h2>
+       {/* 3. CONSULTATION PROCESS */}
+{/* 3. CONSULTATION PROCESS */}
+<section className="relative py-15 overflow-hidden">
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-[#BC6C25]">
-            {[
-              "Analysis",
-              "Guidance",
-              "Implementation",
-              "Ongoing Support",
-            ].map((step, i) => (
-              <div
-                key={i}
-                className="relative bg-[#F5EBE0] border border-[#606C33]/35 rounded-xl p-8 text-center shadow-sm"
-              >
-                <div className="absolute -top-5 left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-[#BC6C25] text-white flex items-center justify-center font-['Playfair_Display']">
-                  {i + 1}
-                </div>
+  {/* Soft ambient background */}
+  <div className="absolute inset-0 -z-10 
+    bg-[radial-gradient(circle_at_top,#FBF4EC,#F8EFE6,transparent)]">
+  </div>
 
-                <p className="mt-6 font-['Playfair_Display'] text-[#1B2624]">
-                  {step}
-                </p>
+  {/* Heading */}
+  <h2 className="text-4xl md:text-5xl font-bold font-['Playfair_Display'] 
+                 text-[#1c3934] mb-18 text-center">
+    Consultation Process
+  </h2>
 
-                <div className="h-px w-10 bg-[#606C33]/40 mx-auto my-4"></div>
+  {/* Steps */}
+  <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12">
 
-                <p className="text-sm font-['Poppins'] text-[#1B2624]/75">
-                  {step === "Analysis" && "Comprehensive evaluation of charts, space, and circumstances."}
-                  {step === "Guidance" && "Clear, structured recommendations explained in detail."}
-                  {step === "Implementation" && "Support during execution of suggested changes."}
-                  {step === "Ongoing Support" && "Follow-ups to ensure long-term alignment."}
-                </p>
-              </div>
-            ))}
-          </div>
+    {[
+      {
+        title: "Analysis",
+        desc: "Comprehensive evaluation of charts, space, and circumstances.",
+      },
+      {
+        title: "Guidance",
+        desc: "Clear, structured recommendations explained in detail.",
+      },
+      {
+        title: "Implementation",
+        desc: "Support during execution of suggested changes.",
+      },
+      {
+        title: "Ongoing Support",
+        desc: "Follow-ups to ensure long-term alignment.",
+      },
+    ].map((step, i) => (
+      <div
+        key={i}
+        className="group relative bg-[#FDF8F3]
+        rounded-2xl p-6 text-center
+        border-2 border-[#606C33]/35
+        shadow-[0_6px_16px_rgba(0,0,0,0.12),0_28px_60px_rgba(28,57,52,0.25),inset_0_1px_0_rgba(255,255,255,0.9)]
+        transition-all duration-500 ease-out
+        transform-gpu
+        hover:-translate-y-4
+        hover:shadow-[0_14px_32px_rgba(0,0,0,0.18),0_45px_90px_rgba(188,108,37,0.35)]"
+      >
+
+        {/* Glow overlay */}
+        <div className="pointer-events-none absolute inset-0 rounded-2xl
+          bg-gradient-to-br from-[#DDA158]/18 via-transparent to-[#606C33]/18
+          opacity-0 group-hover:opacity-100 transition duration-500">
         </div>
 
+        {/* Step Number */}
+        <div className="relative mx-auto -mt-16 mb-6
+          w-14 h-14 rounded-full
+          bg-gradient-to-br from-[#DDA158] to-[#BC6C25]
+          text-white flex items-center justify-center
+          font-['Playfair_Display'] font-bold text-xl
+          shadow-[0_10px_25px_rgba(188,108,37,0.5)]
+          ring-4 ring-[#FDF8F3]">
+          {i + 1}
+        </div>
+
+        {/* Title */}
+        <p className="relative font-['Playfair_Display'] font-bold text-lg 
+                      text-[#1B2624] mb-3">
+          {step.title}
+        </p>
+
+        {/* Divider */}
+        <div className="relative h-px w-12 bg-[#606C33]/40 mx-auto mb-4"></div>
+
+        {/* Description */}
+        <p className="relative text-sm font-['Poppins'] 
+                      text-[#1B2624]/85 leading-relaxed">
+          {step.desc}
+        </p>
+
+      </div>
+    ))}
+  </div>
+</section>
+
+
+
  {/* FINAL CTA – CONSULTATION */}
-<section className="mt-20 md:mt-28">
+<section className="mt-20 md:mt-20">
   <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
     <div className="relative bg-[#F5EBE0] border border-[#606C33]/25 
@@ -229,8 +282,8 @@ function HomeTrustSection() {
 
         {/* LEFT CONTENT */}
         <div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl 
-                         font-['Playfair_Display'] text-[#1B2624] mb-4">
+          <h2 className="text-4xl sm:text-4xl md:text-4xl 
+                         font-['Playfair_Display'] font-bold text-[#1B2624] mb-4">
             Begin Your Consultation Journey
           </h2>
 

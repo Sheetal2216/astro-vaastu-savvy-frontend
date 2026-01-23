@@ -4,23 +4,23 @@ import MediaSlider from "../components/MediaSlider";
 
 function About() {
   return (
-    <section className="bg-[#F5EBE0]">
-      <div className="max-w-7xl mx-auto px-6 py-10 space-y-0">
+    <section className="bg-[white]">
+      <div className="max-w-7xl mx-auto px-6 py-2 space-y-0">
 
        {/* 1. HERO INTRO */}
       <AboutHero />
       
-{/* AwARDS & RECOGNITIONS */}
+
 {/* AWARDS & RECOGNITIONS */}
-<section className="py-10 bg-[#F5EBE0]">
+<section className="py-15 bg-[white]">
   <div className="max-w-6xl mx-auto px-6">
 
     {/* Header */}
     <div className="mb-6">
-      <h2 className="text-3xl md:text-4xl font-bold font-['Playfair_Display'] text-[#1B2624]">
+      <h2 className="text-5xl md:text-5xl mb-10  font-bold font-['Playfair_Display'] text-[#1B2624]">
         Awards & Recognitions
       </h2>
-      <div className="mt-2 h-[2px] w-14 bg-[#BC6C25]"></div>
+      <div className="mt-2 h-[2px] w-14 align-middle bg-[#BC6C25]"></div>
       <p className="mt-2 max-w-2xl text-sm font-['Poppins'] text-[#1B2624]/75">
         Due to her precise predictions and achievements at a young age, she has
         been honoured with several prestigious national and international awards.
@@ -69,25 +69,23 @@ function About() {
               )}
 
               {/* TEXT (NEAR CENTER WITH GAP) */}
-              <div
-                className={`relative w-full md:w-[22rem] ${
-                  isLeft
-                    ? "md:mr-auto md:pr-14"
-                    : "md:ml-auto md:pl-20"
-                }`}
-              >
-                <p className="text-xs font-bold text-[#606C33]">
-                  {award.year}
-                </p>
+           {/* TEXT BLOCK */}
+<div className={`hidden md:flex w-1/2 ${isLeft ? "justify-start pl-20" : "justify-end pr-5"}`}>
+  <div className="w-[22rem]">
+    <p className="text-xs font-bold text-[#606C33]">
+      {award.year}
+    </p>
 
-                <h3 className="font-['Playfair_Display'] font-bold text-[#1B2624] leading-snug">
-                  {award.title}
-                </h3>
+    <h3 className="font-['Playfair_Display'] font-bold text-[#1B2624] leading-snug">
+      {award.title}
+    </h3>
 
-                <p className="text-sm font-['Poppins'] text-[#1B2624]/70">
-                  {award.place}
-                </p>
-              </div>
+    <p className="text-sm font-['Poppins'] text-[#1B2624]/70">
+      {award.place}
+    </p>
+  </div>
+</div>
+
 
               {/* RIGHT IMAGE */}
               {!isLeft && (
@@ -114,10 +112,10 @@ function About() {
 
     {/* LEFT CONTENT */}
     <div>
-      <h2 className="text-3xl md:text-4xl font-bold font-['Playfair_Display'] text-[#1B2624]">
+      <h2 className="text-5xl md:text-5xl font-bold font-['Playfair_Display'] text-[#1B2624]">
         Media Presence
       </h2>
-      <div className="mt-3 h-[2px] w-20 bg-[#BC6C25]"></div>
+      <div className="mt-3 h-[1px] w-20 bg-[#BC6C25]"></div>
 
       <p className="mt-5 font-['Poppins'] text-[#1B2624]/80 leading-relaxed">
         With her authentic skills, deep astrological knowledge, and precise
@@ -147,6 +145,10 @@ function About() {
           "Network 10",
           "JKL 24x7 News",
           "Gulistan",
+          "News Nation",
+          "India News",
+          "NDTV 24x7 News",
+          "NDTV इंडिया",
         ].map((channel, i) => (
           <span
             key={i}
@@ -168,9 +170,9 @@ function About() {
 
      
 {/* 3. AREAS OF PRACTICE */}
-<div className="mt-24 px-4 max-w-7xl mx-auto">
+<div className="mt-18 px-4 max-w-7xl mx-auto">
   <div className="flex flex-col items-center mb-16">
-    <h2 className="text-3xl font-bold md:text-4xl font-['Playfair_Display'] text-[#1B2624] text-center">
+    <h2 className="text-5xl font-bold md:text-5xl font-['Playfair_Display'] text-[#1B2624] text-center">
       Areas of Practice
     </h2>
     <div className="h-1 w-20 bg-[#BC6C25] mt-4 rounded-full"></div>
@@ -199,36 +201,64 @@ function About() {
         desc: "Looking beyond just the lines to understand your karmic blueprints, helping you navigate life's challenges.",
       },
     ].map((item, index) => (
-      <div 
-        key={index}
-        className="group relative border border-[#606C33]/20 p-8 rounded-xl bg-[#F5EBE0] 
-                   transition-all duration-500 ease-out hover:shadow-2xl hover:-translate-y-2 
-                   hover:bg-[#FDF8F3] hover:border-[#BC6C25]/40 overflow-hidden flex flex-col h-full"
-      >
-        {/* Decorative Background Shade on Hover */}
-        <div className="absolute top-0 right-0 -mr-8 -mt-8 w-24 h-24 bg-[#BC6C25]/5 rounded-full transition-transform duration-700 group-hover:scale-[6]"></div>
+     <div 
+  key={index}
+  className="group relative p-8 rounded-xl bg-[#F5EBE0]
+             border border-[#606C33]/30
+             flex flex-col h-full overflow-hidden
+             transition-all duration-500 ease-out
+             hover:-translate-y-1
+             hover:border-[#BC6C25]/45
+             shadow-[0_6px_16px_rgba(0,0,0,0.10),inset_0_1px_0_rgba(255,255,255,0.6)]
+             hover:shadow-[0_18px_45px_rgba(0,0,0,0.18)]"
+>
 
-        <div className="relative z-10 flex flex-col h-full">
-          {/* Enhanced Image Container - Ensures all icons occupy the same space */}
-          <div className="mb-10 flex items-center justify-start h-50">
-            <img 
-              src={item.img} 
-              alt={item.title} 
-              className="w-50 h-50 object-contain filter drop-shadow-md group-hover:scale-110 transition-transform duration-500" 
-            />
-          </div>
-          
-          <p className="font-['Playfair_Display'] text-[#BC6C25] font-bold text-lg mb-4 leading-tight">
-            {item.title}
-          </p>
-          
-          <div className="h-px w-12 bg-[#606C33]/30 mb-4 group-hover:w-20 transition-all duration-500 group-hover:bg-[#BC6C25]"></div>
-          
-          <p className="text-sm font-['Poppins'] text-[#1B2624]/80 leading-relaxed flex-grow">
-            {item.desc}
-          </p>
-        </div>
-      </div>
+  {/* Soft aura glow */}
+  <div className="pointer-events-none absolute inset-0 opacity-0 
+                  group-hover:opacity-100 transition duration-700
+                  bg-gradient-to-b from-[#BC6C25]/10 via-transparent to-transparent">
+  </div>
+
+  {/* Corner depth accent */}
+  <div className="absolute -top-10 -right-10 w-32 h-32 rounded-full 
+                  bg-[#000]/5 blur-2xl opacity-60">
+  </div>
+
+  <div className="relative z-10 flex flex-col h-full">
+
+    {/* Image – same size, stronger depth */}
+    <div className="mb-10 flex items-center justify-center h-50">
+      <img 
+        src={item.img} 
+        alt={item.title} 
+        className="w-50 h-50 object-contain
+                   transition-transform duration-500
+                   group-hover:scale-105
+                   drop-shadow-[0_10px_18px_rgba(0,0,0,0.28)]"
+      />
+    </div>
+
+    {/* Title */}
+    <p className="font-['Playfair_Display'] text-[#BC6C25] 
+                  font-bold text-xl mb-4 leading-tight">
+      {item.title}
+    </p>
+
+    {/* Divider */}
+    <div className="h-px w-12 bg-[#606C33]/35 mb-4
+                    transition-all duration-500
+                    group-hover:w-20 group-hover:bg-[#BC6C25]">
+    </div>
+
+    {/* Description */}
+    <p className="text-sm font-['Poppins'] text-[#1B2624]/80 
+                  leading-relaxed flex-grow">
+      {item.desc}
+    </p>
+
+  </div>
+</div>
+
     ))}
   </div>
 </div>
@@ -240,7 +270,7 @@ function About() {
 
       {/* LEFT – CONTENT */}
       <div>
-        <h2 className="text-2xl md:text-3xl font-bold font-['Playfair_Display'] text-[#0f332c]">
+        <h2 className="text-4xl md:text-4xl font-bold font-['Playfair_Display'] text-[#0f332c]">
           Global Presence & Trust
         </h2>
 

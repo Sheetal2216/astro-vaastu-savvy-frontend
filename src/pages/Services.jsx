@@ -1,6 +1,6 @@
 function Services() {
   return (
-    <section className="bg-[#F5EBE0]">
+    <section className="bg-[white]">
       <div className="max-w-7xl mx-auto px-6 py-16 space-y-24">
 
       {/* 1. INTRO TO SERVICES */}
@@ -8,7 +8,7 @@ function Services() {
 
   {/* TEXT CONTENT */}
   <div>
-    <h1 className="text-4xl font-bold md:text-5xl font-['Playfair_Display'] text-[#1B2624]  leading-tight">
+    <h1 className="text-5xl font-bold md:text-5xl font-['Playfair_Display'] text-[#1B2624]  leading-tight">
       Professional Astrology & Vastu Services
     </h1>
 
@@ -16,7 +16,7 @@ function Services() {
     <div className="mt-4 h-px w-24 bg-[#606C33]/60"></div>
 
     <p className="mt-6 font-['Poppins'] text-[#1B2624]/85 leading-relaxed max-w-xl">
-      The services offered by Aacharaya Dr. Savvy Singhh are rooted in classical
+      The services offered by  <span className="font-bold">Acharaya Dr. Savvy Singh</span> are rooted in classical
       astrological and vastu sciences, interpreted through a modern,
       logical, and ethical framework.
     </p>
@@ -61,7 +61,7 @@ function Services() {
 
         {/* 2. DETAILED SERVICE EXPLANATION */}
 <div>
-  <h2 className="text-2xl font-bold md:text-3xl font-['Playfair_Display'] text-[#1B2624]  mb-12">
+  <h2 className="text-5xl font-bold md:text-5xl text-center font-['Playfair_Display'] text-[#BC6C25]  mb-12">
     Areas of Practice
   </h2>
 
@@ -87,13 +87,13 @@ function Services() {
         desc:
           "Decoding numerical vibrations of names and dates to improve alignment and decision-making.",
         img: "/images/name-analysis.png",
-        icon: "/icons/chiromancy.png",
+        icon: "/icons/mystery.png",
       },
       {
         title: "Astro Palmistry",
         desc: "Looking beyond just the lines to understand your karmic blueprints, helping you navigate life's challenges",
         img: "/images/Astro-4.png",
-        icon: "/icons/mystery.png",
+        icon: "/icons/chiromancy.png",
       },
     ].map((service, index) => (
       <div
@@ -139,79 +139,121 @@ function Services() {
 </div>
 
 {/* 2.5 KUNDLI ANALYSIS – PAID SERVICE */}
-<div className="mt-24">
+{/* 2.5 KUNDLI ANALYSIS – PAID SERVICE */}
+<section className="relative pt-5 pb-5 bg-[#F5EBE0]">
 
-  <h2 className="text-2xl md:text-3xl font-bold font-['Playfair_Display'] text-[#1B2624] mb-12">
-    Kundli Analysis & Birth Chart Consultation
-  </h2>
+  <div className="max-w-7xl mx-auto px-6">
 
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-14 items-start">
 
-    {/* LEFT – INFO */}
-    <div>
-      <p className="font-['Poppins'] text-[#1B2624]/85 leading-relaxed mb-6 max-w-xl">
-        Kundli Analysis is a paid, personalised consultation where your birth
-        chart is studied manually based on planetary positions, nakshatras,
-        dashas, and yogas. This is not an automated or AI-generated report.
-      </p>
+      {/* LEFT – CONTENT */}
+      <div>
 
-      <ul className="space-y-3 font-['Poppins'] text-sm text-[#1B2624]/80 mb-8">
-        <li>• Career, marriage & financial insights</li>
-        <li>• Timing of opportunities & challenges</li>
-        <li>• Ethical, fear-free guidance</li>
-        <li>• Personally analysed by Dr. Savvy Singh</li>
-      </ul>
+        <h2 className="text-5xl md:text-5xl font-bold font-['Playfair_Display'] text-[#BC6C25] mb-4">
+          Bhagya Kundali
+        </h2>
 
-      <p className="text-xs font-['Poppins'] text-[#606C33]">
-        Confidential • Manual Analysis • Paid Consultation
-      </p>
-    </div>
+        <div className="h-px w-24 bg-[#BC6C25]/70 mb-6"></div>
 
-    {/* RIGHT – CARD */}
-    <div className="flex justify-center md:justify-end">
-      <div className="group relative bg-[#F5EBE0] border border-[#606C33]/40 
-                      rounded-3xl p-8 w-full max-w-sm
-                      transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl">
+        <p className="font-['Poppins'] text-[#1B2624]/85 leading-relaxed mb-6 max-w-xl">
+          A deeply personalised, paid consultation where your birth chart is
+          analysed using classical astrological methods.
+        </p>
 
-        {/* Decorative glow */}
-        <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full 
-                        bg-[#BC6C25]/20 blur-3xl opacity-0 
-                        group-hover:opacity-100 transition"></div>
+        <p className="font-['Poppins'] text-[#1B2624]/85 leading-relaxed mb-6 max-w-xl">
+          Your kundli is studied in detail through planetary positions,
+          nakshatras, dashas, yogas, and karmic indicators to provide ethical,
+          fear-free guidance aligned with your life’s direction.
+        </p>
 
-        {/* Icon */}
-        <div className="w-14 h-14 mb-6 rounded-full bg-[#606C33]/15 
-                        flex items-center justify-center">
-          <img src="/icons/kundli.png" alt="Kundli" className="w-8 h-8" />
+       <ul className="space-y-3 font-['Poppins'] text-sm text-[#1B2624]/80 mb-8">
+  <li>• Personalised 10 year kundali prediction</li>
+  <li>• Career & Business Analysis</li>
+  <li>• Love & Marriage Analysis</li>
+  <li>• Financial Guidance Analysis</li>
+  <li>• Health Analysis</li>
+  <li>• Accurate timing of opportunities & challenges</li>
+  <li>• Remedies focused on balance, not fear</li>
+  <li>• Personally analysed by Acharya Dr. Savvy Singh</li>
+</ul>
+
+        <div className="inline-block text-xs font-['Poppins'] text-[#606C33]
+                        border border-[#606C33]/30 rounded-full px-4 py-1">
+          Confidential • Paid Consultation
         </div>
 
-        <h3 className="font-['Playfair_Display'] text-xl text-[#1B2624] mb-3">
-          Detailed Kundli Analysis
-        </h3>
-
-        <div className="h-px w-16 bg-[#606C33]/50 mb-4"></div>
-
-        <p className="text-sm font-['Poppins'] text-[#1B2624]/80 leading-relaxed mb-6">
-          Submit your birth details, complete payment, and receive a
-          professionally analysed consultation with personalised guidance.
-        </p>
-
-        <a
-          href="/kundli-analysis"
-          className="block text-center bg-[#BC6C25] text-white 
-                     py-3 rounded-full font-['Poppins'] shadow-md 
-                     hover:opacity-90 transition"
-        >
-          Pay & Submit Details
-        </a>
-
-        <p className="mt-4 text-xs text-center font-['Poppins'] text-[#1B2624]/60">
-          Analysis conducted manually • You will be contacted personally
-        </p>
       </div>
-    </div>
 
+      {/* RIGHT – FEATURE CARD */}
+      <div className="flex justify-center md:justify-end self-start">
+
+        <div className="group relative bg-[#FDF8F3] border border-[#606C33]/30
+                        rounded-3xl p-9 w-full max-w-sm
+                        transition-all duration-500
+                        hover:-translate-y-2
+                        hover:shadow-[0_28px_70px_rgba(0,0,0,0.18)]">
+
+          {/* Soft glow */}
+          <div className="absolute -top-16 -right-16 w-52 h-52 rounded-full
+                          bg-[#BC6C25]/15 blur-3xl opacity-0
+                          group-hover:opacity-100 transition"></div>
+
+          {/* Image */}
+         <div className="relative mb-8 flex justify-center">
+
+  {/* Soft aura ring */}
+  <div className="absolute w-56 h-56 rounded-full 
+                  bg-gradient-to-br from-[#BC6C25]/25 via-[#DDA158]/20 to-transparent 
+                  blur-2xl"></div>
+
+  {/* Image frame */}
+  <div className="relative z-10 bg-[#FFF8F1] 
+                  rounded-2xl p-5 
+                  shadow-[0_18px_45px_rgba(0,0,0,0.25)]
+                  ring-1 ring-[#BC6C25]/20">
+
+    <img
+      src="/images/kundli-illustration.jpeg"
+      alt="Birth Chart Analysis"
+      className="w-44 h-auto object-contain 
+                 rounded-xl 
+                 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.6)]"
+    />
   </div>
+
 </div>
+
+
+          <h3 className="font-['Playfair_Display'] font-bold text-xl text-[#1B2624] mb-3 text-center">
+           Book Your Bhagya Kundali 
+          </h3>
+
+          <div className="h-px w-16 bg-[#606C33]/50 mx-auto mb-4"></div>
+
+          <p className="text-sm font-['Poppins'] text-[#1B2624]/80
+                        leading-relaxed mb-6 text-center">
+            Submit your birth details, complete payment, and receive a
+            professionally analysed consultation with personalised guidance.
+          </p>
+
+          <a
+            href="/kundli-analysis"
+            className="block text-center bg-[#BC6C25] text-white
+                       py-3 rounded-full font-['Poppins']
+                       shadow-md hover:opacity-90 transition"
+          >
+            Pay & Submit Details
+          </a>
+
+       
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 
 
       {/* 3. ACHIEVEMENTS & EXPERTISE */}
@@ -225,7 +267,7 @@ function Services() {
 
     {/* LEFT CONTENT */}
     <div>
-      <h2 className="text-2xl md:text-3xl font-['Playfair_Display'] font-bold text-[#1B2624] mb-6">
+      <h2 className="text-4xl md:text-4xl font-['Playfair_Display'] font-bold text-[#1B2624] mb-6">
         Expertise, Achievements & Professional Integrity
       </h2>
 
@@ -268,7 +310,7 @@ function Services() {
           <div
             key={index}
             className="group relative bg-[#F5EBE0] border border-[#606C33]/35
-                       rounded-xl p-6 shadow-sm transition-all duration-500
+                       rounded-xl p-4 shadow-sm transition-all duration-500
                        hover:-translate-y-1 hover:shadow-xl"
           >
             {/* Subtle hover wash */}

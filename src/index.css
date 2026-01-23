@@ -4,3 +4,21 @@ body {
   color: #1B2624;           /* Stone Charcoal */
   font-family: 'Poppins', sans-serif;
 }
+.highlight {
+  position: relative;
+  color: #112e29;
+}
+
+.highlight::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 8px;
+  width: 100%;
+  height: 8px;
+  background: #c47a2c; /* warm gold */
+  opacity: 0.25;
+  z-index: -1;
+  border-radius: 4px;
+}
+

@@ -29,12 +29,12 @@ function ServicesSection() {
   ];
 
   return (
-    <section className="bg-[#F5EBE0] py-20">
+    <section className="bg-[white]  pt-15 pb-8">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Header */}
         <div className="max-w-3xl mb-16">
-        <h2 className="text-3xl font-bold md:text-4xl font-['Playfair_Display'] text-[#BC6C25]">
+        <h2 className="text-5xl font-bold md:text-5xl font-['Playfair_Display'] text-[#BC6C25]">
   Services Offered
 </h2>
           <div className="mt-4 h-px w-24 bg-[#606C33]/60"></div>
@@ -71,13 +71,13 @@ function ServicesSection() {
 
               {/* Content */}
               <div className="p-6">
-                <h3 className="font-['Playfair_Display'] text-lg text-[#1B2624] mb-3">
+                <h3 className="font-['Playfair_Display'] font-bold text-lg text-[#1B2624] mb-3">
                   {service.title}
                 </h3>
 
                 <div className="h-px w-12 bg-[#606C33]/40 mb-3"></div>
 
-                <p className="text-sm font-['Poppins'] text-[#1B2624]/75 leading-relaxed">
+                <p className="text-sm font-['Poppins'] text-[#1B2624] leading-relaxed">
                   {service.desc}
                 </p>
               </div>

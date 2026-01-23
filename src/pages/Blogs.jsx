@@ -1,9 +1,38 @@
+
+
 function Blogs() {
+
+
   return (
-    <section className="bg-[#F5EBE0]">
+    <section className="relative bg-[white] overflow-hidden">
+{/* Animated background layers */}
+<div className="pointer-events-none absolute inset-0 -z-0">
+
+  {/* Floating golden aura */}
+  <div className="absolute -top-32 -left-32 w-[420px] h-[420px]
+                  bg-[#DDA158]/25 rounded-full blur-[120px]
+                  animate-floatSlow">
+  </div>
+
+  {/* Olive green aura */}
+  <div className="absolute top-1/3 -right-40 w-[520px] h-[520px]
+                  bg-[#606C33]/20 rounded-full blur-[140px]
+                  animate-floatSlower">
+  </div>
+
+  {/* Soft horizontal drift */}
+  <div className="absolute bottom-0 left-0 w-full h-full
+                  bg-gradient-to-r from-transparent via-[#BC6C25]/5 to-transparent
+                  animate-drift">
+  </div>
+
+</div>
+
       <div className="max-w-7xl mx-auto px-6 py-20 space-y-28">
 {/* PAGE INTRO */}
 <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center max-w-7xl">
+
+
 
   {/* LEFT TEXT */}
   <div className="max-w-4xl">
@@ -15,7 +44,7 @@ function Blogs() {
 
     <p className="mt-6 font-['Poppins'] text-[#1B2624]/85 leading-relaxed">
       A curated collection of public discourses, written insights, and
-      upcoming media engagements by Dr. Savvvy Siinghh — reflecting
+      upcoming media engagements by Acharaya Dr. Savvy Singh — reflecting
       disciplined thought, ethical responsibility, and analytical depth
       across astrology, vastu, numerology, and socio-political studies.
     </p>
@@ -47,72 +76,106 @@ function Blogs() {
 
 
         {/* VIDEO DISCOURSES */}
-        <div>
-          <h2 className="text-3xl md:text-4xl font-['Playfair_Display'] text-[#1B2624] font-bold mb-6">
-            Public Video Discourses
-          </h2>
+  {/* VIDEO DISCOURSES */}
+<div className="relative max-w-7xl mx-auto flex flex-col items-center">
 
-          <p className="max-w-3xl font-['Poppins'] text-[#1B2624]/80 leading-relaxed mb-14">
-            Selected appearances from national and international platforms where
-            Dr. Savvvy Siinghh presents structured insights with clarity,
-            responsibility, and precision.
-          </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+  {/* Subtle constrained background glow */}
+  <div className="pointer-events-none absolute inset-0 overflow-hidden">
+    <div
+      className="absolute top-16 right-12 w-56 h-56
+                 bg-[#DDA158]/18 blur-[100px] rounded-full
+                 animate-floatSlow"
+    />
+    <div
+      className="absolute bottom-16 left-12 w-56 h-56
+                 bg-[#606C33]/14 blur-[100px] rounded-full
+                 animate-floatSlower"
+    />
+  </div>
 
-            {[
-              "6IUR4LYMnus",
-              "5wDRJPVV9Vo",
-              "lZegYBRFCUo",
-              "DiggIiFAzAc",
-              "VTkK4I1i7C8",
-              "6IUR4LYMnus",
-            ].map((id, index) => (
-              <div
-                key={index}
-                className="group bg-[#F5EBE0] border border-[#606C33]/40 rounded-2xl
-                           overflow-hidden shadow-sm hover:shadow-xl transition"
-              >
-                <div className="aspect-video bg-[#606C33]/10">
-                  <iframe
-                    className="w-full h-full"
-                    src={`https://www.youtube.com/embed/${id}`}
-                    title="YouTube discourse"
-                    allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  ></iframe>
-                </div>
+  {/* Content ABOVE glow */}
+  <div className="relative z-10">
+    <h2 className="text-3xl md:text-4xl font-['Playfair_Display'] text-[#1B2624] font-bold mb-6">
+      Public Video Discourses
+    </h2>
 
-                <div className="p-6">
-                  <p className="font-['Playfair_Display'] text-[#1B2624] mb-2">
-                    Analytical Discourse {index + 1}
-                  </p>
-                  <p className="text-sm font-['Poppins'] text-[#1B2624]/70">
-                    A structured discussion offering astrological and vastu-based
-                    insights on contemporary life themes.
-                  </p>
-                </div>
-              </div>
-            ))}
+    <p className="max-w-3xl font-['Poppins'] text-[#1B2624]/80 leading-relaxed mb-14">
+      Selected appearances from national and international platforms where
+      <span className="font-bold">Acharaya Dr. Savvy Singh</span> presents structured insights with clarity,
+      responsibility, and precision.
+    </p>
 
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+      {[
+        "6IUR4LYMnus",
+        "5wDRJPVV9Vo",
+        "lZegYBRFCUo",
+        "DiggIiFAzAc",
+        "VTkK4I1i7C8",
+        "6IUR4LYMnus",
+      ].map((id, index) => (
+        <div
+          key={index}
+          className="group bg-[#F5EBE0] border border-[#606C33]/40 rounded-2xl
+                     overflow-hidden shadow-sm hover:shadow-xl
+                     transition hover:-translate-y-1"
+        >
+          <div className="aspect-video bg-[#606C33]/10">
+            <iframe
+              className="w-full h-full"
+              src={`https://www.youtube.com/embed/${id}`}
+              title="YouTube discourse"
+              allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+
+          <div className="p-6">
+            <p className="font-['Playfair_Display'] text-[#1B2624] mb-2">
+              Analytical Discourse 
+            </p>
+            <p className="text-sm font-['Poppins'] text-[#1B2624]/70">
+              A structured discussion offering astrological and vastu-based
+              insights on contemporary life themes.
+            </p>
           </div>
         </div>
+      ))}
+    </div>
+  </div>
+</div>
+
 
 
         {/* YOUTUBE CHANNEL HIGHLIGHT */}
+\{/* YOUTUBE CHANNEL HIGHLIGHT */}
 <div className="relative border border-[#606C33]/40 rounded-3xl
                 bg-[#F5EBE0] shadow-md overflow-hidden
-                p-8 md:p-12 max-w-6xl mx-auto">
+                p-8 md:p-12 max-w-6xl mx-auto
+                transition hover:shadow-xl">
 
   {/* Soft background glow */}
-  <div className="absolute -top-20 -right-20 w-64 h-64 bg-[#DDA158]/25 rounded-full blur-3xl"></div>
-  <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-[#606C33]/20 rounded-full blur-3xl"></div>
+{/* Background glow – subtle & constrained */}
+<div className="pointer-events-none absolute inset-0 overflow-hidden">
+  <div
+    className="absolute top-20 right-10 w-56 h-56
+               bg-[#DDA158]/18 blur-[100px] rounded-full
+               animate-floatSlow"
+  />
+  <div
+    className="absolute bottom-20 left-10 w-56 h-56
+               bg-[#606C33]/14 blur-[100px] rounded-full
+               animate-floatSlower"
+  />
+</div>
 
   <div className="relative grid grid-cols-1 md:grid-cols-4 gap-8 items-center">
 
     {/* LEFT – IMAGE / CHANNEL VISUAL */}
     <div className="flex justify-center md:justify-start">
-      <div className="relative">
+   <div className="relative max-w-7xl mx-auto">
+
         {/* YouTube ring */}
         <div className="absolute inset-0 rounded-full border-2 border-[#BC6C25]/40"></div>
 
@@ -145,7 +208,7 @@ function Blogs() {
       </h3>
 
       <p className="font-['Poppins'] text-[#1B2624]/80 leading-relaxed mb-5">
-        A long-standing digital platform where Dr. Savvvy Siinghh shares
+        A long-standing digital platform where Achraya Dr. Savvy Singh shares
         structured discourses on astrology, vastu, numerology, and
         socio-political analysis — guided by ethics, clarity, and discipline.
       </p>
@@ -182,81 +245,7 @@ function Blogs() {
 </div>
 
 
-        {/* WRITTEN BLOGS */}
-        <div>
-          <h2 className="text-3xl md:text-4xl font-['Playfair_Display']text-[#1B2624] font-bold mb-14">
-            Selected Writings
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-
-            {[
-              {
-                title: "Astrology as a Structured Science",
-                excerpt:
-                  "Astrology is not intuition-driven mysticism. It is a disciplined science based on mathematical calculations, observation, and time-tested principles.",
-              },
-              {
-                title: "Vastu Beyond Myths and Remedies",
-                excerpt:
-                  "True vastu focuses on spatial harmony, orientation, and psychological balance rather than fear-based corrections.",
-              },
-              {
-                title: "Numerology and the Power of Names",
-                excerpt:
-                  "Names and numbers carry vibrational frequencies that subtly influence confidence, decision-making, and long-term direction.",
-              },
-            ].map((blog, i) => (
-              <div
-                key={i}
-                className="group bg-[#F5EBE0] border border-[#606C33]/40
-                           rounded-2xl p-8 shadow-sm hover:shadow-xl transition"
-              >
-                <div className="w-12 h-12 rounded-full bg-[#DDA158]/30 mb-6"></div>
-
-                <h3 className="font-['Playfair_Display'] text-lg text-[#1B2624] mb-4">
-                  {blog.title}
-                </h3>
-
-                <p className="text-sm font-['Poppins'] text-[#1B2624]/75 leading-relaxed mb-6">
-                  {blog.excerpt}
-                </p>
-
-                <span className="text-sm font-['Poppins'] text-[#BC6C25] underline underline-offset-4">
-                  Read article →
-                </span>
-              </div>
-            ))}
-
-          </div>
-        </div>
-
-        {/* UPCOMING MEDIA PRESENCE */}
-        <div>
-          <h2 className="text-3xl md:text-4xl font-['Playfair_Display'] text-[#1B2624] font-bold mb-10">
-            Upcoming Media Presence
-          </h2>
-
-          <div className="max-w-4xl space-y-6">
-
-            {[
-              "Invited guest for a televised political analysis panel",
-              "Upcoming discourse on vastu science and modern living",
-              "International forum discussion on astrology and ethics",
-            ].map((item, i) => (
-              <div
-                key={i}
-                className="border border-[#606C33]/35 rounded-xl p-6
-                           bg-[#F5EBE0] shadow-sm"
-              >
-                <p className="font-['Poppins'] text-[#1B2624]/80">
-                  {item}
-                </p>
-              </div>
-            ))}
-
-          </div>
-        </div>
+      
 
       </div>
     </section>

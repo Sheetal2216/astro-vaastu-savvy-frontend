@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function HomeHero() {
   return (
-    <section className="bg-[#F5EBE0]">
+    <section className="bg-[white]">
       <div className="max-w-7xl mx-auto px-6 py-5 grid grid-cols-1 md:grid-cols-2 gap-14 items-center">
 
 {/* MOBILE HERO – REFINED */}

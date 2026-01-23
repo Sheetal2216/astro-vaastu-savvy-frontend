@@ -7,8 +7,11 @@ import "jspdf-autotable";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
+
   const [kundlis, setKundlis] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedDate, setSelectedDate] = useState("");
 
   const token = localStorage.getItem("adminToken");
 
@@ -21,7 +24,7 @@ const AdminDashboard = () => {
     const fetchKundlis = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:5000/api/kundli/paid",
+          import.meta.env.VITE_API_URL + "/api/kundli/paid",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -29,8 +32,9 @@ const AdminDashboard = () => {
           }
         );
 
-        setKundlis(res.data.data);
+        setKundlis(res.data.data || []);
       } catch (error) {
+        console.error("Admin fetch error:", error);
         localStorage.removeItem("adminToken");
         navigate("/admin-login");
       } finally {
@@ -43,6 +47,8 @@ const AdminDashboard = () => {
 
   // 📊 EXPORT TO EXCEL
   const exportToExcel = () => {
+    if (!kundlis.length) return;
+
     const worksheet = XLSX.utils.json_to_sheet(kundlis);
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Paid Kundlis");
@@ -51,22 +57,40 @@ const AdminDashboard = () => {
 
   // 📄 EXPORT TO PDF
   const exportToPDF = () => {
+    if (!kundlis.length) return;
+
     const doc = new jsPDF();
     doc.text("Paid Kundli Consultations", 14, 15);
 
     const tableData = kundlis.map((k, index) => [
       index + 1,
-      k.fullName,
-      k.email,
-      k.phone,
-      k.razorpayPaymentId,
+      k.fullName || "-",
+      k.email || "-",
+      k.phone || "-",
+      k.razorpayPaymentId || "-",
+      k.dateOfBirth || "-",
+      k.timeOfBirth || "-",
+      k.placeOfBirth || "-",
+      k.gender || "-",
       new Date(k.createdAt).toLocaleDateString(),
     ]);
 
     doc.autoTable({
-      head: [["#", "Name", "Email", "Phone", "Payment ID", "Date"]],
+      head: [[
+        "#",
+        "Name",
+        "Email",
+        "Phone",
+        "Payment ID",
+        "DOB",
+        "Birth Time",
+        "Birth Place",
+        "Gender",
+        "Submitted On",
+      ]],
       body: tableData,
       startY: 25,
+      styles: { fontSize: 8 },
     });
 
     doc.save("paid_kundlis.pdf");
@@ -85,14 +109,28 @@ const AdminDashboard = () => {
     );
   }
 
+  // 🔍 FILTER LOGIC
+  const filteredKundlis = kundlis.filter((k) => {
+    const matchesSearch =
+      k.fullName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      k.email?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      k.phone?.includes(searchTerm);
+
+    const matchesDate = selectedDate
+      ? new Date(k.createdAt).toISOString().slice(0, 10) === selectedDate
+      : true;
+
+    return matchesSearch && matchesDate;
+  });
+
   return (
     <div className="min-h-screen bg-gray-100 p-6">
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
         <h1 className="text-2xl font-semibold text-purple-700">
           Paid Kundli Consultations
         </h1>
 
-        <div className="flex gap-3">
+        <div className="flex flex-wrap gap-3">
           <button
             onClick={exportToExcel}
             className="bg-green-600 text-white px-4 py-2 rounded-lg"
@@ -116,7 +154,36 @@ const AdminDashboard = () => {
         </div>
       </div>
 
-      {kundlis.length === 0 ? (
+      {/* FILTERS */}
+      <div className="bg-white p-4 rounded-lg shadow mb-4 flex flex-col md:flex-row gap-4">
+        <input
+          type="text"
+          placeholder="Search by name, email or phone"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="border px-4 py-2 rounded-lg w-full md:w-1/2 focus:ring-2 focus:ring-purple-500"
+        />
+
+        <input
+          type="date"
+          value={selectedDate}
+          onChange={(e) => setSelectedDate(e.target.value)}
+          className="border px-4 py-2 rounded-lg w-full md:w-1/4 focus:ring-2 focus:ring-purple-500"
+        />
+
+        <button
+          onClick={() => {
+            setSearchTerm("");
+            setSelectedDate("");
+          }}
+          className="bg-gray-200 px-4 py-2 rounded-lg hover:bg-gray-300"
+        >
+          Clear
+        </button>
+      </div>
+
+      {/* TABLE */}
+      {filteredKundlis.length === 0 ? (
         <p>No paid consultations found.</p>
       ) : (
         <div className="overflow-x-auto bg-white rounded-xl shadow">
@@ -126,16 +193,28 @@ const AdminDashboard = () => {
                 <th className="p-3">Name</th>
                 <th className="p-3">Email</th>
                 <th className="p-3">Phone</th>
+                <th className="p-3">DOB</th>
+                <th className="p-3">Birth Time</th>
+                <th className="p-3">Birth Place</th>
+                <th className="p-3">Gender</th>
                 <th className="p-3">Payment ID</th>
                 <th className="p-3">Date</th>
               </tr>
             </thead>
+
             <tbody>
-              {kundlis.map((k) => (
-                <tr key={k._id} className="border-b hover:bg-gray-50">
+              {filteredKundlis.map((k) => (
+                <tr
+                  key={k._id}
+                  className="border-b hover:bg-gray-50 text-sm"
+                >
                   <td className="p-3">{k.fullName}</td>
                   <td className="p-3">{k.email}</td>
                   <td className="p-3">{k.phone}</td>
+                  <td className="p-3">{k.dateOfBirth}</td>
+                  <td className="p-3">{k.timeOfBirth}</td>
+                  <td className="p-3">{k.placeOfBirth}</td>
+                  <td className="p-3">{k.gender}</td>
                   <td className="p-3">{k.razorpayPaymentId}</td>
                   <td className="p-3">
                     {new Date(k.createdAt).toLocaleDateString()}
