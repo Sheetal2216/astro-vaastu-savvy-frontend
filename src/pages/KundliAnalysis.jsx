@@ -27,24 +27,34 @@ const KundliAnalysis = () => {
     e.preventDefault();
     if (loading) return;
 
+    // 🔥 META PIXEL: Initiate Checkout
+    if (window.fbq) {
+      window.fbq("track", "InitiateCheckout", {
+        value: 299,
+        currency: "INR",
+      });
+    }
+
     try {
       setLoading(true);
 
-      // ✅ 1️⃣ CREATE ORDER
+      // 1️⃣ CREATE ORDER
       const orderRes = await axios.post(
-        import.meta.env.VITE_API_URL + "/api/payment/create-order",
-        { amount: 299 }
+        `${import.meta.env.VITE_API_URL}/api/payment/create-order`,
+        { amount: 299 },
+        { timeout: 30000 }
       );
 
-      const order = orderRes.data.order;
+      const order = orderRes.data.order || orderRes.data;
+
       if (!order?.id) {
         throw new Error("Order creation failed");
       }
 
-      // ✅ 2️⃣ RAZORPAY OPTIONS (UI UNCHANGED)
+      // 2️⃣ RAZORPAY OPTIONS
       const options = {
         key: import.meta.env.VITE_RAZORPAY_KEY,
-        amount: order.amount, // paise
+        amount: order.amount,
         currency: "INR",
         name: "Astro Vaastu Savvy",
         description: "Kundli Analysis Consultation",
@@ -52,9 +62,9 @@ const KundliAnalysis = () => {
 
         handler: async function (response) {
           try {
-            // ✅ VERIFY PAYMENT
+            // VERIFY PAYMENT
             const verifyRes = await axios.post(
-              import.meta.env.VITE_API_URL + "/api/payment/verify",
+              `${import.meta.env.VITE_API_URL}/api/payment/verify`,
               response
             );
 
@@ -64,10 +74,18 @@ const KundliAnalysis = () => {
               return;
             }
 
-            // ✅ SAVE KUNDLI (NON-BLOCKING)
+            // ✅ META PIXEL: Purchase (SUCCESS ONLY)
+            if (window.fbq) {
+              window.fbq("track", "Purchase", {
+                value: 299,
+                currency: "INR",
+              });
+            }
+
+            // SAVE KUNDLI (NON-BLOCKING)
             try {
               await axios.post(
-                import.meta.env.VITE_API_URL + "/api/kundli/paid",
+                `${import.meta.env.VITE_API_URL}/api/kundli/paid`,
                 {
                   ...formData,
                   razorpayOrderId: response.razorpay_order_id,
@@ -89,7 +107,6 @@ const KundliAnalysis = () => {
           }
         },
 
-        // ✅ IMPORTANT: stop loader if user closes Razorpay
         modal: {
           ondismiss: () => {
             setLoading(false);
@@ -101,9 +118,21 @@ const KundliAnalysis = () => {
         },
       };
 
-      // ✅ 3️⃣ OPEN RAZORPAY
+      // 🔥 META PIXEL: Lead (when Razorpay opens)
+      if (window.fbq) {
+        window.fbq("track", "Lead");
+      }
+
+      // 3️⃣ OPEN RAZORPAY
+      if (!window.Razorpay) {
+        alert("Razorpay SDK not loaded");
+        setLoading(false);
+        return;
+      }
+
       const razorpay = new window.Razorpay(options);
       razorpay.open();
+
     } catch (error) {
       console.error("Payment error:", error);
       alert("Something went wrong. Please try again.");
@@ -159,24 +188,36 @@ const KundliAnalysis = () => {
               />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <input
-                type="date"
-                name="dateOfBirth"
-                value={formData.dateOfBirth}
-                onChange={handleChange}
-                required
-                className="px-4 py-3 border border-[#606C33]/40 rounded-xl bg-white"
-              />
-              <input
-                type="time"
-                name="timeOfBirth"
-                value={formData.timeOfBirth}
-                onChange={handleChange}
-                required
-                className="px-4 py-3 border border-[#606C33]/40 rounded-xl bg-white"
-              />
-            </div>
+              {/* DATE */}
+  <div className="flex flex-col">
+    <label className="mb-1 text-sm font-medium text-[#1B2624]">
+      Date of Birth
+    </label>
+    <input
+      type="date"
+      name="dateOfBirth"
+      value={formData.dateOfBirth}
+      onChange={handleChange}
+      required
+      className="px-4 py-3 border border-[#606C33]/40 rounded-xl bg-white"
+    />
+  </div>
+
+  {/* TIME */}
+  <div className="flex flex-col">
+    <label className="mb-1 text-sm font-medium text-[#1B2624]">
+      Time of Birth
+    </label>
+    <input
+      type="time"
+      name="timeOfBirth"
+      value={formData.timeOfBirth}
+      onChange={handleChange}
+      required
+      className="px-4 py-3 border border-[#606C33]/40 rounded-xl bg-white"
+    />
+  </div>
+
 
             <input
               type="text"

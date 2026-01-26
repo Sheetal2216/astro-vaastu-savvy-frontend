@@ -21,12 +21,19 @@ import ThankYou from "./pages/ThankYou";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 
+// Meta Pixel
+import { trackPageView } from "./utils/metaPixel";
+
 const Layout = () => {
   const location = useLocation();
-
   const isAdminRoute = location.pathname.startsWith("/admin");
 
-  // 🔍 BACKEND CONNECTION TEST (remove later if you want)
+  // 🔥 META PIXEL PAGE VIEW TRACKING (IMPORTANT)
+  useEffect(() => {
+    trackPageView();
+  }, [location.pathname]);
+
+  // 🔍 BACKEND CONNECTION TEST (optional)
   useEffect(() => {
     fetch(import.meta.env.VITE_API_URL + "/api/test")
       .then((res) => res.json())
