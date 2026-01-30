@@ -73,19 +73,73 @@ function MediaSlider() {
   );
 }
 
+/* ---------------- AWARDS CAROUSEL ---------------- */
+
+function AwardsCarousel() {
+  const images = [
+    "/images/award-1.jpeg",
+    "/images/award-2.jpeg",
+    "/images/award-3.jpeg",
+    "/images/award-4.jpeg",
+  ];
+
+  const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+
+  useEffect(() => {
+    if (paused) return;
+
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % images.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [paused, images.length]);
+
+  return (
+    <div
+      className="relative w-full h-100 md:h-120 overflow-hidden rounded-md border border-[#606C33]/30"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onClick={() => setPaused(!paused)}
+    >
+      <div
+        className="flex h-full transition-transform duration-700 ease-in-out"
+        style={{ transform: `translateX(-${index * 100}%)` }}
+      >
+        {images.map((src, i) => (
+          <img
+            key={i}
+            src={src}
+            alt="Award Recognition"
+            className="min-w-full h-full object-cover"
+          />
+        ))}
+      </div>
+
+      {paused && (
+        <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
+          <span className="text-white text-xs font-['Poppins']">
+            Paused
+          </span>
+        </div>
+      )}
+    </div>
+  );
+}
+
 /* ---------------- MAIN COMPONENT ---------------- */
 
 function AwardsTimeline() {
   return (
     <>
       {/* ================= AWARDS SECTION ================= */}
-     <section className="py-20 bg-[white]">
-
+      <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6">
 
           {/* Header */}
           <div className="mb-14 max-w-3xl">
-            <h2 className="text-5xl md:text-5xl font-bold font-['Playfair_Display'] text-[#1B2624]">
+            <h2 className="text-5xl font-bold font-['Playfair_Display'] text-[#1B2624]">
               Awards & Media Presence
             </h2>
             <p className="mt-4 font-['Poppins'] text-[#1B2624]/80">
@@ -100,31 +154,11 @@ function AwardsTimeline() {
             {/* Timeline */}
             <div className="relative border-l border-[#606C33]/50 pl-8 space-y-10">
               {[
-                {
-                  year: "2025",
-                  title: "Jyotish Gaurav Samman",
-                  place: "Uttarakhand, India",
-                },
-                {
-                  year: "2024",
-                  title: "Yuva Yodha Award",
-                  place: "National Akali Dal, India",
-                },
-                {
-                  year: "2023",
-                  title: "Innovative Youth Icon Award",
-                  place: "House of Lords, London, UK",
-                },
-                {
-                  year: "2023",
-                  title: "Bharat Gaurav Samman",
-                  place: "Times Square, New York, USA",
-                },
-                {
-                  year: "2022",
-                  title: "Bharat Gaurav Samman",
-                  place: "House of Lords, London, UK",
-                },
+                { year: "2025", title: "Jyotish Gaurav Samman", place: "Uttarakhand, India" },
+                { year: "2024", title: "Yuva Yodha Award", place: "National Akali Dal, India" },
+                { year: "2023", title: "Innovative Youth Icon Award", place: "House of Lords, London, UK" },
+                { year: "2023", title: "Bharat Gaurav Samman", place: "Times Square, New York, USA" },
+                { year: "2022", title: "Bharat Gaurav Samman", place: "House of Lords, London, UK" },
               ].map((item, index) => (
                 <div key={index}>
                   <span className="text-sm font-bold font-['Poppins'] text-[#BC6C25]">
@@ -140,24 +174,9 @@ function AwardsTimeline() {
               ))}
             </div>
 
-            {/* Awards Images */}
+            {/* Awards Carousel */}
             <div>
-              <div className="grid grid-cols-2 gap-4">
-                {[
-                  "/images/award-1.jpeg",
-                  "/images/award-2.jpeg",
-                  "/images/award-3.jpeg",
-                  "/images/award-4.jpeg",
-                ].map((src, index) => (
-                  <img
-                    key={index}
-                    src={src}
-                    alt="Award Recognition"
-                    className="w-full h-48 object-cover rounded-md border border-[#606C33]/30"
-                  />
-                ))}
-              </div>
-
+              <AwardsCarousel />
               <p className="mt-6 text-sm font-['Poppins'] text-[#1B2624]/70">
                 Selected recognitions from national and international institutions.
               </p>
@@ -167,47 +186,29 @@ function AwardsTimeline() {
         </div>
       </section>
 
-      {/* ================= MEDIA PRESENCE (FULL WIDTH) ================= */}
-      <section className="py-20 bg-[white] ">
+      {/* ================= MEDIA PRESENCE ================= */}
+      <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-14 items-start">
 
-            {/* Slider */}
             <MediaSlider />
 
-            {/* Content */}
             <div>
               <h3 className="text-2xl md:text-5xl font-bold font-['Playfair_Display'] text-[#BC6C25] mb-6">
                 Media Presence & Public Discourse
               </h3>
 
               <p className="font-['Poppins'] text-[#1B2624]/80 leading-relaxed mb-8">
-               <span className="font-bold">Acharaya Dr.Savvy Singh</span>  has been a regular presence on national
-                television and international platforms, particularly known for her
-                analytical insights in astrology, vastu, and political forecasting.
+                <span className="font-bold">Acharaya Dr. Savvy Singh</span> has been a regular
+                presence on national television and international platforms.
               </p>
 
               <ul className="space-y-4 font-bold font-['Poppins'] text-[#1B2624]/85">
-                <li className="flex gap-3">
-                  <span className="mt-2 w-2 h-2 bg-[#18322d] rounded-full"></span>
-                  Zee Media — National Television
-                </li>
-                <li className="flex gap-3">
-                  <span className="mt-2 w-2 h-2 font-bold bg-[#18322d] rounded-full"></span>
-                  NDTV इंडिया  
-                </li>
-                <li className="flex gap-3">
-                  <span className="mt-2 w-2 h-2 font-bold bg-[#18322d] rounded-full"></span>
-                  NDTV — News & Special Panels
-                </li>
-                <li className="flex gap-3">
-                  <span className="mt-2 font-bold w-2 h-2 bg-[#18322d] rounded-full"></span>
-                  Network 10 — Expert Commentary
-                </li>
-                <li className="flex gap-3">
-                  <span className="mt-2 w-2 h-2 bg-[#18322d] rounded-full"></span>
-                 News Nation 
-                </li>
+                <li className="flex gap-3"><span className="mt-2 w-2 h-2 bg-[#18322d] rounded-full"></span>Zee Media</li>
+                <li className="flex gap-3"><span className="mt-2 w-2 h-2 bg-[#18322d] rounded-full"></span>NDTV इंडिया</li>
+                <li className="flex gap-3"><span className="mt-2 w-2 h-2 bg-[#18322d] rounded-full"></span>NDTV Panels</li>
+                <li className="flex gap-3"><span className="mt-2 w-2 h-2 bg-[#18322d] rounded-full"></span>Network 10</li>
+                <li className="flex gap-3"><span className="mt-2 w-2 h-2 bg-[#18322d] rounded-full"></span>News Nation</li>
               </ul>
             </div>
 

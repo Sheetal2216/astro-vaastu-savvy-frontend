@@ -11,30 +11,29 @@ function About() {
       <AboutHero />
       
 
-{/* AWARDS & RECOGNITIONS */}
-<section className="py-15 bg-[white]">
+{/* ================= AWARDS & RECOGNITIONS ================= */}
+<section className="py-16 bg-white">
   <div className="max-w-6xl mx-auto px-6">
 
     {/* Header */}
-    <div className="mb-6">
-      <h2 className="text-5xl md:text-5xl mb-10  font-bold font-['Playfair_Display'] text-[#1B2624]">
+    <div className="mb-10">
+      <h2 className="text-5xl font-bold font-['Playfair_Display'] text-[#1B2624]">
         Awards & Recognitions
       </h2>
-      <div className="mt-2 h-[2px] w-14 align-middle bg-[#BC6C25]"></div>
-      <p className="mt-2 max-w-2xl text-sm font-['Poppins'] text-[#1B2624]/75">
+      <div className="mt-3 h-[2px] w-14 bg-[#BC6C25]"></div>
+      <p className="mt-4 max-w-2xl text-sm font-['Poppins'] text-[#1B2624]/75">
         Due to her precise predictions and achievements at a young age, she has
         been honoured with several prestigious national and international awards.
       </p>
     </div>
 
-    {/* Timeline */}
-    <div className="relative mt-8">
+    {/* Timeline Wrapper */}
+    <div className="relative">
 
-      {/* Center Vertical Line */}
+      {/* Center Line (Desktop only) */}
       <div className="absolute left-1/2 top-0 bottom-0 w-[2px] bg-[#606C33]/30 hidden md:block"></div>
 
       <div className="space-y-14">
-
         {[
           { year: "2025", title: "Jyotish Gaurav Samman", place: "Uttarakhand, India", img: "/images/celeb-3.jpeg" },
           { year: "2024", title: "Yuva Yodha Award", place: "National Akali Dal, India", img: "/images/award-6.jpeg" },
@@ -50,33 +49,55 @@ function About() {
           const isLeft = index % 2 === 0;
 
           return (
-            <div key={index} className="relative flex items-center">
+            <div key={index} className="relative">
 
-              {/* CENTER DOT – FIXED */}
-              <span className="hidden md:block absolute left-1/2 top-4 -translate-x-1/2
-                               w-3 h-3 rounded-full bg-[#BC6C25] ring-4 ring-[#F5EBE0] z-10">
-              </span>
+              {/* ================= MOBILE CARD ================= */}
+              <div className="md:hidden bg-[#F5EBE0]/40 rounded-xl p-4 shadow-sm">
+                <img
+                  src={award.img}
+                  alt={award.title}
+                  className="w-full h-48 object-cover rounded-lg mb-3"
+                />
+                <p className="text-xs font-bold text-[#606C33]">{award.year}</p>
+                <h3 className="font-['Playfair_Display'] font-bold text-[#1B2624]">
+                  {award.title}
+                </h3>
+                <p className="text-sm font-['Poppins'] text-[#1B2624]/70">
+                  {award.place}
+                </p>
+              </div>
 
-              {/* LEFT IMAGE */}
-              {isLeft && (
-                <div className="hidden md:flex w-1/2 justify-end pr-20">
-                  <img
-                    src={award.img}
-                    alt={award.title}
-                    className="w-72 h-56 object-cover rounded-xl shadow-lg"
-                  />
-                </div>
-              )}
+              {/* ================= DESKTOP TIMELINE ================= */}
+              <div className="hidden md:flex items-center">
 
-              {/* TEXT (NEAR CENTER WITH GAP) */}
-           {/* TEXT BLOCK */}
-<div className={`hidden md:flex w-1/2 ${isLeft ? "justify-start pl-20" : "justify-end pr-5"}`}>
+                {/* Center Dot */}
+                <span className="absolute left-1/2 top-6 -translate-x-1/2
+                                 w-3 h-3 rounded-full bg-[#BC6C25]
+                                 ring-4 ring-[#F5EBE0] z-10" />
+
+                {/* Left Image */}
+                {isLeft && (
+                  <div className="w-1/2 flex justify-end pr-20">
+                    <img
+                      src={award.img}
+                      alt={award.title}
+                      className="w-72 h-56 object-cover rounded-xl shadow-lg"
+                    />
+                  </div>
+                )}
+
+                {/* Text */}
+               <div
+  className={`w-1/2 flex ${
+    isLeft ? "justify-end   pr-10 -mr-6 text-right" : "justify-start pl-10 text-left"
+  }`}
+>
   <div className="w-[22rem]">
     <p className="text-xs font-bold text-[#606C33]">
       {award.year}
     </p>
 
-    <h3 className="font-['Playfair_Display'] font-bold text-[#1B2624] leading-snug">
+    <h3 className="font-['Playfair_Display'] font-bold text-2xl text-[#1B2624] leading-snug">
       {award.title}
     </h3>
 
@@ -87,17 +108,17 @@ function About() {
 </div>
 
 
-              {/* RIGHT IMAGE */}
-              {!isLeft && (
-                <div className="hidden md:flex w-1/2 justify-start pl-20">
-                  <img
-                    src={award.img}
-                    alt={award.title}
-                    className="w-72 h-56 object-cover rounded-xl shadow-lg"
-                  />
-                </div>
-              )}
-
+                {/* Right Image */}
+                {!isLeft && (
+                  <div className="w-1/2 flex justify-start pl-20">
+                    <img
+                      src={award.img}
+                      alt={award.title}
+                      className="w-72 h-56 object-cover rounded-xl shadow-lg"
+                    />
+                  </div>
+                )}
+              </div>
             </div>
           );
         })}
@@ -106,13 +127,13 @@ function About() {
   </div>
 </section>
 
-{/* MEDIA PRESENCE */}
+{/* ================= MEDIA PRESENCE ================= */}
 <section className="py-16 bg-[#FDF6EC]">
   <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
 
     {/* LEFT CONTENT */}
     <div>
-      <h2 className="text-5xl md:text-5xl font-bold font-['Playfair_Display'] text-[#1B2624]">
+      <h2 className="text-5xl font-bold font-['Playfair_Display'] text-[#1B2624]">
         Media Presence
       </h2>
       <div className="mt-3 h-[1px] w-20 bg-[#BC6C25]"></div>
@@ -130,13 +151,11 @@ function About() {
       </p>
 
       <p className="mt-4 font-['Poppins'] text-[#1B2624]/80 leading-relaxed">
-        Her popular prediction-based show{" "}
-        <strong>“2024 की कुंडली”</strong>, aired on{" "}
-        <strong>JKL 24x7 News</strong> and <strong>Gulistan</strong>, gained
-        widespread recognition for its accurate political forecasts.
+        Her popular prediction-based show <strong>“2024 की कुंडली”</strong>, aired on{" "}
+        <strong>JKL 24x7 News</strong> and <strong>Gulistan</strong>.
       </p>
 
-      {/* CHANNEL TAGS */}
+      {/* Tags */}
       <div className="mt-6 flex flex-wrap gap-3">
         {[
           "Zee Media",
@@ -153,8 +172,7 @@ function About() {
           <span
             key={i}
             className="px-4 py-1.5 text-sm rounded-full bg-white
-                       border border-[#BC6C25]/30 text-[#1B2624]
-                       shadow-sm"
+                       border border-[#BC6C25]/30 text-[#1B2624] shadow-sm"
           >
             {channel}
           </span>
@@ -164,7 +182,6 @@ function About() {
 
     {/* RIGHT SLIDER */}
     <MediaSlider />
-
   </div>
 </section>
 

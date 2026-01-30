@@ -4,67 +4,62 @@ function ConsultationPopup() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    // Check if popup was already shown
-    const hasSeenPopup = localStorage.getItem("astroConsultPopupShown");
-
-    if (hasSeenPopup) return;
-
-    // Start 1-minute timer
-    const timer = setTimeout(() => {
-      setVisible(true);
-      localStorage.setItem("astroConsultPopupShown", "true");
-    }, 60000); // 60 seconds
-
-    return () => clearTimeout(timer);
+    setVisible(true);
   }, []);
 
   if (!visible) return null;
 
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/40 px-4">
-      <div className="relative bg-[#F5EBE0] rounded-2xl shadow-2xl max-w-md w-full p-8 border border-[#606C33]/40">
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 px-4">
+      <div className="relative bg-[#FFF8F1] rounded-2xl shadow-2xl max-w-md w-full overflow-hidden border border-[#BC6C25]/40">
 
         {/* Close Button */}
         <button
           onClick={() => setVisible(false)}
-          className="absolute top-4 right-4 text-[#1B2624]/60 hover:text-[#1B2624]"
+          className="absolute top-3 right-3 z-10 text-[#1B2624]/70 hover:text-[#1B2624]"
         >
           ✕
         </button>
 
-        {/* Content */}
-        <h3 className="text-2xl font-['Playfair_Display'] text-[#1B2624] mb-4">
-          Need Astro Consultancy?
-        </h3>
+        {/* Kundli Image */}
+     {/* Kundli Image */}
+<div className="w-full flex justify-center">
+  <div className="w-60 h-96 flex items-center justify-center overflow-hidden">
+    <img
+      src="/images/kundli-illustration.jpeg"
+      alt="Bhagya Kundli Analysis"
+      className="w-full h-full object-cover object-center"
+    />
+  </div>
+</div>
 
-        <p className="font-['Poppins'] text-[#1B2624]/80 leading-relaxed mb-6">
-          If you have a specific concern related to astrology, vastu, or
-          numerology, our team would be happy to guide you.
-        </p>
 
-        <div className="flex flex-col gap-4">
-          {/* Primary CTA */}
+
+
+        {/* Content */}                         
+        <div className="p-6 text-center">
+          <h3 className="text-2xl font-['Playfair_Display'] text-[#1B2624] mb-3">
+            Discover Your Bhagya Kundli
+          </h3>
+
+          <p className="font-['Poppins'] text-[#1B2624]/80 text-sm leading-relaxed mb-5">
+            Your Kundli holds the secrets of your destiny — career growth,
+            marriage timing, financial stability, health insights, and powerful
+            remedies to remove obstacles from your life.
+          </p>
+
+          {/* CTA */}
           <a
-            href="/contact"
-            className="text-center bg-[#BC6C25] text-white py-3 rounded-full font-['Poppins'] shadow-md hover:opacity-90 transition"
+            href="/kundli-analysis"
+            className="inline-block w-full bg-[#BC6C25] text-white py-3 rounded-full font-['Poppins'] text-sm shadow-md hover:opacity-90 transition"
           >
-            Book Consultation
+            View My Bhagya Kundli
           </a>
 
-          {/* Secondary CTA */}
-          <a
-            href="https://wa.me/917303014789"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-center border border-[#606C33]/50 text-[#1B2624] py-3 rounded-full font-['Poppins'] hover:bg-[#606C33]/10 transition"
-          >
-            Chat on WhatsApp
-          </a>
+          <p className="mt-4 text-xs font-['Poppins'] text-[#1B2624]/60">
+            Accurate • Personalized • Trusted by Thousands
+          </p>
         </div>
-
-        <p className="mt-6 text-xs font-['Poppins'] text-[#1B2624]/60 text-center">
-          This message will not appear again.
-        </p>
       </div>
     </div>
   );

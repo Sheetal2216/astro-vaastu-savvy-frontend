@@ -24,76 +24,82 @@ function HomeTrustSection() {
     </div>
 
     {/* Cards */}
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12">
+   {/* Cards */}
+<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 perspective">
 
-      {[
-        {
-          title: "Ethical Practice",
-          desc: "No fear-based guidance. Every recommendation is ethical, practical, and confidential.",
-          icon: "/icons/sign-1.png",
-        },
-        {
-          title: "Accuracy & Precision",
-          desc: "Predictions and remedies are rooted in deep analysis and disciplined methodology.",
-          icon: "/icons/sign-2.png",
-        },
-        {
-          title: "Long-Term Guidance",
-          desc: "Focus on sustainable outcomes rather than instant or temporary fixes.",
-          icon: "/icons/sign-3.png",
-        },
-        {
-          title: "Global Trust",
-          desc: "Trusted by clients across India, the UK, the US, Europe, and beyond.",
-          icon: "/icons/sign-4.png",
-        },
-      ].map((item, i) => (
-        <div
-          key={i}
-          className="group relative bg-white
-rounded-3xl p-8 text-center
-border border-[#8FAF9A]/50
-shadow-[0_8px_20px_rgba(0,0,0,0.12),0_25px_60px_rgba(27,38,36,0.22),inset_0_1px_0_rgba(255,255,255,0.8)]
-transition-all duration-500 ease-out
-transform-gpu
-hover:-translate-y-4
-hover:shadow-[0_15px_35px_rgba(0,0,0,0.18),0_45px_90px_rgba(27,38,36,0.35)]"
+  {[
+    {
+      title: "Ethical Practice",
+      desc: "No fear-based guidance. Every recommendation is ethical, practical, and confidential.",
+      icon: "/icons/sign-1.png",
+    },
+    {
+      title: "Accuracy & Precision",
+      desc: "Predictions and remedies are rooted in deep analysis and disciplined methodology.",
+      icon: "/icons/sign-2.png",
+    },
+    {
+      title: "Long-Term Guidance",
+      desc: "Focus on sustainable outcomes rather than instant or temporary fixes.",
+      icon: "/icons/sign-3.png",
+    },
+    {
+      title: "Global Trust",
+      desc: "Trusted by clients across India, the UK, the US, Europe, and beyond.",
+      icon: "/icons/sign-4.png",
+    },
+  ].map((item, i) => (
+    <div
+      key={i}
+      className="group relative bg-white
+                 rounded-3xl p-8 text-center
+                 border border-[#8FAF9A]/50
+                 card-3d
+                 shadow-[0_10px_25px_rgba(0,0,0,0.15),0_35px_80px_rgba(27,38,36,0.35)]
+                 opacity-0
+                 animate-[floatUp_0.9s_ease-out_forwards]"
+      style={{ animationDelay: `${i * 120}ms` }}
+    >
 
-        >
+      {/* Icon */}
+      <div className="mx-auto mb-6 flex items-center justify-center 
+                      w-20 h-20 rounded-full 
+                      bg-[#DDA158]/25
+                      transform transition duration-500
+                      group-hover:scale-110">
+        <img src={item.icon} alt="" className="w-12 h-12" />
+      </div>
 
-          {/* Icon */}
-          <div className="mx-auto mb-6 flex items-center justify-center 
-                          w-20 h-20 rounded-full 
-                          bg-[#DDA158]/25">
-            <img src={item.icon} alt="" className="w-12 h-12" />
-          </div>
+      {/* Title */}
+      <h3 className="font-['Playfair_Display'] font-bold text-xl text-[#1B2624] mb-3">
+        {item.title}
+      </h3>
 
-          {/* Title */}
-          <h3 className="font-['Playfair_Display'] font-bold text-xl text-[#1B2624] mb-3">
-            {item.title}
-          </h3>
+      {/* Divider */}
+      <div className="mx-auto mb-4 h-px w-12 bg-[#606C33]/50
+                      transition-all duration-500
+                      group-hover:w-20 group-hover:bg-[#DDA158]">
+      </div>
 
-          {/* Divider */}
-          <div className="mx-auto mb-4 h-px w-12 bg-[#606C33]/50"></div>
+      {/* Description */}
+      <p className="text-sm font-['Poppins'] text-[#1B2624]/75 leading-relaxed">
+        {item.desc}
+      </p>
 
-          {/* Description */}
-          <p className="text-sm font-['Poppins'] text-[#1B2624]/75 leading-relaxed">
-            {item.desc}
-          </p>
-
-          {/* Corner Logo (subtle, not loud) */}
-          <div className="absolute top-4 right-4 w-12 h-12 ">
-            <img
-              src="/images/astro-savvy-bgless.png"
-              alt=""
-              className="w-full h-full object-contain"
-            />
-          </div>
-
-        </div>
-      ))}
+      {/* Corner Logo */}
+      <div className="absolute top-4 right-4 w-10 h-10 ">
+        <img
+          src="/images/astro-savvy-bgless.png"
+          alt=""
+          className="w-full h-full object-contain"
+        />
+      </div>
 
     </div>
+  ))}
+
+</div>
+
   </div>
 </section>
 
