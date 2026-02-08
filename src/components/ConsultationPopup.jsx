@@ -8,6 +8,9 @@ function ConsultationPopup() {
   }, []);
 
   if (!visible) return null;
+const blockedRoutes = ["/kundli-analysis", "/checkout"];
+
+if (blockedRoutes.includes(location.pathname)) return null;
 
   return (
     <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 px-4">
@@ -41,12 +44,6 @@ function ConsultationPopup() {
           <h3 className="text-2xl font-['Playfair_Display'] text-[#1B2624] mb-3">
             Discover Your Bhagya Kundli
           </h3>
-
-          <p className="font-['Poppins'] text-[#1B2624]/80 text-sm leading-relaxed mb-5">
-            Your Kundli holds the secrets of your destiny — career growth,
-            marriage timing, financial stability, health insights, and powerful
-            remedies to remove obstacles from your life.
-          </p>
 
           {/* CTA */}
           <a

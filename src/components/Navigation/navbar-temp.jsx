@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useCart } from "../../context/CartContext";
+
 
 function Navbar() {
   const [open, setOpen] = useState(false);
+  const { cartItem } = useCart();
 
   return (
     <header className="sticky top-0 z-50 bg-[#F5EBE0]/95 backdrop-blur-md border-b border-[#606C33]/30">
@@ -19,7 +22,7 @@ function Navbar() {
 
           {/* Desktop Menu */}
           <ul className="hidden md:flex items-center gap-8 font-['Poppins'] text-[#1B2624]">
-            {["Home","About","Services","Blogs","Contact"].map(item => (
+            {["Home","About","Services","Shop","Blogs","Contact"].map(item => (
               <li key={item}>
                 <Link
                   to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
@@ -31,8 +34,20 @@ function Navbar() {
             ))}
           </ul>
 
-          {/* CTA */}
-          <div className="hidden md:block">
+          {/* Right Side (Cart + CTA) */}
+          <div className="hidden md:flex items-center gap-6">
+
+            {/* Cart Icon */}
+            <Link to="/cart" className="relative text-2xl">
+              🛒
+              {cartItem && (
+                <span className="absolute -top-2 -right-2 bg-[#BC6C25] text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                  1
+                </span>
+              )}
+            </Link>
+
+            {/* CTA */}
             <Link
               to="/contact"
               className="bg-[#BC6C25] text-white px-6 py-2 rounded-md font-['Poppins'] shadow-md hover:opacity-90 transition"
@@ -54,7 +69,8 @@ function Navbar() {
         {open && (
           <div className="md:hidden mt-3 bg-[#F5EBE0] rounded-xl p-5 shadow-lg border border-[#606C33]/30">
             <ul className="flex flex-col gap-4 font-['Poppins'] text-[#1B2624]">
-              {["Home","About","Services","Courses","Shop","Blogs","Contact"].map(item => (
+
+              {["Home","About","Services","Shop","Blogs","Contact"].map(item => (
                 <Link
                   key={item}
                   to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
@@ -64,6 +80,20 @@ function Navbar() {
                   {item}
                 </Link>
               ))}
+
+              {/* Mobile Cart */}
+              <Link
+                to="/cart"
+                onClick={() => setOpen(false)}
+                className="flex items-center gap-2 text-lg"
+              >
+                🛒 Cart
+                {cartItem && (
+                  <span className="bg-[#BC6C25] text-white text-xs px-2 py-0.5 rounded-full">
+                    1
+                  </span>
+                )}
+              </Link>
 
               <Link
                 to="/contact"

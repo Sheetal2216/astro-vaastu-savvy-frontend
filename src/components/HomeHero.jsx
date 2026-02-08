@@ -1,5 +1,38 @@
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion"; // Added this
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+
+
+/* ================= ANIMATED NUMBER ================= */
+function AnimatedNumber({ value, suffix = "" }) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    let start = 0;
+    const end = value;
+    const duration = 1200;
+    const increment = Math.ceil(end / (duration / 16));
+
+    const timer = setInterval(() => {
+      start += increment;
+      if (start >= end) {
+        start = end;
+        clearInterval(timer);
+      }
+      setCount(start);
+    }, 16);
+
+    return () => clearInterval(timer);
+  }, [value]);
+
+  return (
+    <span>
+      {count}
+      {suffix}
+    </span>
+  );
+}
+
 
 function HomeHero() {
   // Animation variants for staggered children
@@ -102,21 +135,30 @@ function HomeHero() {
           </motion.div>
 
           {/* Achievements */}
-          <motion.div variants={itemVariants} className="mt-12 flex gap-15 text-[#1B2624]">
+           {/* 🔥 ANIMATED ACHIEVEMENTS */}
+          <motion.div variants={itemVariants} className="mt-12 flex gap-12 text-[#1B2624]">
             <div>
-              <p className="text-3xl text-[#1B2624] font-['Playfair_Display']">50+</p>
+              <p className="text-3xl font-['Playfair_Display']">
+                <AnimatedNumber value={50} suffix="+" />
+              </p>
               <p className="text-sm font-['Poppins']">Global Awards</p>
             </div>
             <div>
-              <p className="text-3xl text-[#1B2624] font-['Playfair_Display']">15+</p>
+              <p className="text-3xl font-['Playfair_Display']">
+                <AnimatedNumber value={15} suffix="+" />
+              </p>
               <p className="text-sm font-['Poppins']">Years Experience</p>
             </div>
             <div>
-              <p className="text-3xl text-[#1B2624] font-['Playfair_Display']">50L+</p>
+              <p className="text-3xl font-['Playfair_Display']">
+                <AnimatedNumber value={50} suffix="L+" />
+              </p>
               <p className="text-sm font-['Poppins']">Reach</p>
             </div>
           </motion.div>
         </motion.div>
+
+      
 
         {/* RIGHT VISUAL - DESKTOP */}
         <div className="relative hidden md:flex justify-center items-center w-full min-h-[420px]">
