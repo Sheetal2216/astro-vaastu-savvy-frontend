@@ -12,20 +12,25 @@ function ProductPayment() {
     localStorage.getItem("productCheckoutData")
   );
 
-  // 🔒 Guard: if cart missing, redirect
+  /* --------------------------------------------------
+     🔒 SAFE GUARD (DO NOT BREAK PAYMENT FLOW)
+  -------------------------------------------------- */
   useEffect(() => {
-    if (!cartItem) {
+    if (!cartItem && !checkoutData) {
       navigate("/shop");
     }
-  }, [cartItem, navigate]);
+  }, [cartItem, checkoutData, navigate]);
 
+  /* --------------------------------------------------
+     💳 PAYMENT HANDLER
+  -------------------------------------------------- */
   const handlePayment = async () => {
-    if (!cartItem) return;
+    if (!cartItem || loading) return;
 
     try {
       setLoading(true);
 
-      // 1️⃣ Create Razorpay order
+      // 1️⃣ Create Razorpay Order
       const { data } = await api.post(
         "/api/product-payment/create-order",
         { amount: cartItem.price }
@@ -40,24 +45,34 @@ function ProductPayment() {
         order_id: data.order.id,
 
         handler: async function (response) {
-          const verifyRes = await api.post(
-            "/api/product-payment/verify",
-            {
-              ...response,
-              productName: cartItem.name,
-              productPrice: cartItem.price,
-              customerName: checkoutData?.name,
-              phone: checkoutData?.phone,
-              email: checkoutData?.email,
-              address: checkoutData?.address,
-            }
-          );
+          try {
+            // 2️⃣ Verify Payment + Save Order
+            const verifyRes = await api.post(
+              "/api/product-payment/verify",
+              {
+                ...response,
+                productName: cartItem.name,
+                productPrice: cartItem.price,
+                customerName: checkoutData?.name,
+                phone: checkoutData?.phone,
+                email: checkoutData?.email,
+                address: checkoutData?.address,
+              }
+            );
 
-          if (verifyRes.data.success) {
-            removeFromCart();
-            localStorage.removeItem("productCheckoutData");
-            navigate("/payment-success");
-          } else {
+            if (verifyRes.data.success) {
+              // ✅ FIRST redirect
+              navigate("/payment-success");
+
+              // ✅ CLEANUP AFTER REDIRECT
+              setTimeout(() => {
+                removeFromCart();
+                localStorage.removeItem("productCheckoutData");
+              }, 500);
+            } else {
+              navigate("/payment-failure");
+            }
+          } catch (err) {
             navigate("/payment-failure");
           }
         },
@@ -87,36 +102,35 @@ function ProductPayment() {
 
   const originalPrice = Math.round(cartItem.price / 0.4);
 
+  /* --------------------------------------------------
+     🎨 UI
+  -------------------------------------------------- */
   return (
     <div className="min-h-screen bg-[#f9f7f3] flex items-center justify-center px-6">
       <div className="max-w-md w-full bg-white rounded-2xl shadow-lg p-8">
 
-        {/* Heading */}
         <h1 className="text-3xl font-['Playfair_Display'] text-center text-[#1B2624]">
           Confirm Your Order
         </h1>
 
         <p className="text-center text-gray-600 mt-2">
-          Please review before proceeding to payment
+          Please review your order before payment
         </p>
 
-        {/* Product Card */}
+        {/* PRODUCT */}
         <div className="mt-8 flex gap-5 items-center border rounded-xl p-4">
-
           <img
-  src="/images/shop/panch-mukhi-rudradsha-2.jpeg"
-  alt="Panch Mukhi Rudraksha Bracelet"
-  className="w-32 h-32 object-cover rounded-xl"
-/>
+            src="/images/shop/panch-mukhi-rudradsha-2.jpeg"
+            alt={cartItem.name}
+            className="w-28 h-28 object-cover rounded-xl"
+          />
 
           <div className="flex-1">
             <h2 className="text-lg font-semibold text-[#1B2624]">
               {cartItem.name}
             </h2>
 
-            <p className="text-sm text-gray-500 mt-1">
-              Quantity: 1
-            </p>
+            <p className="text-sm text-gray-500">Qty: 1</p>
 
             <div className="mt-2">
               <p className="text-sm text-gray-400 line-through">
@@ -132,7 +146,7 @@ function ProductPayment() {
           </div>
         </div>
 
-        {/* Delivery Info */}
+        {/* DELIVERY */}
         <div className="mt-6 text-sm text-gray-600">
           <p>
             <span className="font-medium">Delivering to:</span>{" "}
@@ -140,7 +154,7 @@ function ProductPayment() {
           </p>
         </div>
 
-        {/* Total */}
+        {/* TOTAL */}
         <div className="flex justify-between items-center mt-6 text-lg font-semibold">
           <span>Total Payable</span>
           <span>₹{cartItem.price}</span>
@@ -159,9 +173,8 @@ function ProductPayment() {
           {loading ? "Opening Payment..." : "Confirm & Pay Securely"}
         </button>
 
-        {/* Trust Text */}
         <p className="text-center text-sm text-gray-500 mt-4">
-          🔒 100% Secure payment powered by Razorpay
+          🔒 Secure payment powered by Razorpay
         </p>
 
       </div>
