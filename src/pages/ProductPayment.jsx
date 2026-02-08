@@ -13,7 +13,7 @@ function ProductPayment() {
   );
 
   /* --------------------------------------------------
-     🔒 SAFE GUARD (DO NOT BREAK PAYMENT FLOW)
+     🔒 SAFE GUARD
   -------------------------------------------------- */
   useEffect(() => {
     if (!cartItem && !checkoutData) {
@@ -46,7 +46,7 @@ function ProductPayment() {
 
         handler: async function (response) {
           try {
-            // 2️⃣ Verify Payment + Save Order
+            // 2️⃣ Verify payment
             const verifyRes = await api.post(
               "/api/product-payment/verify",
               {
@@ -61,19 +61,22 @@ function ProductPayment() {
             );
 
             if (verifyRes.data.success) {
-              // ✅ FIRST redirect
-              navigate("/payment-success");
+              // ✅ MARK SUCCESS
+              localStorage.setItem("orderSuccess", "true");
+
+              // ✅ HARD REDIRECT (THIS IS THE FIX)
+              window.location.href = "/payment-success";
 
               // ✅ CLEANUP AFTER REDIRECT
               setTimeout(() => {
                 removeFromCart();
                 localStorage.removeItem("productCheckoutData");
-              }, 500);
+              }, 1000);
             } else {
-              navigate("/payment-failure");
+              window.location.href = "/payment-failure";
             }
           } catch (err) {
-            navigate("/payment-failure");
+            window.location.href = "/payment-failure";
           }
         },
 
@@ -117,7 +120,6 @@ function ProductPayment() {
           Please review your order before payment
         </p>
 
-        {/* PRODUCT */}
         <div className="mt-8 flex gap-5 items-center border rounded-xl p-4">
           <img
             src="/images/shop/panch-mukhi-rudradsha-2.jpeg"
@@ -146,7 +148,6 @@ function ProductPayment() {
           </div>
         </div>
 
-        {/* DELIVERY */}
         <div className="mt-6 text-sm text-gray-600">
           <p>
             <span className="font-medium">Delivering to:</span>{" "}
@@ -154,13 +155,11 @@ function ProductPayment() {
           </p>
         </div>
 
-        {/* TOTAL */}
         <div className="flex justify-between items-center mt-6 text-lg font-semibold">
           <span>Total Payable</span>
           <span>₹{cartItem.price}</span>
         </div>
 
-        {/* CTA */}
         <button
           onClick={handlePayment}
           disabled={loading}
