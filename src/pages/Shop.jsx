@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useCart } from "../context/CartContext";
+import { useNavigate } from "react-router-dom";
 
 function Shop() {
   const { addToCart } = useCart();
+const navigate = useNavigate();
 
   const product = {
     id: 1,
@@ -132,21 +134,53 @@ function Shop() {
             </p>
 
             {/* Price Card */}
-            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#FFF4EC] to-white p-6 border border-[#E6BE8A]/30">
-              <div className="flex items-center gap-6">
-                <span className="text-4xl font-bold text-[#8B0000]">₹999</span>
-                <div className="flex flex-col">
-                  <span className="text-lg line-through text-gray-400">₹2499</span>
-                  <span className="text-[#5D101D] font-bold text-sm tracking-wide">
-                    You Save 60% Today
-                  </span>
-                </div>
-              </div>
-            </div>
+           <div className="relative mt-8">
+
+  {/* 🌟 SACRED BADGE */}
+  <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
+    <div className="px-6 py-1.5 rounded-full bg-[#FFF1DC] border border-[#E6BE8A] shadow-[0_0_25px_rgba(230,190,138,0.45)]">
+      <p className="text-xs tracking-wide font-semibold text-[#5D101D]">
+        Become a part of our cosmic family
+      </p>
+    </div>
+  </div>
+
+  {/* PRICE CARD */}
+  <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#FFF4EC] to-white p-6 border border-[#E6BE8A]/30">
+
+    <div className="flex items-center gap-6">
+      <span className="text-4xl font-bold text-[#8B0000]">₹999</span>
+
+      <div className="flex flex-col">
+        <span className="text-lg line-through text-gray-400">₹2499</span>
+        <span className="text-[#5D101D] font-bold text-sm tracking-wide">
+          Flat 60% OFF
+        </span>
+      </div>
+    </div>
+
+    {/* 💫 SAVINGS */}
+    <div className="mt-4 inline-flex items-center gap-2 px-5 py-1.5 rounded-full bg-[#FFD700]/20 border border-[#FFD700]/40 shadow-[0_0_18px_rgba(255,215,0,0.35)]">
+      <span className="text-sm font-semibold text-[#8B0000]">
+        You save ₹1500
+      </span>
+      <span className="text-xs font-bold text-[#5D101D]">
+        (60% OFF)
+      </span>
+    </div>
+
+  </div>
+</div>
+
+
 
             <div className="space-y-4">
               <button
-                onClick={() => addToCart(product)}
+               onClick={() => {
+  addToCart(product);
+  navigate("/cart");
+}}
+
                 className="group relative w-full py-5 rounded-full bg-[#5D101D] text-white text-xl font-semibold shadow-[0_10px_30px_rgba(93,16,29,0.3)] transition-all hover:translate-y-[-2px] active:scale-95 overflow-hidden"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
