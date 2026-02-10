@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 function Shop() {
   const { addToCart } = useCart();
 const navigate = useNavigate();
+const [showAdded, setShowAdded] = useState(false);
 
   const product = {
     id: 1,
@@ -31,13 +32,22 @@ const navigate = useNavigate();
     );
 
   useEffect(() => {
-    const interval = setInterval(nextImage, 5000);
-    return () => clearInterval(interval);
-  }, [currentImage]);
+  const interval = setInterval(nextImage, 5000);
+  return () => clearInterval(interval);
+}, []);
+
+
+
+
 
   return (
+    
     <div className="relative min-h-screen bg-[#FFFBF7] text-[#4A3728] pb-32 overflow-hidden selection:bg-[#5D101D] selection:text-white">
-      
+      {showAdded && (
+  <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-[#1B2624] text-white px-6 py-3 rounded-full shadow-xl text-sm animate-fadeIn">
+    ✅ Added to cart
+  </div>
+)}
       {/* DIVINE BACKGROUND ELEMENTS */}
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-[#FFD700]/5 blur-[120px] rounded-full" />
@@ -175,17 +185,22 @@ const navigate = useNavigate();
 
 
             <div className="space-y-4">
-              <button
-               onClick={() => {
-  addToCart(product);
-  navigate("/cart");
-}}
+             <button
+  onClick={() => {
+    addToCart(product);
+    setShowAdded(true);
 
-                className="group relative w-full py-5 rounded-full bg-[#5D101D] text-white text-xl font-semibold shadow-[0_10px_30px_rgba(93,16,29,0.3)] transition-all hover:translate-y-[-2px] active:scale-95 overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-                Claim Your Divine Love Bracelet
-              </button>
+    setTimeout(() => {
+      setShowAdded(false);
+      navigate("/cart");
+    }, 1200);
+  }}
+  className="group relative w-full py-5 rounded-full bg-[#5D101D] text-white text-xl font-semibold shadow-[0_10px_30px_rgba(93,16,29,0.3)] transition-all hover:translate-y-[-2px] active:scale-95 overflow-hidden"
+>
+  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+  Claim Your Divine Love Bracelet
+</button>
+
 
               <div className="flex justify-center gap-8 text-xs font-bold tracking-widest uppercase text-[#B27D62]">
                 <span className="flex items-center gap-2">✦ 7 Day Exchange</span>

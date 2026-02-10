@@ -29,6 +29,77 @@ function Blogs() {
 </div>
 
       <div className="max-w-7xl mx-auto px-6 py-20 space-y-28">
+
+        {/* FEATURED BLOG – MAHA SHIVRATRI */}
+<div className="relative max-w-6xl mx-auto">
+
+  {/* Soft background glow */}
+  <div className="pointer-events-none absolute inset-0 overflow-hidden">
+    <div
+      className="absolute -top-10 left-10 w-64 h-64
+                 bg-[#DDA158]/20 blur-[120px] rounded-full"
+    />
+    <div
+      className="absolute bottom-0 right-10 w-64 h-64
+                 bg-[#606C33]/20 blur-[120px] rounded-full"
+    />
+  </div>
+
+  {/* Card */}
+  <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-8
+                  bg-[#F5EBE0] border border-[#606C33]/40
+                  rounded-3xl p-8 md:p-10 shadow-md
+                  hover:shadow-xl transition">
+
+    {/* LEFT – IMAGE */}
+    <div className="md:col-span-1 flex justify-center">
+      <img
+        src="/images/maha-shivratri.png"
+        alt="Maha Shivratri 2026"
+        className="w-full max-w-xs rounded-2xl shadow-lg"
+      />
+    </div>
+
+    {/* RIGHT – CONTENT */}
+    <div className="md:col-span-2 flex flex-col justify-center">
+
+      <span className="inline-block mb-3 text-xs uppercase tracking-wide
+                       bg-[#BC6C25]/10 text-[#BC6C25]
+                       px-3 py-1 rounded-full w-fit">
+        Featured Blog
+      </span>
+
+      <h3 className="text-2xl md:text-3xl font-['Playfair_Display']
+                     text-[#1B2624] font-bold mb-4">
+        महाशिवरात्रि 2026: तिथि, पूजा का शुभ समय, व्रत विधि, अनुष्ठान और महत्व
+      </h3>
+
+      <p className="font-['Poppins'] text-[#1B2624]/80 leading-relaxed mb-6">
+        महा शिवरात्रि भगवान शिव की आराधना, तपस्या और आध्यात्मिक जागरण का पावन पर्व है।
+        इस ब्लॉग में महाशिवरात्रि 2026 की तिथि, पूजा का शुभ समय, व्रत विधि और धार्मिक महत्व
+        का विस्तार से वर्णन किया गया है।
+      </p>
+
+      {/* CTA */}
+      <div>
+        <a
+          href="/blogs/maha-shivratri"
+          className="inline-flex items-center gap-2
+                     px-6 py-3 rounded-full
+                     bg-[#BC6C25] text-white
+                     font-['Poppins']
+                     shadow-lg hover:shadow-xl
+                     hover:translate-y-[-2px] transition-all"
+        >
+          पूरा ब्लॉग पढ़ें
+          <span className="text-lg">→</span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 {/* PAGE INTRO */}
 <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center max-w-7xl">
 

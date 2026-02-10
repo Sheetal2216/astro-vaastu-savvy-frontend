@@ -13,6 +13,7 @@ import "swiper/css/pagination";
 
 const KundliAnalysis = () => {
   const navigate = useNavigate();
+const [showAdded, setShowAdded] = useState(false);
 
   const [formData, setFormData] = useState({
     fullName: "",
