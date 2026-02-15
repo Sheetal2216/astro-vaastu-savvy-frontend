@@ -81,7 +81,13 @@ function ProductDetails() {
           </div>
 
           <div className="flex items-baseline gap-4">
-            <span className="text-4xl font-bold text-[#8B0000]">₹{product.price.toLocaleString()}</span>
+      <span className="text-4xl font-bold text-[#8B0000]">
+  {product.price
+    ? `₹${product.price.toLocaleString()}`
+    : "Call for Pricing"}
+</span>
+
+
             {savings > 0 && (
               <>
                 <span className="text-xl line-through text-gray-400">₹{product.originalPrice.toLocaleString()}</span>
