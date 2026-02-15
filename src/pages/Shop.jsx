@@ -112,7 +112,7 @@ function Shop() {
                 {/* CATEGORY IMAGE CONTAINER */}
                 <div className="relative h-64 mb-10 overflow-hidden rounded-[2rem] shadow-2xl">
                    <img 
-                    src="/images/rudraksha/2mukhi-nepali.jpeg" 
+                    src="/images/rudraksha/2mukhi-nepali-1.jpeg" 
                     alt="Holy Rudraksha" 
                     className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110"
                    />

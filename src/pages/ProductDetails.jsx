@@ -31,7 +31,13 @@ function ProductDetails() {
   const isBracelet = product.category === "bracelet";
   const isRudraksha = product.category === "rudraksha";
 
-  const savings = product.originalPrice && product.originalPrice > product.price ? product.originalPrice - product.price : 0;
+  const savings =
+  product.originalPrice &&
+  product.price &&
+  product.originalPrice > product.price
+    ? product.originalPrice - product.price
+    : 0;
+
   const discount = savings > 0 ? Math.round((savings / product.originalPrice) * 100) : 0;
 
   return (
@@ -88,12 +94,17 @@ function ProductDetails() {
 </span>
 
 
-            {savings > 0 && (
-              <>
-                <span className="text-xl line-through text-gray-400">₹{product.originalPrice.toLocaleString()}</span>
-                <span className="text-green-600 font-bold bg-green-50 px-3 py-1 rounded-lg text-sm">{discount}% OFF</span>
-              </>
-            )}
+           {savings > 0 && (
+  <>
+    <span className="text-xl line-through text-gray-400">
+      ₹{product.originalPrice.toLocaleString()}
+    </span>
+    <span className="text-green-600 font-bold bg-green-50 px-3 py-1 rounded-lg text-sm">
+      {discount}% OFF
+    </span>
+  </>
+)}
+
           </div>
 
           <button
