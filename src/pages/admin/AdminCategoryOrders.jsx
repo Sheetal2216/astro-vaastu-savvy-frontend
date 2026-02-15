@@ -53,36 +53,48 @@ const AdminCategoryOrders = ({ category, title, color }) => {
       {orders.length === 0 ? (
         <p>No orders found.</p>
       ) : (
-        <div className="overflow-x-auto bg-white rounded-xl shadow">
-          <table className="min-w-full border text-sm">
-            <thead className={`${color} text-white`}>
-              <tr>
-                <th className="p-3">Customer</th>
-                <th className="p-3">Phone</th>
-                <th className="p-3">Email</th>
-                <th className="p-3">Product</th>
-                <th className="p-3">Amount</th>
-                <th className="p-3">Status</th>
-                <th className="p-3">Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              {orders.map((o) => (
-                <tr key={o._id} className="border-b hover:bg-gray-50">
-                  <td className="p-3">{o.customerName}</td>
-                  <td className="p-3">{o.phone}</td>
-                  <td className="p-3">{o.email}</td>
-                  <td className="p-3">{o.productName}</td>
-                  <td className="p-3">₹{o.productPrice}</td>
-                  <td className="p-3 capitalize">{o.orderStatus}</td>
-                  <td className="p-3">
-                    {new Date(o.createdAt).toLocaleDateString()}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+       <div className="overflow-x-auto bg-white rounded-xl shadow">
+  <table className="min-w-full border text-sm">
+    <thead className={`${color} text-white`}>
+      <tr>
+        <th className="p-3">Customer</th>
+        <th className="p-3">Phone</th>
+        <th className="p-3">Email</th>
+        <th className="p-3">Address</th>
+        <th className="p-3">Product</th>
+        <th className="p-3">Category</th>
+        <th className="p-3">Amount</th>
+        <th className="p-3">Payment ID</th>
+        <th className="p-3">Payment Status</th>
+        <th className="p-3">Order Status</th>
+        <th className="p-3">Date</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {orders.map((o) => (
+        <tr key={o._id} className="border-b hover:bg-gray-50">
+          <td className="p-3">{o.customerName}</td>
+          <td className="p-3">{o.phone}</td>
+          <td className="p-3">{o.email}</td>
+          <td className="p-3 max-w-xs break-words">{o.address}</td>
+          <td className="p-3">{o.productName}</td>
+          <td className="p-3 capitalize">{o.productCategory}</td>
+          <td className="p-3 font-semibold">₹{o.productPrice}</td>
+          <td className="p-3 text-xs">{o.paymentId}</td>
+          <td className="p-3 capitalize">{o.paymentStatus}</td>
+          <td className="p-3 capitalize font-medium">
+            {o.orderStatus}
+          </td>
+          <td className="p-3">
+            {new Date(o.createdAt).toLocaleDateString()}
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
       )}
     </div>
   );
