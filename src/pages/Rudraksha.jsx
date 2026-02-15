@@ -126,9 +126,13 @@ function Rudraksha() {
                       </p>
                       
                       <div className="flex justify-between items-center border-t border-[#E6BE8A]/20 pt-4">
-                        <span className="text-2xl font-bold text-[#8B0000]">
-                          ₹{product.price.toLocaleString()}
-                        </span>
+                  <span className="text-2xl font-bold text-[#8B0000]">
+  {product.price
+    ? `₹${product.price.toLocaleString()}`
+    : "Call for Pricing"}
+</span>
+
+
                         <button className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#B27D62] border-b border-[#B27D62] pb-1 group-hover:text-[#5D101D] group-hover:border-[#5D101D] transition-all">
                           View Details
                         </button>

@@ -35,11 +35,12 @@ function RudrakshaDetails() {
 
         {/* ================= IMAGE SLIDER ================= */}
         <div className="relative">
-          <img
-            src={product.images?.[currentImage]}
-            alt={product.name}
-            className="rounded-3xl shadow-xl w-full object-cover"
-          />
+         <img
+  src={product.images?.[currentImage] || "/images/fallback.jpg"}
+  alt={product.name}
+  className="rounded-3xl shadow-xl w-full object-cover"
+/>
+
 
           {product.images?.length > 1 && (
             <>
@@ -74,9 +75,12 @@ function RudrakshaDetails() {
           </p>
 
           {/* PRICE */}
-          <p className="text-3xl font-semibold text-[#BC6C25]">
-            ₹{product.price}
-          </p>
+         <p className="text-3xl font-semibold text-[#BC6C25]">
+  {product.price
+    ? `₹${product.price.toLocaleString()}`
+    : "Call for Pricing"}
+</p>
+
 
           {/* ABOUT */}
           <div className="mt-6">
