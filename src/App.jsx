@@ -19,6 +19,7 @@ import Home from "./pages/Home.jsx";
 import About from "./pages/About.jsx";
 import Services from "./pages/Services.jsx";
 import Blogs from "./pages/Blogs.jsx";
+import Shop from "./pages/Shop.jsx";
 import Contact from "./pages/Contact.jsx";
 import KundliAnalysis from "./pages/KundliAnalysis";
 import ThankYou from "./pages/ThankYou";
@@ -27,13 +28,15 @@ import Mahashivratri from "./pages/Mahashivratri";
 // ==============================
 // SHOP / PRODUCT PAGES
 // ==============================
-import Shop from "./pages/Shop";
+import BraceletDetails from "./pages/BraceletDetails..jsx";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import ProductPayment from "./pages/ProductPayment";
 import PaymentSuccess from "./pages/PaymentSuccess.jsx";
 import PaymentFailure from "./pages/PaymentFailure.jsx";
-
+import ProductDetails from "./pages/ProductDetails";
+import RudrakshaCategory from "./pages/RudrakshaCategory";
+import RudrakshaDetails from "./pages/RudrakshaDeatils.jsx";
 // ==============================
 // ADMIN PAGES
 // ==============================
@@ -41,6 +44,8 @@ import AdminLogin from "./pages/AdminLogin";
 import AdminHome from "./pages/admin/AdminHome";
 import AdminKundli from "./pages/admin/AdminKundli";
 import AdminOrders from "./pages/admin/AdminOrders";
+import Bracelets from "./pages/Bracelets";
+import Rudraksha from "./pages/Rudraksha";
 
 // ==============================
 // META PIXEL TRACKING
@@ -89,7 +94,7 @@ const Layout = () => {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/services" element={<Services />} />
-
+<Route path="/shop" element={<Shop />} />
         {/* BLOG ROUTES */}
         <Route path="/blogs" element={<Blogs />} />
         <Route
@@ -102,13 +107,18 @@ const Layout = () => {
         <Route path="/thank-you" element={<ThankYou />} />
 
         {/* ===== SHOP / PRODUCT ROUTES ===== */}
-        <Route path="/shop" element={<Shop />} />
+        <Route path="/bracelet-details" element={<BraceletDetails />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/product-payment" element={<ProductPayment />} />
         <Route path="/payment-success" element={<PaymentSuccess />} />
         <Route path="/payment-failure" element={<PaymentFailure />} />
-
+<Route path="/product/:id" element={<ProductDetails />} />
+<Route path="/shop/bracelets" element={<Bracelets />} />
+<Route path="/shop/rudraksha" element={<Rudraksha />} />
+<Route path="/rudraksha" element={<RudrakshaCategory />} />
+<Route path="/bracelet/:id" element={<ProductDetails />} />
+<Route path="/rudraksha/:id" element={<RudrakshaDetails />} />
         {/* ===== ADMIN LOGIN ===== */}
         <Route path="/admin-login" element={<AdminLogin />} />
 

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import api from "../utils/axios";
 
 function ProductPayment() {
-  const { cartItem, removeFromCart } = useCart();
+  const { cartItems, clearCart } = useCart();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
@@ -12,20 +12,28 @@ function ProductPayment() {
     localStorage.getItem("productCheckoutData")
   );
 
-  /* --------------------------------------------------
-     🔒 SAFE GUARD
-  -------------------------------------------------- */
   useEffect(() => {
-    if (!cartItem && !checkoutData) {
+    if (!cartItems || cartItems.length === 0) {
       navigate("/shop");
     }
-  }, [cartItem, checkoutData, navigate]);
+  }, [cartItems, navigate]);
 
-  /* --------------------------------------------------
-     💳 PAYMENT HANDLER
-  -------------------------------------------------- */
+  if (!cartItems || cartItems.length === 0) return null;
+
+  // ========================
+  // TOTAL CALCULATION
+  // ========================
+  const totalAmount = cartItems.reduce(
+    (acc, item) =>
+      acc + (item.price || 0) * (item.quantity || 1),
+    0
+  );
+
+  // ========================
+  // PAYMENT HANDLER
+  // ========================
   const handlePayment = async () => {
-    if (!cartItem || loading) return;
+    if (loading) return;
 
     try {
       setLoading(true);
@@ -33,45 +41,42 @@ function ProductPayment() {
       // 1️⃣ Create Razorpay Order
       const { data } = await api.post(
         "/api/product-payment/create-order",
-        { amount: cartItem.price }
+        { amount: totalAmount }
       );
+
+      // 2️⃣ Build Product Description Dynamically
+      const productNames = cartItems
+        .map(item =>
+          item.category === "rudraksha"
+            ? item.title
+            : item.name
+        )
+        .join(", ");
 
       const options = {
         key: import.meta.env.VITE_RAZORPAY_KEY_ID,
         amount: data.order.amount,
         currency: "INR",
         name: "Astro Vaastu Savvy",
-        description: "Bracelet Purchase",
+        description: productNames,
         order_id: data.order.id,
 
         handler: async function (response) {
           try {
-            // 2️⃣ Verify payment
             const verifyRes = await api.post(
               "/api/product-payment/verify",
               {
                 ...response,
-                productName: cartItem.name,
-                productPrice: cartItem.price,
-                customerName: checkoutData?.name,
-                phone: checkoutData?.phone,
-                email: checkoutData?.email,
-                address: checkoutData?.address,
+                products: cartItems,
+                totalAmount,
+                customer: checkoutData,
               }
             );
 
             if (verifyRes.data.success) {
-              // ✅ MARK SUCCESS
-              localStorage.setItem("orderSuccess", "true");
-
-              // ✅ HARD REDIRECT (THIS IS THE FIX)
+              clearCart();
+              localStorage.removeItem("productCheckoutData");
               window.location.href = "/payment-success";
-
-              // ✅ CLEANUP AFTER REDIRECT
-              setTimeout(() => {
-                removeFromCart();
-                localStorage.removeItem("productCheckoutData");
-              }, 1000);
             } else {
               window.location.href = "/payment-failure";
             }
@@ -95,69 +100,56 @@ function ProductPayment() {
       razorpay.open();
 
     } catch (err) {
-      console.error("Payment init error:", err);
+      console.error("Payment error:", err);
       setLoading(false);
       navigate("/payment-failure");
     }
   };
 
-  if (!cartItem) return null;
-
-  const originalPrice = Math.round(cartItem.price / 0.4);
-
-  /* --------------------------------------------------
-     🎨 UI
-  -------------------------------------------------- */
   return (
     <div className="min-h-screen bg-[#f9f7f3] flex items-center justify-center px-6">
-      <div className="max-w-md w-full bg-white rounded-2xl shadow-lg p-8">
+      <div className="max-w-xl w-full bg-white rounded-2xl shadow-lg p-8">
 
-        <h1 className="text-3xl font-['Playfair_Display'] text-center text-[#1B2624]">
+        <h1 className="text-3xl text-center text-[#1B2624] font-semibold">
           Confirm Your Order
         </h1>
 
-        <p className="text-center text-gray-600 mt-2">
-          Please review your order before payment
-        </p>
+        <div className="mt-8 space-y-6">
 
-        <div className="mt-8 flex gap-5 items-center border rounded-xl p-4">
-          <img
-            src="/images/shop/panch-mukhi-rudradsha-2.jpeg"
-            alt={cartItem.name}
-            className="w-28 h-28 object-cover rounded-xl"
-          />
+          {cartItems.map((item) => (
+            <div
+              key={item._id}
+              className="flex gap-5 items-center border rounded-xl p-4"
+            >
+              <img
+                src={item.images?.[0]}
+                alt={item.name}
+                className="w-24 h-24 object-cover rounded-xl"
+              />
 
-          <div className="flex-1">
-            <h2 className="text-lg font-semibold text-[#1B2624]">
-              {cartItem.name}
-            </h2>
+              <div className="flex-1">
+                <h2 className="text-lg font-semibold text-[#1B2624]">
+                  {item.category === "rudraksha"
+                    ? item.title
+                    : item.name}
+                </h2>
 
-            <p className="text-sm text-gray-500">Qty: 1</p>
+                <p className="text-sm text-gray-500">
+                  Qty: {item.quantity || 1}
+                </p>
 
-            <div className="mt-2">
-              <p className="text-sm text-gray-400 line-through">
-                MRP ₹{originalPrice}
-              </p>
-              <p className="text-lg font-bold text-[#BC6C25]">
-                ₹{cartItem.price}
-              </p>
-              <p className="text-xs text-green-600">
-                You save 60% today
-              </p>
+                <p className="text-lg font-bold text-[#BC6C25] mt-2">
+                  ₹{item.price} × {item.quantity || 1}
+                </p>
+              </div>
             </div>
-          </div>
+          ))}
+
         </div>
 
-        <div className="mt-6 text-sm text-gray-600">
-          <p>
-            <span className="font-medium">Delivering to:</span>{" "}
-            {checkoutData?.name}, {checkoutData?.city}
-          </p>
-        </div>
-
-        <div className="flex justify-between items-center mt-6 text-lg font-semibold">
+        <div className="flex justify-between items-center mt-8 text-lg font-semibold border-t pt-6">
           <span>Total Payable</span>
-          <span>₹{cartItem.price}</span>
+          <span>₹{totalAmount}</span>
         </div>
 
         <button

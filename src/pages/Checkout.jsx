@@ -2,9 +2,8 @@ import { useCart } from "../context/CartContext";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-
 function Checkout() {
-  const { cartItem } = useCart();
+  const { cartItems } = useCart();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -16,7 +15,7 @@ function Checkout() {
     pincode: "",
   });
 
-  if (!cartItem) {
+  if (!cartItems || cartItems.length === 0) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#f9f7f3]">
         <p className="text-gray-600 text-lg">Your cart is empty.</p>
@@ -24,7 +23,11 @@ function Checkout() {
     );
   }
 
-  const originalPrice = Math.round(cartItem.price / 0.4); // reverse 60% off
+  // Calculate total
+  const totalAmount = cartItems.reduce(
+    (acc, item) => acc + item.price * (item.quantity || 1),
+    0
+  );
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -39,8 +42,12 @@ function Checkout() {
     }
 
     localStorage.setItem(
-      "productCheckoutData",
-      JSON.stringify(formData)
+      "checkoutData",
+      JSON.stringify({
+        formData,
+        cartItems,
+        totalAmount,
+      })
     );
 
     navigate("/product-payment");
@@ -59,53 +66,45 @@ function Checkout() {
         </p>
       </div>
 
-      <div className="max-w-5xl mx-auto grid lg:grid-cols-2 gap-10">
+      <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-10">
 
-        {/* LEFT — SHOP STYLE PRODUCT CARD */}
+        {/* LEFT — ORDER SUMMARY */}
         <div className="bg-white rounded-2xl shadow-md p-8">
 
-          {/* OFFER BADGE */}
-          <div className="inline-block bg-[#BC6C25] text-white text-sm px-4 py-1 rounded-full mb-5">
-            🔥 60% OFF – Limited Time Offer
-          </div>
+          <h2 className="text-2xl font-semibold text-[#1B2624] mb-6">
+            Order Summary
+          </h2>
 
-          <div className="flex gap-6 items-start">
-         <img
-  src="/images/shop/panch-mukhi-rudradsha-2.jpeg"
-  alt="Panch Mukhi Rudraksha Bracelet"
-  className="w-32 h-32 object-cover rounded-xl"
-/>
+          {cartItems.map((item, index) => (
+            <div key={index} className="flex gap-5 mb-6 border-b pb-5">
+              <img
+                src={item.images?.[0]}
+                alt={item.name}
+                className="w-24 h-24 object-cover rounded-xl"
+              />
 
-
-            <div className="flex-1">
-              <h2 className="text-2xl font-semibold text-[#1B2624]">
-                {cartItem.name}
-              </h2>
-
-              <p className="text-gray-600 mt-2">
-                Sacred bracelet designed to attract positivity, protection, and balance.
-              </p>
-
-              {/* PRICE SECTION */}
-              <div className="mt-4">
-                <p className="text-gray-500 line-through">
-                  MRP ₹{originalPrice}
+              <div className="flex-1">
+                <h3 className="text-lg font-semibold">{item.name}</h3>
+                <p className="text-sm text-gray-500 mt-1">
+                  Quantity: {item.quantity || 1}
                 </p>
-                <p className="text-2xl font-bold text-[#BC6C25]">
-                  ₹{cartItem.price}
+
+                <p className="text-[#BC6C25] font-bold mt-2">
+                  ₹{item.price} × {item.quantity || 1}
                 </p>
-                <p className="text-sm text-green-600 mt-1">
-                  You save ₹{originalPrice - cartItem.price} (60% OFF)
+
+                <p className="text-sm font-semibold mt-1">
+                  Subtotal: ₹{item.price * (item.quantity || 1)}
                 </p>
               </div>
             </div>
-          </div>
+          ))}
 
           <hr className="my-6" />
 
-          <div className="flex justify-between text-lg font-semibold">
+          <div className="flex justify-between text-xl font-bold">
             <span>Total Payable</span>
-            <span>₹{cartItem.price}</span>
+            <span>₹{totalAmount}</span>
           </div>
 
           <p className="text-sm text-gray-500 mt-4">
