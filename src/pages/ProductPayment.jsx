@@ -12,6 +12,9 @@ function ProductPayment() {
     localStorage.getItem("productCheckoutData")
   );
 
+  /* -------------------------------------------------- */
+  /* SAFETY GUARD                                       */
+  /* -------------------------------------------------- */
   useEffect(() => {
     if (!cartItems || cartItems.length === 0) {
       navigate("/shop");
@@ -20,33 +23,33 @@ function ProductPayment() {
 
   if (!cartItems || cartItems.length === 0) return null;
 
-  // ========================
-  // TOTAL CALCULATION
-  // ========================
+  /* -------------------------------------------------- */
+  /* TOTAL CALCULATION                                  */
+  /* -------------------------------------------------- */
   const totalAmount = cartItems.reduce(
     (acc, item) =>
       acc + (item.price || 0) * (item.quantity || 1),
     0
   );
 
-  // ========================
-  // PAYMENT HANDLER
-  // ========================
+  /* -------------------------------------------------- */
+  /* PAYMENT HANDLER                                    */
+  /* -------------------------------------------------- */
   const handlePayment = async () => {
     if (loading) return;
 
     try {
       setLoading(true);
 
-      // 1️⃣ Create Razorpay Order
+      /* 1️⃣ CREATE RAZORPAY ORDER */
       const { data } = await api.post(
         "/api/product-payment/create-order",
         { amount: totalAmount }
       );
 
-      // 2️⃣ Build Product Description Dynamically
+      /* 2️⃣ Dynamic Description */
       const productNames = cartItems
-        .map(item =>
+        .map((item) =>
           item.category === "rudraksha"
             ? item.title
             : item.name
@@ -63,13 +66,23 @@ function ProductPayment() {
 
         handler: async function (response) {
           try {
+            /* 3️⃣ VERIFY PAYMENT */
             const verifyRes = await api.post(
               "/api/product-payment/verify",
               {
-                ...response,
-                products: cartItems,
-                totalAmount,
-                customer: checkoutData,
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_signature: response.razorpay_signature,
+
+                // 🔥 MUST MATCH BACKEND
+                cartItems: cartItems,
+
+                customer: {
+                  name: checkoutData?.name,
+                  phone: checkoutData?.phone,
+                  email: checkoutData?.email,
+                  address: checkoutData?.address,
+                },
               }
             );
 
@@ -80,7 +93,9 @@ function ProductPayment() {
             } else {
               window.location.href = "/payment-failure";
             }
+
           } catch (err) {
+            console.error("Verify error:", err);
             window.location.href = "/payment-failure";
           }
         },
@@ -100,12 +115,15 @@ function ProductPayment() {
       razorpay.open();
 
     } catch (err) {
-      console.error("Payment error:", err);
+      console.error("Payment init error:", err);
       setLoading(false);
       navigate("/payment-failure");
     }
   };
 
+  /* -------------------------------------------------- */
+  /* UI                                                  */
+  /* -------------------------------------------------- */
   return (
     <div className="min-h-screen bg-[#f9f7f3] flex items-center justify-center px-6">
       <div className="max-w-xl w-full bg-white rounded-2xl shadow-lg p-8">

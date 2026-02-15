@@ -5,31 +5,44 @@ const AdminHome = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6">
-      <div className="grid md:grid-cols-2 gap-6 max-w-4xl w-full">
+      <div className="grid md:grid-cols-3 gap-6 max-w-5xl w-full">
 
-        {/* Kundli Section */}
+        {/* Kundli */}
         <div
           onClick={() => navigate("/admin/kundli")}
           className="cursor-pointer bg-white p-8 rounded-xl shadow hover:shadow-lg transition"
         >
           <h2 className="text-2xl font-semibold text-purple-700 mb-2">
-            Kundli Management
+            Kundli Consultations
           </h2>
           <p className="text-gray-600">
-            View paid Kundli consultations, export data, and manage clients.
+            View paid Kundli consultations.
           </p>
         </div>
 
-        {/* Orders Section */}
+        {/* Bracelet */}
         <div
-          onClick={() => navigate("/admin/orders")}
+          onClick={() => navigate("/admin/bracelet-orders")}
           className="cursor-pointer bg-white p-8 rounded-xl shadow hover:shadow-lg transition"
         >
           <h2 className="text-2xl font-semibold text-[#BC6C25] mb-2">
             Bracelet Orders
           </h2>
           <p className="text-gray-600">
-            View bracelet purchases, customer details, and shipping info.
+            Manage bracelet purchases.
+          </p>
+        </div>
+
+        {/* Rudraksha */}
+        <div
+          onClick={() => navigate("/admin/rudraksha-orders")}
+          className="cursor-pointer bg-white p-8 rounded-xl shadow hover:shadow-lg transition"
+        >
+          <h2 className="text-2xl font-semibold text-green-700 mb-2">
+            Rudraksha Orders
+          </h2>
+          <p className="text-gray-600">
+            Manage rudraksha purchases.
           </p>
         </div>
 

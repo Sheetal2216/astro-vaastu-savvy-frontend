@@ -37,12 +37,16 @@ import PaymentFailure from "./pages/PaymentFailure.jsx";
 import ProductDetails from "./pages/ProductDetails";
 import RudrakshaCategory from "./pages/RudrakshaCategory";
 import RudrakshaDetails from "./pages/RudrakshaDeatils.jsx";
+import KundliOrders from "./pages/admin/KundliOrders.jsx";
+import RudrakshaOrders from "./pages/admin/RudrakshaOrders.jsx";
+import BraceletOrders from "./pages/admin/BraceletOrders.jsx";
+
 // ==============================
 // ADMIN PAGES
 // ==============================
 import AdminLogin from "./pages/AdminLogin";
 import AdminHome from "./pages/admin/AdminHome";
-import AdminKundli from "./pages/admin/AdminKundli";
+import AdminKundli from "./pages/admin/KundliOrders.jsx";
 import AdminOrders from "./pages/admin/AdminOrders";
 import Bracelets from "./pages/Bracelets";
 import Rudraksha from "./pages/Rudraksha";
@@ -119,6 +123,10 @@ const Layout = () => {
 <Route path="/rudraksha" element={<RudrakshaCategory />} />
 <Route path="/bracelet/:id" element={<ProductDetails />} />
 <Route path="/rudraksha/:id" element={<RudrakshaDetails />} />
+<Route path="/admin/bracelet-orders" element={<BraceletOrders />} />
+<Route path="/admin/rudraksha-orders" element={<RudrakshaOrders />} />
+<Route path="/admin/kundli-orders" element={<KundliOrders />} />
+
         {/* ===== ADMIN LOGIN ===== */}
         <Route path="/admin-login" element={<AdminLogin />} />
 
