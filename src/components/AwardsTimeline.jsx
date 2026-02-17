@@ -206,9 +206,12 @@ function AwardsTimeline() {
               <ul className="space-y-4 font-bold font-['Poppins'] text-[#1B2624]/85">
                 <li className="flex gap-3"><span className="mt-2 w-2 h-2 bg-[#18322d] rounded-full"></span>Zee Media</li>
                 <li className="flex gap-3"><span className="mt-2 w-2 h-2 bg-[#18322d] rounded-full"></span>NDTV इंडिया</li>
-                <li className="flex gap-3"><span className="mt-2 w-2 h-2 bg-[#18322d] rounded-full"></span>NDTV Panels</li>
+                <li className="flex gap-3"><span className="mt-2 w-2 h-2 bg-[#18322d] rounded-full"></span>NDTV 24*7</li>
                 <li className="flex gap-3"><span className="mt-2 w-2 h-2 bg-[#18322d] rounded-full"></span>Network 10</li>
                 <li className="flex gap-3"><span className="mt-2 w-2 h-2 bg-[#18322d] rounded-full"></span>News Nation</li>
+                 <li className="flex gap-3"><span className="mt-2 w-2 h-2 bg-[#18322d] rounded-full"></span>Zee Rajasthan</li>
+                  <li className="flex gap-3"><span className="mt-2 w-2 h-2 bg-[#18322d] rounded-full"></span>India News</li>
+             
               </ul>
             </div>
 

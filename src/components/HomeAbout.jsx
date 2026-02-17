@@ -9,7 +9,7 @@ function HomeAbout() {
 
         {/* LEFT CONTENT */}
         <div>
-          <p className="text-sm font-['Poppins'] tracking-wide text-[#4d794b1e] mb-3">
+          <p className="text-sm font-['Poppins'] tracking-wide text-[#4d794b] mb-3">
             About the Astrologer
           </p>
 

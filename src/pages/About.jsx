@@ -35,16 +35,20 @@ function About() {
 
       <div className="space-y-14">
         {[
-          { year: "2025", title: "Jyotish Gaurav Samman", place: "Uttarakhand, India", img: "/images/celeb-3.jpeg" },
-          { year: "2024", title: "Yuva Yodha Award", place: "National Akali Dal, India", img: "/images/award-6.jpeg" },
-          { year: "2023", title: "Innovative Youth Icon Award", place: "House of Lords, London, UK", img: "/images/award-5.jpeg" },
-          { year: "2023", title: "Bharat Gaurav Samman", place: "Times Square, New York, USA", img: "/images/award-3.jpeg" },
-          { year: "2023", title: "Jyotish Ratna Award", place: "India", img: "/images/award-2.jpeg" },
+          { year: "2025", title: "Jyotish Gaurav Samman", place: "Uttarakhand, India", img: "/images/award-11.jpeg" },
+          { year: "2024", title: "Yuva Yodha Award", place: "National Akali Dal, India", img: "/images/award-12.jpeg" },
+          { year: "2023", title: "Innovative Youth Icon Award", place: "House of Lords, London, UK", img: "/images/award-3.jpeg" },
+          { year: "2023", title: "Bharat Gaurav Samman", place: "Times Square, New York, USA", img: "/images/award-2.jpeg" },
+          { year: "2023", title: "Jyotish Ratna Award", place: "India", img: "/images/celeb-3.jpeg" },
           { year: "2022", title: "Bharat Gaurav Samman", place: "House of Lords, London, UK", img: "/images/award-10.jpeg" },
-          { year: "2022", title: "Special Guest – ERAS Festival", place: "Oslo, Norway", img: "/images/award-7.jpeg" },
+          { year: "2022", title: "Special Guest – ERAS Festival", place: "Oslo, Norway", img: "/images/award-14.jpeg" },
           { year: "2022", title: "Voice of Nation Award", place: "National Akali Dal, India", img: "/images/award-8.jpeg" },
-          { year: "2021", title: "Social Awareness Influencer", place: "Zürich, Switzerland", img: "/images/award-1.jpeg" },
-          { year: "2021", title: "Bharat Vikas Ratan", place: "All India Business Development Association", img: "/images/speech-3.jpeg" },
+          { year: "2021", title: "Indian Culture Promoter & Awareness Influencer", place: "Zürich, Switzerland", img: "/images/award-5.jpeg" },
+          { year: "2021", title: "Bharat Vikas Ratan", place: "All India Business Development Association", img: "/images/award-6.jpeg" },
+          { year: "2019", title: "12th National Women Ecxellence Award", place: "", img: "/images/award-13.jpeg" },
+              { year: "2021", title: "Prominent Personality Award", place: "", img: "/images/award-1.jpeg" },
+               { year: "2024", title: "Special Guest at India Week", place: "London, UK", img: "/images/award-15.jpeg" },
+              
         ].map((award, index) => {
           const isLeft = index % 2 === 0;
 
@@ -168,6 +172,7 @@ function About() {
           "India News",
           "NDTV 24x7 News",
           "NDTV इंडिया",
+          "Zee Rajasthan"
         ].map((channel, i) => (
           <span
             key={i}

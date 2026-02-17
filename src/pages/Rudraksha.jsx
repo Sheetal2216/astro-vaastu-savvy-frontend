@@ -31,11 +31,11 @@ function Rudraksha() {
       <div className="relative z-10">
         
         {/* HERO SECTION & GENERAL DESCRIPTION */}
-        <section className="max-w-5xl mx-auto px-6 pt-20 pb-16 text-center">
+        <section className="max-w-5xl mx-auto px-6 pt-10 pb-10 text-center">
           <span className="text-[10px] tracking-[0.4em] uppercase text-[#B27D62] font-bold mb-4 block animate-fadeIn">
             The Tears of Lord Shiva
           </span>
-          <h1 className="text-5xl md:text-6xl font-bold italic text-[#5D101D] mb-8 font-['Noto_Serif_Devanagari']">
+          <h1 className="text-5xl md:text-6xl font-bold italic text-[#5D101D] mb-2 font-['Noto_Serif_Devanagari']">
             Sacred Rudraksha
           </h1>
           
@@ -43,9 +43,7 @@ function Rudraksha() {
 
           <div className="grid md:grid-cols-2 gap-12 items-center text-left">
             <div className="space-y-6 text-lg leading-relaxed font-light text-gray-700 italic">
-              <p>
-                Rudraksha, the "Eye of Shiva," are sacred seeds used for millennia by seekers and sages to align the soul with the cosmic vibration. Formed from the compassionate tears of Mahadev, these botanical wonders are more than beads—they are energetic portals.
-              </p>
+            
               <p>
                 Each bead carries a unique frequency based on its <span className="text-[#5D101D] font-semibold">Mukhi (faces)</span>, acting as a shield against negativity and a catalyst for spiritual awakening, mental clarity, and physiological balance.
               </p>
