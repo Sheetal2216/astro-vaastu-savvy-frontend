@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import * as XLSX from "xlsx";
@@ -27,11 +27,9 @@ const AdminOrders = () => {
     const fetchOrders = async () => {
       try {
         const res = await axios.get(
-          import.meta.env.VITE_API_URL + "/api/orders",
+          `${import.meta.env.VITE_API_URL}/api/orders`,
           {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+            headers: { Authorization: `Bearer ${token}` },
           }
         );
 
@@ -49,6 +47,35 @@ const AdminOrders = () => {
   }, [navigate, token]);
 
   /* --------------------------------------------------
+     🔍 FILTER LOGIC
+  -------------------------------------------------- */
+  const filteredOrders = useMemo(() => {
+    return orders.filter((o) => {
+      const matchesSearch =
+        o.customerName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        o.phone?.includes(searchTerm) ||
+        o.email?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        o.productName?.toLowerCase().includes(searchTerm.toLowerCase());
+
+      const matchesDate = selectedDate
+        ? new Date(o.createdAt).toISOString().slice(0, 10) === selectedDate
+        : true;
+
+      return matchesSearch && matchesDate;
+    });
+  }, [orders, searchTerm, selectedDate]);
+
+  /* --------------------------------------------------
+     📊 SUMMARY STATS
+  -------------------------------------------------- */
+  const totalRevenue = filteredOrders.reduce(
+    (sum, o) => sum + (o.productPrice || 0),
+    0
+  );
+
+  const totalOrders = filteredOrders.length;
+
+  /* --------------------------------------------------
      📊 EXPORT TO EXCEL
   -------------------------------------------------- */
   const exportToExcel = () => {
@@ -56,8 +83,8 @@ const AdminOrders = () => {
 
     const worksheet = XLSX.utils.json_to_sheet(filteredOrders);
     const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Bracelet Orders");
-    XLSX.writeFile(workbook, "bracelet_orders.xlsx");
+    XLSX.utils.book_append_sheet(workbook, worksheet, "All Orders");
+    XLSX.writeFile(workbook, "all_orders.xlsx");
   };
 
   /* --------------------------------------------------
@@ -67,7 +94,7 @@ const AdminOrders = () => {
     if (!filteredOrders.length) return;
 
     const doc = new jsPDF();
-    doc.text("Bracelet Orders - Astro Vaastu Savvy", 14, 15);
+    doc.text("All Orders - Astro Vaastu Savvy", 14, 15);
 
     const tableData = filteredOrders.map((o, index) => [
       index + 1,
@@ -75,9 +102,9 @@ const AdminOrders = () => {
       o.phone,
       o.email || "-",
       o.productName,
+      o.productCategory,
       `₹${o.productPrice}`,
       o.orderStatus,
-      o.address,
       new Date(o.createdAt).toLocaleDateString(),
     ]);
 
@@ -88,9 +115,9 @@ const AdminOrders = () => {
         "Phone",
         "Email",
         "Product",
+        "Category",
         "Amount",
         "Status",
-        "Address",
         "Date",
       ]],
       body: tableData,
@@ -98,7 +125,7 @@ const AdminOrders = () => {
       styles: { fontSize: 8 },
     });
 
-    doc.save("bracelet_orders.pdf");
+    doc.save("all_orders.pdf");
   };
 
   if (loading) {
@@ -109,33 +136,13 @@ const AdminOrders = () => {
     );
   }
 
-  /* --------------------------------------------------
-     🔍 FILTER LOGIC
-  -------------------------------------------------- */
-  const filteredOrders = orders.filter((o) => {
-    const matchesSearch =
-      o.customerName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      o.phone?.includes(searchTerm) ||
-      o.email?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      o.productName?.toLowerCase().includes(searchTerm.toLowerCase());
-
-    const matchesDate = selectedDate
-      ? new Date(o.createdAt).toISOString().slice(0, 10) === selectedDate
-      : true;
-
-    return matchesSearch && matchesDate;
-  });
-
-  /* --------------------------------------------------
-     🖥️ UI
-  -------------------------------------------------- */
   return (
     <div className="min-h-screen bg-gray-100 p-6">
 
       {/* HEADER */}
       <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
-        <h1 className="text-2xl font-semibold text-[#BC6C25]">
-          Bracelet Orders
+        <h1 className="text-2xl font-semibold text-[#5D101D]">
+          All Orders
         </h1>
 
         <div className="flex gap-3">
@@ -155,6 +162,23 @@ const AdminOrders = () => {
         </div>
       </div>
 
+      {/* SUMMARY CARDS */}
+      <div className="grid md:grid-cols-2 gap-6 mb-6">
+        <div className="bg-white p-6 rounded-xl shadow">
+          <h3 className="text-gray-500 text-sm">Total Orders</h3>
+          <p className="text-3xl font-bold text-[#5D101D]">
+            {totalOrders}
+          </p>
+        </div>
+
+        <div className="bg-white p-6 rounded-xl shadow">
+          <h3 className="text-gray-500 text-sm">Total Revenue</h3>
+          <p className="text-3xl font-bold text-green-600">
+            ₹{totalRevenue.toLocaleString()}
+          </p>
+        </div>
+      </div>
+
       {/* FILTERS */}
       <div className="bg-white p-4 rounded-lg shadow mb-4 flex flex-col md:flex-row gap-4">
         <input
@@ -162,14 +186,14 @@ const AdminOrders = () => {
           placeholder="Search name / phone / email / product"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="border px-4 py-2 rounded-lg w-full md:w-1/2 focus:ring-2 focus:ring-[#BC6C25]"
+          className="border px-4 py-2 rounded-lg w-full md:w-1/2 focus:ring-2 focus:ring-[#5D101D]"
         />
 
         <input
           type="date"
           value={selectedDate}
           onChange={(e) => setSelectedDate(e.target.value)}
-          className="border px-4 py-2 rounded-lg w-full md:w-1/4 focus:ring-2 focus:ring-[#BC6C25]"
+          className="border px-4 py-2 rounded-lg w-full md:w-1/4 focus:ring-2 focus:ring-[#5D101D]"
         />
 
         <button
@@ -189,12 +213,13 @@ const AdminOrders = () => {
       ) : (
         <div className="overflow-x-auto bg-white rounded-xl shadow">
           <table className="min-w-full border text-sm">
-            <thead className="bg-[#BC6C25] text-white">
+            <thead className="bg-[#5D101D] text-white">
               <tr>
                 <th className="p-3">Customer</th>
                 <th className="p-3">Phone</th>
                 <th className="p-3">Email</th>
                 <th className="p-3">Product</th>
+                <th className="p-3">Category</th>
                 <th className="p-3">Amount</th>
                 <th className="p-3">Status</th>
                 <th className="p-3">Address</th>
@@ -209,7 +234,10 @@ const AdminOrders = () => {
                   <td className="p-3">{o.phone}</td>
                   <td className="p-3">{o.email || "-"}</td>
                   <td className="p-3">{o.productName}</td>
-                  <td className="p-3">₹{o.productPrice}</td>
+                  <td className="p-3 capitalize">{o.productCategory}</td>
+                  <td className="p-3 font-semibold">
+                    ₹{o.productPrice}
+                  </td>
                   <td className="p-3 capitalize font-medium">
                     {o.orderStatus}
                   </td>
@@ -225,7 +253,6 @@ const AdminOrders = () => {
           </table>
         </div>
       )}
-
     </div>
   );
 };

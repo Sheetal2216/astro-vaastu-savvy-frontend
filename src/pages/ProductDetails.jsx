@@ -14,7 +14,11 @@ function ProductDetails() {
 
   useEffect(() => {
     api.get(`/api/products/${id}`)
-      .then(res => setProduct(res.data))
+      .then(res => {
+        if (res.data.success) {
+          setProduct(res.data.product);
+        }
+      })
       .catch(err => console.log(err));
   }, [id]);
 
@@ -30,11 +34,9 @@ function ProductDetails() {
 
   const isBracelet = product.category === "bracelet";
   const isRudraksha = product.category === "rudraksha";
+  const isPotli = product.category === "potli";
 
-  const savings =
-  product.originalPrice &&
-  product.price &&
-  product.originalPrice > product.price
+  const savings = product.originalPrice && product.price && product.originalPrice > product.price
     ? product.originalPrice - product.price
     : 0;
 
@@ -65,8 +67,8 @@ function ProductDetails() {
             
             {product.images?.length > 1 && (
               <div className="absolute inset-0 flex items-center justify-between px-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                <button onClick={() => setCurrentImage(p => p === 0 ? product.images.length - 1 : p - 1)} className="bg-white/80 backdrop-blur-sm p-3 rounded-full shadow-lg text-[#5D101D]">‹</button>
-                <button onClick={() => setCurrentImage(p => (p + 1) % product.images.length)} className="bg-white/80 backdrop-blur-sm p-3 rounded-full shadow-lg text-[#5D101D]">›</button>
+                <button onClick={() => setCurrentImage(p => p === 0 ? product.images.length - 1 : p - 1)} className="bg-white/80 backdrop-blur-sm p-3 rounded-full shadow-lg text-[#5D101D] w-10 h-10 flex items-center justify-center">‹</button>
+                <button onClick={() => setCurrentImage(p => (p + 1) % product.images.length)} className="bg-white/80 backdrop-blur-sm p-3 rounded-full shadow-lg text-[#5D101D] w-10 h-10 flex items-center justify-center">›</button>
               </div>
             )}
           </div>
@@ -87,24 +89,20 @@ function ProductDetails() {
           </div>
 
           <div className="flex items-baseline gap-4">
-      <span className="text-4xl font-bold text-[#8B0000]">
-  {product.price
-    ? `₹${product.price.toLocaleString()}`
-    : "Call for Pricing"}
-</span>
+            <span className="text-4xl font-bold text-[#8B0000]">
+              {product.price ? `₹${product.price.toLocaleString()}` : "Call for Pricing"}
+            </span>
 
-
-           {savings > 0 && (
-  <>
-    <span className="text-xl line-through text-gray-400">
-      ₹{product.originalPrice.toLocaleString()}
-    </span>
-    <span className="text-green-600 font-bold bg-green-50 px-3 py-1 rounded-lg text-sm">
-      {discount}% OFF
-    </span>
-  </>
-)}
-
+            {savings > 0 && (
+              <>
+                <span className="text-xl line-through text-gray-400">
+                  ₹{product.originalPrice.toLocaleString()}
+                </span>
+                <span className="text-green-600 font-bold bg-green-50 px-3 py-1 rounded-lg text-sm">
+                  {discount}% OFF
+                </span>
+              </>
+            )}
           </div>
 
           <button
@@ -118,7 +116,6 @@ function ProductDetails() {
             Add to Sacred Cart
           </button>
 
-          {/* QUICK PROMISES */}
           <div className="grid grid-cols-2 gap-4 pt-4">
             <div className="flex items-center gap-3 text-sm text-gray-600">
               <span className="text-[#E6BE8A]">✦</span> 100% Authentic
@@ -131,7 +128,7 @@ function ProductDetails() {
       </div>
 
       {/* ================= DETAILED CONTENT SECTION ================= */}
-      <div className="max-w-5xl mx-auto px-4 mt-12">
+      <div className="max-w-5xl mx-auto px-4 mt-12 space-y-20">
         
         {/* ---------------- RUDRAKSHA SPECIFIC UI ---------------- */}
         {isRudraksha && (
@@ -149,9 +146,7 @@ function ProductDetails() {
 
             <section className="bg-white p-10 rounded-[3rem] shadow-xl border border-gray-100">
               <h2 className="text-3xl font-bold mb-6 text-[#5D101D] font-serif">About This Sacred Bead</h2>
-              <p className="text-gray-700 leading-relaxed text-lg">
-                {product.about}
-              </p>
+              <p className="text-gray-700 leading-relaxed text-lg">{product.about}</p>
             </section>
 
             <section className="grid md:grid-cols-2 gap-12">
@@ -226,44 +221,96 @@ function ProductDetails() {
                 </section>
               </div>
             </div>
-
-            {/* RITUAL BOX */}
-            <section className="relative overflow-hidden bg-gradient-to-br from-[#5D101D] to-[#3D0A13] text-white p-12 rounded-[4rem] shadow-2xl">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mt-32 blur-3xl" />
-              <div className="relative z-10 grid md:grid-cols-2 gap-12 items-center">
-                <div>
-                  <h2 className="text-4xl font-bold mb-6 font-serif text-[#E6BE8A]">Ritual & Activation</h2>
-                  <p className="text-lg text-rose-100 font-light leading-relaxed">
-                    {product.ritual?.energized}
-                  </p>
-                </div>
-                <div className="space-y-4 bg-black/20 p-8 rounded-3xl border border-white/10">
-                  <div className="flex justify-between border-b border-white/10 pb-2">
-                    <span className="text-rose-200">Day:</span>
-                    <span className="font-bold">{product.ritual?.wearDay}</span>
-                  </div>
-                  <div className="flex justify-between border-b border-white/10 pb-2">
-                    <span className="text-rose-200">Hand:</span>
-                    <span className="font-bold">{product.ritual?.wearHand || product.ritual?.hand}</span>
-                  </div>
-                  <p className="italic text-sm text-center pt-2 text-rose-200">
-                    "{product.ritual?.instruction}"
-                  </p>
-                </div>
-              </div>
-            </section>
-
-            {/* FOOTER QUOTE */}
-            <footer className="text-center py-20 border-t border-gray-100">
-              <h2 className="text-4xl font-serif italic text-[#5D101D] mb-6">
-                "{product.footerQuote}"
-              </h2>
-              <p className="text-gray-500 max-w-2xl mx-auto uppercase tracking-widest text-xs leading-loose">
-                {product.footerNote}
-              </p>
-            </footer>
           </div>
         )}
+
+        {/* ---------------- POTLI SPECIFIC UI ---------------- */}
+        {isPotli && (
+          <div className="space-y-20">
+            <section className="text-center max-w-3xl mx-auto space-y-6">
+              <div className="text-[#E6BE8A] text-2xl">✧ ✧ ✧</div>
+              <p className="text-gray-700 leading-relaxed text-xl font-light">
+                {product.description}
+              </p>
+            </section>
+
+            <div className="grid md:grid-cols-2 gap-8">
+              <section className="bg-white p-10 rounded-[3rem] shadow-lg border border-gray-50">
+                <h2 className="text-2xl font-bold mb-8 text-[#5D101D] border-b pb-4">Key Features</h2>
+                <ul className="space-y-4">
+                  {product.symbolism?.map((item, i) => (
+                    <li key={i} className="flex gap-4 items-center text-gray-700">
+                      <span className="text-[#B27D62]">✦</span> {item}
+                    </li>
+                  ))}
+                </ul>
+              </section>
+
+              <section className="bg-white p-10 rounded-[3rem] shadow-lg border border-gray-50">
+                <h2 className="text-2xl font-bold mb-8 text-[#5D101D] border-b pb-4">Who Is It For?</h2>
+                <ul className="space-y-4">
+                  {product.whoIsItFor?.map((item, i) => (
+                    <li key={i} className="flex gap-4 items-center text-gray-700">
+                      <span className="text-[#B27D62]">✦</span> {item}
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            </div>
+
+            <section className="bg-white p-10 rounded-[3rem] shadow-lg border border-gray-50">
+              <h2 className="text-2xl font-bold mb-8 text-[#5D101D] border-b pb-4">Benefits</h2>
+              <ul className="space-y-4">
+                {product.benefits?.map((item, i) => (
+                  <li key={i} className="flex gap-4 items-center text-gray-700">
+                    <span className="text-[#B27D62]">✦</span> {item}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          </div>
+        )}
+
+        {/* ---------------- UNIVERSAL RITUAL BOX ---------------- */}
+        <section className="relative overflow-hidden bg-gradient-to-br from-[#5D101D] to-[#3D0A13] text-white p-12 rounded-[4rem] shadow-2xl">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mt-32 blur-3xl" />
+          <div className="relative z-10 grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-4xl font-bold mb-6 font-serif text-[#E6BE8A]">Ritual & Activation</h2>
+              <p className="text-lg text-rose-100 font-light leading-relaxed">
+                {product.ritual?.energized}
+              </p>
+            </div>
+            <div className="space-y-4 bg-black/20 p-8 rounded-3xl border border-white/10">
+              {product.ritual?.wearDay && (
+                <div className="flex justify-between border-b border-white/10 pb-2">
+                  <span className="text-rose-200">Auspicious Day:</span>
+                  <span className="font-bold">{product.ritual?.wearDay}</span>
+                </div>
+              )}
+              {(product.ritual?.wearHand || product.ritual?.hand) && (
+                <div className="flex justify-between border-b border-white/10 pb-2">
+                  <span className="text-rose-200">Hand/Side:</span>
+                  <span className="font-bold">{product.ritual?.wearHand || product.ritual?.hand}</span>
+                </div>
+              )}
+              <p className="italic text-sm text-center pt-2 text-rose-200">
+                "{product.ritual?.instruction}"
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* ---------------- FOOTER SECTION ---------------- */}
+        <footer className="text-center py-20 border-t border-gray-100">
+          <h2 className="text-4xl font-serif italic text-[#5D101D] mb-6">
+            "{product.footerQuote}"
+          </h2>
+          <p className="text-gray-500 max-w-2xl mx-auto uppercase tracking-widest text-xs leading-loose">
+            {product.footerNote}
+          </p>
+        </footer>
+
       </div>
     </div>
   );

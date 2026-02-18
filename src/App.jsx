@@ -37,9 +37,9 @@ import PaymentFailure from "./pages/PaymentFailure.jsx";
 import ProductDetails from "./pages/ProductDetails";
 import RudrakshaCategory from "./pages/RudrakshaCategory";
 import RudrakshaDetails from "./pages/RudrakshaDeatils.jsx";
-import KundliOrders from "./pages/admin/KundliOrders.jsx";
-import RudrakshaOrders from "./pages/admin/RudrakshaOrders.jsx";
-import BraceletOrders from "./pages/admin/BraceletOrders.jsx";
+import Bracelets from "./pages/Bracelets";
+import Rudraksha from "./pages/Rudraksha";
+import Potli from "./pages/Potli";
 
 // ==============================
 // ADMIN PAGES
@@ -48,8 +48,10 @@ import AdminLogin from "./pages/AdminLogin";
 import AdminHome from "./pages/admin/AdminHome";
 import AdminKundli from "./pages/admin/KundliOrders.jsx";
 import AdminOrders from "./pages/admin/AdminOrders";
-import Bracelets from "./pages/Bracelets";
-import Rudraksha from "./pages/Rudraksha";
+import KundliOrders from "./pages/admin/KundliOrders.jsx";
+import RudrakshaOrders from "./pages/admin/RudrakshaOrders.jsx";
+import BraceletOrders from "./pages/admin/BraceletOrders.jsx";
+import PotliOrders from "./pages/admin/PotliOrders.jsx";
 
 // ==============================
 // META PIXEL TRACKING
@@ -58,22 +60,15 @@ import { trackPageView } from "./utils/metaPixel";
 
 /* =====================================================
    LAYOUT COMPONENT
-   - Handles Navbar visibility
-   - Handles Meta Pixel tracking
-   - Contains ALL routes
 ===================================================== */
 const Layout = () => {
   const location = useLocation();
-
-  // Check if current route is admin route
   const isAdminRoute = location.pathname.startsWith("/admin");
 
-  // Track page views for Meta Pixel on every route change
   useEffect(() => {
     trackPageView();
   }, [location.pathname]);
 
-  // Optional backend connection test (safe to keep)
   useEffect(() => {
     fetch(import.meta.env.VITE_API_URL + "/api/test")
       .then((res) => res.json())
@@ -83,54 +78,47 @@ const Layout = () => {
 
   return (
     <>
-      {/* 
-        Hide Navbar & Consultation Popup 
-        on all admin routes 
-      */}
       {!isAdminRoute && <ConsultationPopup />}
       {!isAdminRoute && <Navbar />}
 
-      {/* ======================
-          ALL APPLICATION ROUTES
-         ====================== */}
       <Routes>
-        {/* ===== PUBLIC ROUTES ===== */}
+        {/* ================= PUBLIC ROUTES ================= */}
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/services" element={<Services />} />
-<Route path="/shop" element={<Shop />} />
-        {/* BLOG ROUTES */}
+        <Route path="/shop" element={<Shop />} />
         <Route path="/blogs" element={<Blogs />} />
         <Route
           path="/blogs/maha-shivratri"
           element={<Mahashivratri />}
         />
-
         <Route path="/contact" element={<Contact />} />
         <Route path="/kundli-analysis" element={<KundliAnalysis />} />
         <Route path="/thank-you" element={<ThankYou />} />
 
-        {/* ===== SHOP / PRODUCT ROUTES ===== */}
+        {/* ================= SHOP ROUTES ================= */}
+        <Route path="/shop/bracelets" element={<Bracelets />} />
+        <Route path="/shop/rudraksha" element={<Rudraksha />} />
+        <Route path="/shop/potli" element={<Potli />} />
+
+        {/* ================= PRODUCT DETAIL ROUTES ================= */}
+        <Route path="/product/:id" element={<ProductDetails />} />
+        <Route path="/bracelet/:id" element={<ProductDetails />} />
+        <Route path="/rudraksha/:id" element={<RudrakshaDetails />} />
+        <Route path="/potli/:id" element={<ProductDetails />} />
+
+        {/* ================= CART / PAYMENT ================= */}
         <Route path="/bracelet-details" element={<BraceletDetails />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/product-payment" element={<ProductPayment />} />
         <Route path="/payment-success" element={<PaymentSuccess />} />
         <Route path="/payment-failure" element={<PaymentFailure />} />
-<Route path="/product/:id" element={<ProductDetails />} />
-<Route path="/shop/bracelets" element={<Bracelets />} />
-<Route path="/shop/rudraksha" element={<Rudraksha />} />
-<Route path="/rudraksha" element={<RudrakshaCategory />} />
-<Route path="/bracelet/:id" element={<ProductDetails />} />
-<Route path="/rudraksha/:id" element={<RudrakshaDetails />} />
-<Route path="/admin/bracelet-orders" element={<BraceletOrders />} />
-<Route path="/admin/rudraksha-orders" element={<RudrakshaOrders />} />
-<Route path="/admin/kundli-orders" element={<KundliOrders />} />
 
-        {/* ===== ADMIN LOGIN ===== */}
+        {/* ================= ADMIN LOGIN ================= */}
         <Route path="/admin-login" element={<AdminLogin />} />
 
-        {/* ===== PROTECTED ADMIN ROUTES ===== */}
+        {/* ================= PROTECTED ADMIN ROUTES ================= */}
         <Route
           path="/admin"
           element={
@@ -157,9 +145,44 @@ const Layout = () => {
             </ProtectedRoute>
           }
         />
+
+        <Route
+          path="/admin/bracelet-orders"
+          element={
+            <ProtectedRoute>
+              <BraceletOrders />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/rudraksha-orders"
+          element={
+            <ProtectedRoute>
+              <RudrakshaOrders />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/potli-orders"
+          element={
+            <ProtectedRoute>
+              <PotliOrders />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/kundli-orders"
+          element={
+            <ProtectedRoute>
+              <KundliOrders />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
 
-      {/* PromptBox should not appear on admin routes */}
       {!isAdminRoute && <PromptBox />}
     </>
   );
@@ -167,7 +190,6 @@ const Layout = () => {
 
 /* =====================================================
    APP WRAPPER
-   - BrowserRouter must wrap Layout
 ===================================================== */
 function App() {
   return (

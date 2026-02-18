@@ -64,7 +64,7 @@ function Shop() {
         </div>
 
         {/* ================= CATEGORY CARDS ================= */}
-        <div className="grid md:grid-cols-2 gap-10 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
           {/* BRACELETS */}
           <div
             onClick={() => navigate("/shop/bracelets")}
@@ -132,6 +132,41 @@ function Shop() {
               </span>
             </div>
           </div>
+          {/* POTLI */}
+<div
+  onClick={() => navigate("/shop/potli")}
+  className="group relative cursor-pointer"
+>
+  <div className="absolute -inset-2 bg-gradient-to-tr from-[#FFD700]/20 to-[#5D101D]/10 rounded-[3.5rem] blur-xl opacity-0 group-hover:opacity-100 transition duration-700" />
+
+  <div className="relative bg-white/50 backdrop-blur-2xl rounded-[3.5rem] p-10 border border-white/60 shadow-xl transition-all duration-700 hover:-translate-y-2">
+    <div className="relative h-64 mb-8 overflow-hidden rounded-[2rem] shadow-2xl">
+     <img
+  src="/images/potli/potli-3.jpeg"
+  alt="Holi Special Potli"
+  className="w-full h-full object-cover transition-transform duration-[2000ms] group-hover:scale-110"
+/>
+
+      <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-md text-[#5D101D] text-[10px] px-4 py-1 rounded-full uppercase tracking-widest font-semibold border border-[#E6BE8A]/30">
+        Holi Special
+      </div>
+    </div>
+
+    <h2 className="text-3xl font-serif font-bold text-[#5D101D] mb-3">
+      Sarvdosh Nivaran Potli
+    </h2>
+
+    <p className="text-gray-600 text-base mb-8">
+      Specially energized Holashtak Potli designed to remove negativity,
+      clear financial blockages, and restore harmony in your life.
+    </p>
+
+    <span className="text-[#B27D62] font-semibold text-xs uppercase tracking-[0.3em]">
+      Explore Sacred Item
+    </span>
+  </div>
+</div>
+
         </div>
 
         {/* ================= VEDIC PROMISE ================= */}
