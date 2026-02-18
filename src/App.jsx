@@ -11,6 +11,7 @@ import Navbar from "./components/Navigation/navbar-temp.jsx";
 import PromptBox from "./components/PromptBox/PromptBox";
 import ConsultationPopup from "./components/ConsultationPopup";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Footer from "./components/Footer";
 
 // ==============================
 // PUBLIC PAGES
@@ -58,12 +59,18 @@ import PotliOrders from "./pages/admin/PotliOrders.jsx";
 // ==============================
 import { trackPageView } from "./utils/metaPixel";
 
+// LEGAL PAGES
+// ==============================
+import ReturnPolicy from "./pages/ReturnPolicy";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import Terms from "./pages/Terms";
 /* =====================================================
    LAYOUT COMPONENT
 ===================================================== */
 const Layout = () => {
   const location = useLocation();
   const isAdminRoute = location.pathname.startsWith("/admin");
+  const isHomePage = location.pathname === "/";
 
   useEffect(() => {
     trackPageView();
@@ -95,6 +102,9 @@ const Layout = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/kundli-analysis" element={<KundliAnalysis />} />
         <Route path="/thank-you" element={<ThankYou />} />
+<Route path="/return-policy" element={<ReturnPolicy />} />
+<Route path="/privacy-policy" element={<PrivacyPolicy />} />
+<Route path="/terms" element={<Terms />} />
 
         {/* ================= SHOP ROUTES ================= */}
         <Route path="/shop/bracelets" element={<Bracelets />} />
@@ -182,6 +192,7 @@ const Layout = () => {
           }
         />
       </Routes>
+      {!isAdminRoute && !isHomePage && <Footer />}
 
       {!isAdminRoute && <PromptBox />}
     </>

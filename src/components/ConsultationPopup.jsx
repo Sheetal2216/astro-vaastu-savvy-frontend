@@ -8,7 +8,7 @@ function ConsultationPopup() {
   }, []);
 
   if (!visible) return null;
-const blockedRoutes = ["/kundli-analysis", "/checkout","/shop","/services","/shop/rudraksha","/shop/bracelets"];
+const blockedRoutes = ["/kundli-analysis", "/checkout","/shop","/services","/shop/rudraksha","/shop/bracelets","/potli/6995bdeaad02b5bb4201238c"];
 
 if (blockedRoutes.includes(location.pathname)) return null;
 

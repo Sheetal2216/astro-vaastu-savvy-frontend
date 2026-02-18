@@ -333,8 +333,6 @@ return (
             className="w-full min-h-[260px] h-[260px] sm:h-[420px] md:h-[550px]"
           >
             {[
-              "/images/celeb-1.jpeg",
-              "/images/celeb-2.jpeg",
               "/images/celeb-3.jpeg",
               "/images/celeb-4.jpeg",
               "/images/celeb-5.jpeg",
