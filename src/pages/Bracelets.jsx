@@ -8,7 +8,12 @@ function Bracelets() {
 
   useEffect(() => {
     api.get("/api/products?category=bracelet")
-      .then(res => setProducts(res.data))
+      .then(res => {
+  if (res.data.success) {
+    setProducts(res.data.products);
+  }
+})
+
       .catch(err => console.error(err));
   }, []);
 

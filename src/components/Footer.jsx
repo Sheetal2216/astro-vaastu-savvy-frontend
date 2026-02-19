@@ -70,20 +70,26 @@ function Footer() {
           </div>
 
           {/* Glass Card Social */}
-          <div className="mt-6 flex gap-4">
-            <a
-              href="#"
-              className="px-4 py-2 bg-white/70 backdrop-blur-md rounded-lg text-sm hover:bg-[#BC6C25] hover:text-white transition duration-300 shadow-sm"
-            >
-              Instagram
-            </a>
-            <a
-              href="#"
-              className="px-4 py-2 bg-white/70 backdrop-blur-md rounded-lg text-sm hover:bg-[#BC6C25] hover:text-white transition duration-300 shadow-sm"
-            >
-              YouTube
-            </a>
-          </div>
+      <div className="mt-6 flex gap-4">
+  <a
+    href="https://www.instagram.com/astrovaastusavvy?igsh=MWRkNW80NzFvNHdvZQ=="
+    target="_blank"
+    rel="noopener noreferrer"
+    className="px-4 py-2 bg-white/70 backdrop-blur-md rounded-lg text-sm hover:bg-[#BC6C25] hover:text-white transition duration-300 shadow-sm"
+  >
+    Instagram
+  </a>
+
+  <a
+    href="https://youtube.com/@astrovaastusavvy?si=ElbFq-AFMX9zlT61"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="px-4 py-2 bg-white/70 backdrop-blur-md rounded-lg text-sm hover:bg-[#BC6C25] hover:text-white transition duration-300 shadow-sm"
+  >
+    YouTube
+  </a>
+</div>
+
         </div>
       </div>
 

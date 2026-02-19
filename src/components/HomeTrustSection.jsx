@@ -316,27 +316,44 @@ function HomeTrustSection() {
               Stay Connected
             </p>
 
-            <div className="flex items-center gap-3 flex-wrap">
+           <div className="flex items-center gap-3 flex-wrap">
 
-              {[
-                { href: "https://www.youtube.com/@AstroVaastuSavvy", icon: "/icons/youtube.png" },
-                { href: "https://www.instagram.com/astrovastussavvy", icon: "/icons/instagram.png" },
-                { href: "https://www.facebook.com/AstroVaastuSavvy", icon: "/icons/facebook.png" },
-                { href: "https://wa.me/917303014789", icon: "/icons/whatsapp.png", green: true },
-              ].map((item, i) => (
-                <a
-                  key={i}
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`w-11 h-11 rounded-full border 
-                    ${item.green ? "border-green-600/40 hover:bg-green-600" : "border-[#606C33]/40 hover:bg-[#BC6C25]"}
-                    flex items-center justify-center bg-white transition shadow-sm`}
-                >
-                  <img src={item.icon} alt="" className="w-5 h-5" />
-                </a>
-              ))}
-            </div>
+  {[
+    {
+      href: "https://www.youtube.com/@AstroVaastuSavvy",
+      icon: "/icons/youtube.png"
+    },
+    {
+      href: "https://www.instagram.com/astrovaastusavvy",
+      icon: "/icons/instagram.png"
+    },
+    {
+      href: "https://wa.me/917303014789",
+      icon: "/icons/whatsapp.png",
+      green: true
+    },
+  ].map((item, i) => (
+    <a
+      key={i}
+      href={item.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`w-11 h-11 rounded-full border 
+        ${item.green 
+          ? "border-green-600/40 hover:bg-green-600 hover:border-green-600" 
+          : "border-[#606C33]/40 hover:bg-[#BC6C25] hover:border-[#BC6C25]"}
+        flex items-center justify-center bg-white transition duration-300 shadow-sm group`}
+    >
+      <img
+        src={item.icon}
+        alt="social-icon"
+        className="w-5 h-5 group-hover:brightness-0 group-hover:invert transition duration-300"
+      />
+    </a>
+  ))}
+
+</div>
+
 
             <p className="mt-4 text-sm font-['Poppins'] text-[#1B2624]/70">
               📞 Call / WhatsApp: <br />
