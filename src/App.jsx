@@ -53,6 +53,10 @@ import KundliOrders from "./pages/admin/KundliOrders.jsx";
 import RudrakshaOrders from "./pages/admin/RudrakshaOrders.jsx";
 import BraceletOrders from "./pages/admin/BraceletOrders.jsx";
 import PotliOrders from "./pages/admin/PotliOrders.jsx";
+import AdminBlogs from "./pages/admin/AdminBlogs";
+import CreateBlog from "./pages/admin/CreateBlog";
+import EditBlog from "./pages/admin/EditBlog";
+import BlogDetails from "./pages/BlogDetails";
 
 // ==============================
 // META PIXEL TRACKING
@@ -106,6 +110,14 @@ const Layout = () => {
 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
 <Route path="/terms" element={<Terms />} />
 
+
+
+<Route path="/blogs/:slug" element={<BlogDetails />} />
+
+{/* ADMIN */}
+<Route path="/admin/blogs" element={<AdminBlogs />} />
+<Route path="/admin/create-blog" element={<CreateBlog />} />
+<Route path="/admin/edit-blog/:id" element={<EditBlog />} />
         {/* ================= SHOP ROUTES ================= */}
         <Route path="/shop/bracelets" element={<Bracelets />} />
         <Route path="/shop/rudraksha" element={<Rudraksha />} />

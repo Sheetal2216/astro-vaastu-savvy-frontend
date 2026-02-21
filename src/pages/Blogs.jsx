@@ -1,7 +1,23 @@
-
+import { useEffect, useState } from "react";
+import api from "../utils/axios";
+import { useNavigate } from "react-router-dom";
 
 function Blogs() {
+const [blogs, setBlogs] = useState([]);
+const navigate = useNavigate();
 
+useEffect(() => {
+  fetchBlogs();
+}, []);
+
+const fetchBlogs = async () => {
+  try {
+    const { data } = await api.get("/api/blogs");
+    setBlogs(data.blogs);
+  } catch (error) {
+    console.error(error);
+  }
+};
 
   return (
     <section className="relative bg-[white] overflow-hidden">
@@ -30,6 +46,95 @@ function Blogs() {
 
       <div className="max-w-7xl mx-auto px-6 py-20 space-y-28">
 
+        {/* FEATURED BLOG*/}
+
+{blogs.length > 0 && (
+  <div className="relative max-w-6xl mx-auto">
+
+    <div className="pointer-events-none absolute inset-0 overflow-hidden">
+      <div className="absolute -top-10 left-10 w-64 h-64 bg-[#DDA158]/20 blur-[120px] rounded-full" />
+      <div className="absolute bottom-0 right-10 w-64 h-64 bg-[#606C33]/20 blur-[120px] rounded-full" />
+    </div>
+
+    <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-8
+                    bg-[#F5EBE0] border border-[#606C33]/40
+                    rounded-3xl p-8 md:p-10 shadow-md
+                    hover:shadow-xl transition">
+
+      {/* IMAGE */}
+      <div className="md:col-span-1 flex justify-center">
+        <img
+          src={`${import.meta.env.VITE_API_URL}${blogs[0].coverImage}`}
+          alt={blogs[0].title}
+          className="w-full max-w-xs rounded-2xl shadow-lg"
+        />
+      </div>
+
+      {/* CONTENT */}
+      <div className="md:col-span-2 flex flex-col justify-center">
+
+        <span className="inline-block mb-3 text-xs uppercase tracking-wide
+                         bg-[#BC6C25]/10 text-[#BC6C25]
+                         px-3 py-1 rounded-full w-fit">
+          Featured Blog
+        </span>
+
+        <h3 className="text-2xl md:text-3xl font-['Playfair_Display']
+                       text-[#1B2624] font-bold mb-4">
+          {blogs[0].title}
+        </h3>
+
+        <p className="font-['Poppins'] text-[#1B2624]/80 leading-relaxed mb-6">
+          {blogs[0].excerpt}
+        </p>
+
+        <div>
+          <button
+            onClick={() => navigate(`/blogs/${blogs[0].slug}`)}
+            className="inline-flex items-center gap-2
+                       px-6 py-3 rounded-full
+                       bg-[#BC6C25] text-white
+                       font-['Poppins']
+                       shadow-lg hover:shadow-xl
+                       hover:translate-y-[-2px] transition-all"
+          >
+            Read Full Blog →
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
+{/*Remaining blogs*/}
+{blogs.length > 1 && (
+  <div className="grid md:grid-cols-3 gap-8 mt-16">
+    {blogs.slice(1).map((blog) => (
+      <div
+        key={blog._id}
+        onClick={() => navigate(`/blogs/${blog.slug}`)}
+        className="cursor-pointer bg-[#F5EBE0] border border-[#606C33]/40 rounded-2xl
+                   overflow-hidden shadow-sm hover:shadow-xl
+                   transition hover:-translate-y-1"
+      >
+        <img
+          src={`${import.meta.env.VITE_API_URL}${blog.coverImage}`}
+          alt={blog.title}
+          className="w-full h-56 object-cover"
+        />
+
+        <div className="p-6">
+          <h3 className="font-['Playfair_Display'] text-lg font-semibold text-[#1B2624] mb-2">
+            {blog.title}
+          </h3>
+
+          <p className="text-sm font-['Poppins'] text-[#1B2624]/70">
+            {blog.excerpt}
+          </p>
+        </div>
+      </div>
+    ))}
+  </div>
+)}
         {/* FEATURED BLOG – MAHA SHIVRATRI */}
 <div className="relative max-w-6xl mx-auto">
 

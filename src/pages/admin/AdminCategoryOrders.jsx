@@ -1,103 +1,113 @@
-
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import api from "../../utils/axios";
 
-const AdminCategoryOrders = ({ category, title, color }) => {
+function AdminBlogs() {
+  const [blogs, setBlogs] = useState([]);
   const navigate = useNavigate();
-  const [orders, setOrders] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  const token = localStorage.getItem("adminToken");
 
   useEffect(() => {
-    if (!token) {
-      navigate("/admin-login");
-      return;
+    fetchBlogs();
+  }, []);
+
+  const fetchBlogs = async () => {
+    try {
+      const { data } = await api.get("/api/blogs", {
+        headers: {
+          // ✅ Updated key to adminToken
+          Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+        },
+      });
+
+      setBlogs(data.blogs);
+    } catch (error) {
+      console.error(error);
+      alert("Failed to fetch blogs");
     }
+  };
 
-    const fetchOrders = async () => {
-      try {
-        const res = await axios.get(
-          `${import.meta.env.VITE_API_URL}/api/orders?category=${category}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+  const handleDelete = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this blog?"))
+      return;
 
-        setOrders(res.data.orders || []);
-      } catch (err) {
-        console.error("Order fetch failed", err);
-        navigate("/admin-login");
-      } finally {
-        setLoading(false);
-      }
-    };
+    try {
+      await api.delete(`/api/blogs/${id}`, {
+        headers: {
+          // ✅ Updated key to adminToken
+          Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+        },
+      });
 
-    fetchOrders();
-  }, [category, navigate, token]);
-
-  if (loading) {
-    return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
-  }
+      fetchBlogs();
+    } catch (error) {
+      console.error(error);
+      alert("Delete failed");
+    }
+  };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
+    <div className="p-8">
+      <div className="flex justify-between mb-6">
+        <h2 className="text-2xl font-bold">All Blogs</h2>
+        <button
+          onClick={() => navigate("/admin/create-blog")}
+          className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition"
+        >
+          + Create Blog
+        </button>
+      </div>
 
-      <h1 className={`text-2xl font-semibold mb-6 ${color}`}>
-        {title}
-      </h1>
+      <div className="overflow-x-auto">
+        <table className="w-full border">
+          <thead>
+            <tr className="bg-gray-200 text-left">
+              <th className="p-3 border">Title</th>
+              <th className="p-3 border">Published</th>
+              <th className="p-3 border">Actions</th>
+            </tr>
+          </thead>
 
-      {orders.length === 0 ? (
-        <p>No orders found.</p>
-      ) : (
-       <div className="overflow-x-auto bg-white rounded-xl shadow">
-  <table className="min-w-full border text-sm">
-    <thead className={`${color} text-white`}>
-      <tr>
-        <th className="p-3">Customer</th>
-        <th className="p-3">Phone</th>
-        <th className="p-3">Email</th>
-        <th className="p-3">Address</th>
-        <th className="p-3">Product</th>
-        <th className="p-3">Category</th>
-        <th className="p-3">Amount</th>
-        <th className="p-3">Payment ID</th>
-        <th className="p-3">Payment Status</th>
-        <th className="p-3">Order Status</th>
-        <th className="p-3">Date</th>
-      </tr>
-    </thead>
+          <tbody>
+            {blogs.map((blog) => (
+              <tr key={blog._id} className="hover:bg-gray-50">
+                <td className="p-3 border font-medium">{blog.title}</td>
+                <td className="p-3 border text-center">
+                  <span className={`px-2 py-1 rounded text-sm ${blog.isPublished ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}`}>
+                    {blog.isPublished ? "Published" : "Draft"}
+                  </span>
+                </td>
+                <td className="p-3 border">
+                  <div className="flex gap-3">
+                    <button
+                      onClick={() => navigate(`/admin/edit-blog/${blog._id}`)}
+                      className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded transition"
+                    >
+                      Edit
+                    </button>
 
-    <tbody>
-      {orders.map((o) => (
-        <tr key={o._id} className="border-b hover:bg-gray-50">
-          <td className="p-3">{o.customerName}</td>
-          <td className="p-3">{o.phone}</td>
-          <td className="p-3">{o.email}</td>
-          <td className="p-3 max-w-xs break-words">{o.address}</td>
-          <td className="p-3">{o.productName}</td>
-          <td className="p-3 capitalize">{o.productCategory}</td>
-          <td className="p-3 font-semibold">₹{o.productPrice}</td>
-          <td className="p-3 text-xs">{o.paymentId}</td>
-          <td className="p-3 capitalize">{o.paymentStatus}</td>
-          <td className="p-3 capitalize font-medium">
-            {o.orderStatus}
-          </td>
-          <td className="p-3">
-            {new Date(o.createdAt).toLocaleDateString()}
-          </td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
-</div>
+                    <button
+                      onClick={() => handleDelete(blog._id)}
+                      className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded transition"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            ))}
 
-      )}
+            {blogs.length === 0 && (
+              <tr>
+                <td colSpan="3" className="text-center p-8 text-gray-500">
+                  No blogs found. Start by creating one!
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
-};
+}
 
-export default AdminCategoryOrders;
+export default AdminBlogs;

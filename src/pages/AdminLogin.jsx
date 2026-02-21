@@ -29,8 +29,9 @@ const AdminLogin = () => {
         { email, password }
       );
 
-      // ✅ Save JWT token
+      // ✅ Save BOTH JWT token and Role
       localStorage.setItem("adminToken", res.data.token);
+      localStorage.setItem("adminRole", res.data.role); // 🔥 Now stored for UI logic
 
       navigate("/admin");
     } catch (error) {
