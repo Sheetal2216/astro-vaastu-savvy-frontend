@@ -1,113 +1,146 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import api from "../../utils/axios";
 
-function AdminBlogs() {
-  const [blogs, setBlogs] = useState([]);
-  const navigate = useNavigate();
+export default function AdminCategoryOrders({ category, title, color }) {
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // ===============================
+  // FETCH ORDERS BY CATEGORY
+  // ===============================
+  const fetchOrders = async () => {
+    try {
+      setLoading(true);
+
+      const res = await api.get(`/api/orders?category=${category}`);
+
+      setOrders(res.data.orders || []);
+    } catch (error) {
+      console.error("Error fetching category orders:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    fetchBlogs();
-  }, []);
+    fetchOrders();
+  }, [category]);
 
-  const fetchBlogs = async () => {
+  // ===============================
+  // UPDATE ORDER STATUS
+  // ===============================
+  const handleStatusChange = async (orderId, newStatus) => {
     try {
-      const { data } = await api.get("/api/blogs", {
-        headers: {
-          // ✅ Updated key to adminToken
-          Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
-        },
+      await api.patch(`/api/orders/${orderId}/status`, {
+        status: newStatus,
       });
 
-      setBlogs(data.blogs);
+      // Refresh list after update
+      fetchOrders();
     } catch (error) {
-      console.error(error);
-      alert("Failed to fetch blogs");
+      console.error("Failed to update order status:", error);
+      alert("Failed to update order status");
     }
   };
 
-  const handleDelete = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this blog?"))
-      return;
-
-    try {
-      await api.delete(`/api/blogs/${id}`, {
-        headers: {
-          // ✅ Updated key to adminToken
-          Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
-        },
-      });
-
-      fetchBlogs();
-    } catch (error) {
-      console.error(error);
-      alert("Delete failed");
-    }
-  };
+  // ===============================
+  // LOADING STATE
+  // ===============================
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center text-lg">
+        Loading {category} orders...
+      </div>
+    );
+  }
 
   return (
-    <div className="p-8">
-      <div className="flex justify-between mb-6">
-        <h2 className="text-2xl font-bold">All Blogs</h2>
-        <button
-          onClick={() => navigate("/admin/create-blog")}
-          className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition"
-        >
-          + Create Blog
-        </button>
+    <div className="min-h-screen bg-gray-100 p-6">
+      
+      {/* HEADER */}
+      <div className={`mb-6 p-4 rounded-lg text-white ${color}`}>
+        <h1 className="text-2xl font-semibold">
+          {title}
+        </h1>
       </div>
 
-      <div className="overflow-x-auto">
-        <table className="w-full border">
-          <thead>
-            <tr className="bg-gray-200 text-left">
-              <th className="p-3 border">Title</th>
-              <th className="p-3 border">Published</th>
-              <th className="p-3 border">Actions</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {blogs.map((blog) => (
-              <tr key={blog._id} className="hover:bg-gray-50">
-                <td className="p-3 border font-medium">{blog.title}</td>
-                <td className="p-3 border text-center">
-                  <span className={`px-2 py-1 rounded text-sm ${blog.isPublished ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}`}>
-                    {blog.isPublished ? "Published" : "Draft"}
-                  </span>
-                </td>
-                <td className="p-3 border">
-                  <div className="flex gap-3">
-                    <button
-                      onClick={() => navigate(`/admin/edit-blog/${blog._id}`)}
-                      className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded transition"
-                    >
-                      Edit
-                    </button>
-
-                    <button
-                      onClick={() => handleDelete(blog._id)}
-                      className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded transition"
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))}
-
-            {blogs.length === 0 && (
+      {/* EMPTY STATE */}
+      {orders.length === 0 ? (
+        <div className="bg-white p-8 rounded-xl shadow text-center text-gray-500">
+          No {category} orders found.
+        </div>
+      ) : (
+        <div className="overflow-x-auto bg-white rounded-xl shadow">
+          <table className="min-w-full border text-sm">
+            
+            <thead className="bg-gray-200">
               <tr>
-                <td colSpan="3" className="text-center p-8 text-gray-500">
-                  No blogs found. Start by creating one!
-                </td>
+                <th className="p-3 border">Customer</th>
+                <th className="p-3 border">Phone</th>
+                <th className="p-3 border">Email</th>
+                <th className="p-3 border">Product</th>
+                <th className="p-3 border">Amount</th>
+                <th className="p-3 border">Payment</th>
+                <th className="p-3 border">Order Status</th>
+                <th className="p-3 border">Date</th>
               </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+
+            <tbody>
+              {orders.map((order) => (
+                <tr key={order._id} className="hover:bg-gray-50">
+                  
+                  <td className="p-3 border font-medium">
+                    {order.customerName}
+                  </td>
+
+                  <td className="p-3 border">
+                    {order.phone}
+                  </td>
+
+                  <td className="p-3 border">
+                    {order.email || "-"}
+                  </td>
+
+                  <td className="p-3 border">
+                    {order.productName}
+                  </td>
+
+                  <td className="p-3 border font-semibold">
+                    ₹{order.productPrice}
+                  </td>
+
+                  <td className="p-3 border capitalize">
+                    {order.paymentStatus}
+                  </td>
+
+                  <td className="p-3 border">
+                    <select
+                      value={order.orderStatus}
+                      onChange={(e) =>
+                        handleStatusChange(order._id, e.target.value)
+                      }
+                      className="border rounded px-2 py-1 text-sm"
+                    >
+                      <option value="received">Received</option>
+                      <option value="processing">Processing</option>
+                      <option value="shipped">Shipped</option>
+                      <option value="delivered">Delivered</option>
+                      <option value="cancelled">Cancelled</option>
+                    </select>
+                  </td>
+
+                  <td className="p-3 border">
+                    {new Date(order.createdAt).toLocaleDateString()}
+                  </td>
+
+                </tr>
+              ))}
+            </tbody>
+
+          </table>
+        </div>
+      )}
     </div>
   );
 }
-
-export default AdminBlogs;

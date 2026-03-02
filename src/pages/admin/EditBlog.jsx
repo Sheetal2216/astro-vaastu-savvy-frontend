@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import api from "../../utils/axios";
 import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css"; 
+import "react-quill/dist/quill.snow.css";
 
 function EditBlog() {
   const { id } = useParams();
@@ -11,7 +11,6 @@ function EditBlog() {
   const [title, setTitle] = useState("");
   const [excerpt, setExcerpt] = useState("");
   const [content, setContent] = useState("");
-  const [coverImage, setCoverImage] = useState(null);
   const [isPublished, setIsPublished] = useState(true);
   const [loading, setLoading] = useState(false);
 
@@ -26,7 +25,13 @@ function EditBlog() {
   };
 
   const formats = [
-    "header", "bold", "italic", "underline", "list", "bullet", "link",
+    "header",
+    "bold",
+    "italic",
+    "underline",
+    "list",
+    "bullet",
+    "link",
   ];
 
   useEffect(() => {
@@ -35,7 +40,6 @@ function EditBlog() {
 
   const fetchBlog = async () => {
     try {
-      // ✅ Manual Authorization header removed
       const { data } = await api.get(`/api/blogs/admin/${id}`);
 
       const blog = data.blog;
@@ -61,11 +65,6 @@ function EditBlog() {
       formData.append("content", content);
       formData.append("isPublished", isPublished);
 
-      if (coverImage) {
-        formData.append("coverImage", coverImage);
-      }
-
-      // ✅ Manual Authorization header removed
       await api.put(`/api/blogs/${id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -113,16 +112,6 @@ function EditBlog() {
             className="bg-white mb-4"
             modules={modules}
             formats={formats}
-          />
-        </div>
-
-        <div className="pt-4">
-          <label className="block mb-2 font-medium">Change Cover Image (Optional)</label>
-          <input
-            type="file"
-            accept="image/*"
-            className="w-full"
-            onChange={(e) => setCoverImage(e.target.files[0])}
           />
         </div>
 

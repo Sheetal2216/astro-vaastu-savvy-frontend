@@ -12,8 +12,13 @@ function AdminBlogs() {
 
   const fetchBlogs = async () => {
     try {
-      // ✅ Manual Authorization header removed
-      const { data } = await api.get("/api/blogs");
+      const { data } = await api.get("/api/blogs", {
+        headers: {
+          // ✅ Updated key to adminToken
+          Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+        },
+      });
+
       setBlogs(data.blogs);
     } catch (error) {
       console.error(error);
@@ -26,8 +31,13 @@ function AdminBlogs() {
       return;
 
     try {
-      // ✅ Manual Authorization header removed
-      await api.delete(`/api/blogs/${id}`);
+      await api.delete(`/api/blogs/${id}`, {
+        headers: {
+          // ✅ Updated key to adminToken
+          Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+        },
+      });
+
       fetchBlogs();
     } catch (error) {
       console.error(error);
@@ -47,51 +57,55 @@ function AdminBlogs() {
         </button>
       </div>
 
-      <table className="w-full border">
-        <thead>
-          <tr className="bg-gray-200">
-            <th className="p-3 border">Title</th>
-            <th className="p-3 border">Published</th>
-            <th className="p-3 border">Actions</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {blogs.map((blog) => (
-            <tr key={blog._id} className="hover:bg-gray-50">
-              <td className="p-3 border">{blog.title}</td>
-              <td className="p-3 border">
-                {blog.isPublished ? "Yes" : "No"}
-              </td>
-              <td className="p-3 border flex gap-3">
-                <button
-                  onClick={() =>
-                    navigate(`/admin/edit-blog/${blog._id}`)
-                  }
-                  className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded transition"
-                >
-                  Edit
-                </button>
-
-                <button
-                  onClick={() => handleDelete(blog._id)}
-                  className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded transition"
-                >
-                  Delete
-                </button>
-              </td>
+      <div className="overflow-x-auto">
+        <table className="w-full border">
+          <thead>
+            <tr className="bg-gray-200 text-left">
+              <th className="p-3 border">Title</th>
+              <th className="p-3 border">Published</th>
+              <th className="p-3 border">Actions</th>
             </tr>
-          ))}
+          </thead>
 
-          {blogs.length === 0 && (
-            <tr>
-              <td colSpan="3" className="text-center p-4 text-gray-500">
-                No blogs found
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+          <tbody>
+            {blogs.map((blog) => (
+              <tr key={blog._id} className="hover:bg-gray-50">
+                <td className="p-3 border font-medium">{blog.title}</td>
+                <td className="p-3 border text-center">
+                  <span className={`px-2 py-1 rounded text-sm ${blog.isPublished ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}`}>
+                    {blog.isPublished ? "Published" : "Draft"}
+                  </span>
+                </td>
+                <td className="p-3 border">
+                  <div className="flex gap-3">
+                    <button
+                      onClick={() => navigate(`/admin/edit-blog/${blog._id}`)}
+                      className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded transition"
+                    >
+                      Edit
+                    </button>
+
+                    <button
+                      onClick={() => handleDelete(blog._id)}
+                      className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded transition"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+
+            {blogs.length === 0 && (
+              <tr>
+                <td colSpan="3" className="text-center p-8 text-gray-500">
+                  No blogs found. Start by creating one!
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

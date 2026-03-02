@@ -62,13 +62,7 @@ const fetchBlogs = async () => {
                     hover:shadow-xl transition">
 
       {/* IMAGE */}
-      <div className="md:col-span-1 flex justify-center">
-        <img
-          src={`${import.meta.env.VITE_API_URL}${blogs[0].coverImage}`}
-          alt={blogs[0].title}
-          className="w-full max-w-xs rounded-2xl shadow-lg"
-        />
-      </div>
+ 
 
       {/* CONTENT */}
       <div className="md:col-span-2 flex flex-col justify-center">

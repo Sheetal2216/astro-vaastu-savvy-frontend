@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../utils/axios";
 import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css"; 
+import "react-quill/dist/quill.snow.css";
 
 function CreateBlog() {
   const navigate = useNavigate();
@@ -10,7 +10,6 @@ function CreateBlog() {
   const [title, setTitle] = useState("");
   const [excerpt, setExcerpt] = useState("");
   const [content, setContent] = useState("");
-  const [coverImage, setCoverImage] = useState(null);
   const [isPublished, setIsPublished] = useState(true);
   const [loading, setLoading] = useState(false);
 
@@ -25,12 +24,7 @@ function CreateBlog() {
       formData.append("excerpt", excerpt);
       formData.append("content", content);
       formData.append("isPublished", isPublished);
-      if (coverImage) {
-        formData.append("coverImage", coverImage);
-      }
 
-      // ✅ Manual Authorization header removed. 
-      // Axios interceptor will now handle the token.
       await api.post("/api/blogs", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -58,7 +52,13 @@ function CreateBlog() {
   };
 
   const formats = [
-    "header", "bold", "italic", "underline", "list", "bullet", "link",
+    "header",
+    "bold",
+    "italic",
+    "underline",
+    "list",
+    "bullet",
+    "link",
   ];
 
   return (
@@ -92,16 +92,6 @@ function CreateBlog() {
             className="bg-white mb-4"
             modules={modules}
             formats={formats}
-          />
-        </div>
-
-        <div className="pt-4">
-          <label className="block mb-2 font-medium">Cover Image</label>
-          <input
-            type="file"
-            accept="image/*"
-            className="w-full"
-            onChange={(e) => setCoverImage(e.target.files[0])}
           />
         </div>
 
