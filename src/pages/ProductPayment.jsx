@@ -67,9 +67,8 @@ function ProductPayment() {
         handler: async function (response) {
           try {
             /* 3️⃣ VERIFY PAYMENT */
-            const verifyRes = await api.post(
-              "/api/product-payment/verify",
-              {
+            const verifyRes = await api.post("/api/product-payment/verify-payment",
+               {
                 razorpay_order_id: response.razorpay_order_id,
                 razorpay_payment_id: response.razorpay_payment_id,
                 razorpay_signature: response.razorpay_signature,
