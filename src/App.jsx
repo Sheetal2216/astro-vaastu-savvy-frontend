@@ -58,16 +58,22 @@ import CreateBlog from "./pages/admin/CreateBlog";
 import EditBlog from "./pages/admin/EditBlog";
 import BlogDetails from "./pages/BlogDetails";
 
+// ── NEW: Product Admin Pages ──────────────────────────────────────────────────
+import AdminProducts from "./pages/admin/AdminProducts";
+import AddProduct from "./pages/admin/AddProduct";
+
 // ==============================
 // META PIXEL TRACKING
 // ==============================
 import { trackPageView } from "./utils/metaPixel";
 
+// ==============================
 // LEGAL PAGES
 // ==============================
 import ReturnPolicy from "./pages/ReturnPolicy";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Terms from "./pages/Terms";
+
 /* =====================================================
    LAYOUT COMPONENT
 ===================================================== */
@@ -99,35 +105,25 @@ const Layout = () => {
         <Route path="/services" element={<Services />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/blogs" element={<Blogs />} />
-        <Route
-          path="/blogs/maha-shivratri"
-          element={<Mahashivratri />}
-        />
+        <Route path="/blogs/maha-shivratri" element={<Mahashivratri />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/kundli-analysis" element={<KundliAnalysis />} />
         <Route path="/thank-you" element={<ThankYou />} />
-<Route path="/return-policy" element={<ReturnPolicy />} />
-<Route path="/privacy-policy" element={<PrivacyPolicy />} />
-<Route path="/terms" element={<Terms />} />
+        <Route path="/return-policy" element={<ReturnPolicy />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/blogs/:slug" element={<BlogDetails />} />
 
-
-
-<Route path="/blogs/:slug" element={<BlogDetails />} />
-
-{/* ADMIN */}
-<Route path="/admin/blogs" element={<AdminBlogs />} />
-<Route path="/admin/create-blog" element={<CreateBlog />} />
-<Route path="/admin/edit-blog/:id" element={<EditBlog />} />
         {/* ================= SHOP ROUTES ================= */}
         <Route path="/shop/bracelets" element={<Bracelets />} />
         <Route path="/shop/rudraksha" element={<Rudraksha />} />
         <Route path="/shop/potli" element={<Potli />} />
 
         {/* ================= PRODUCT DETAIL ROUTES ================= */}
-        <Route path="/product/:id" element={<ProductDetails />} />
-        <Route path="/bracelet/:id" element={<ProductDetails />} />
-        <Route path="/rudraksha/:id" element={<RudrakshaDetails />} />
-        <Route path="/potli/:id" element={<ProductDetails />} />
+        <Route path="/product/:slug" element={<ProductDetails />} />
+        <Route path="/bracelet/:slug" element={<ProductDetails />} />
+        <Route path="/rudraksha/:slug" element={<RudrakshaDetails />} />
+        <Route path="/potli/:slug" element={<ProductDetails />} />
 
         {/* ================= CART / PAYMENT ================= */}
         <Route path="/bracelet-details" element={<BraceletDetails />} />
@@ -149,7 +145,6 @@ const Layout = () => {
             </ProtectedRoute>
           }
         />
-
         <Route
           path="/admin/kundli"
           element={
@@ -158,7 +153,6 @@ const Layout = () => {
             </ProtectedRoute>
           }
         />
-
         <Route
           path="/admin/orders"
           element={
@@ -167,7 +161,6 @@ const Layout = () => {
             </ProtectedRoute>
           }
         />
-
         <Route
           path="/admin/bracelet-orders"
           element={
@@ -176,7 +169,6 @@ const Layout = () => {
             </ProtectedRoute>
           }
         />
-
         <Route
           path="/admin/rudraksha-orders"
           element={
@@ -185,7 +177,6 @@ const Layout = () => {
             </ProtectedRoute>
           }
         />
-
         <Route
           path="/admin/potli-orders"
           element={
@@ -194,7 +185,6 @@ const Layout = () => {
             </ProtectedRoute>
           }
         />
-
         <Route
           path="/admin/kundli-orders"
           element={
@@ -203,9 +193,33 @@ const Layout = () => {
             </ProtectedRoute>
           }
         />
-      </Routes>
-      {!isAdminRoute && !isHomePage && <Footer />}
 
+        {/* ADMIN BLOGS */}
+        <Route path="/admin/blogs" element={<AdminBlogs />} />
+        <Route path="/admin/create-blog" element={<CreateBlog />} />
+        <Route path="/admin/edit-blog/:id" element={<EditBlog />} />
+
+        {/* ── NEW: ADMIN PRODUCTS ── */}
+        <Route
+          path="/admin/products"
+          element={
+            <ProtectedRoute>
+              <AdminProducts />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/products/add"
+          element={
+            <ProtectedRoute>
+              <AddProduct />
+            </ProtectedRoute>
+          }
+        />
+
+      </Routes>
+
+      {!isAdminRoute && !isHomePage && <Footer />}
       {!isAdminRoute && <PromptBox />}
     </>
   );

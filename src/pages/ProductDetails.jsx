@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import api from "../utils/axios";
 
 function ProductDetails() {
-  const { id } = useParams();
+  const { slug } = useParams(); // ← was `id`, now `slug`
   const { addToCart } = useCart();
   const navigate = useNavigate();
 
@@ -13,14 +13,14 @@ function ProductDetails() {
   const [showAdded, setShowAdded] = useState(false);
 
   useEffect(() => {
-    api.get(`/api/products/${id}`)
+    api.get(`/api/products/${slug}`) // ← now fetches by slug
       .then(res => {
         if (res.data.success) {
           setProduct(res.data.product);
         }
       })
       .catch(err => console.log(err));
-  }, [id]);
+  }, [slug]);
 
   useEffect(() => {
     if (!product?.images?.length) return;
@@ -272,68 +272,47 @@ function ProductDetails() {
         )}
 
         {/* ---------------- UNIVERSAL RITUAL BOX ---------------- */}
-     {isBracelet &&
- product.ritual &&
- (product.ritual.energized ||
-  product.ritual.wearDay ||
-  product.ritual.wearHand ||
-  product.ritual.hand ||
-  product.ritual.instruction) && (
-
-  <section className="relative overflow-hidden bg-gradient-to-br from-[#5D101D] to-[#3D0A13] text-white p-12 rounded-[4rem] shadow-2xl">
-    <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mt-32 blur-3xl" />
-    
-    <div className="relative z-10 grid md:grid-cols-2 gap-12 items-center">
-      
-      <div>
-        <h2 className="text-4xl font-bold mb-6 font-serif text-[#E6BE8A]">
-          Ritual & Activation
-        </h2>
-        {product.ritual?.energized && (
-          <p className="text-lg text-rose-100 font-light leading-relaxed">
-            {product.ritual.energized}
-          </p>
-        )}
-      </div>
-
-      <div className="space-y-4 bg-black/20 p-8 rounded-3xl border border-white/10">
-        
-        {product.ritual?.wearDay && (
-          <div className="flex justify-between border-b border-white/10 pb-2">
-            <span className="text-rose-200">Auspicious Day:</span>
-            <span className="font-bold">{product.ritual.wearDay}</span>
-          </div>
-        )}
-
-        {(product.ritual?.wearHand || product.ritual?.hand) && (
-          <div className="flex justify-between border-b border-white/10 pb-2">
-            <span className="text-rose-200">Hand/Side:</span>
-            <span className="font-bold">
-              {product.ritual.wearHand || product.ritual.hand}
-            </span>
-          </div>
-        )}
-
-        {product.ritual?.instruction && (
-          <p className="italic text-sm text-center pt-2 text-rose-200">
-            "{product.ritual.instruction}"
-          </p>
-        )}
-
-      </div>
-    </div>
-  </section>
-)}
-
+        {isBracelet &&
+          product.ritual &&
+          (product.ritual.energized ||
+            product.ritual.wearDay ||
+            product.ritual.wearHand ||
+            product.ritual.hand ||
+            product.ritual.instruction) && (
+            <section className="relative overflow-hidden bg-gradient-to-br from-[#5D101D] to-[#3D0A13] text-white p-12 rounded-[4rem] shadow-2xl">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mt-32 blur-3xl" />
+              <div className="relative z-10 grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                  <h2 className="text-4xl font-bold mb-6 font-serif text-[#E6BE8A]">Ritual & Activation</h2>
+                  {product.ritual?.energized && (
+                    <p className="text-lg text-rose-100 font-light leading-relaxed">{product.ritual.energized}</p>
+                  )}
+                </div>
+                <div className="space-y-4 bg-black/20 p-8 rounded-3xl border border-white/10">
+                  {product.ritual?.wearDay && (
+                    <div className="flex justify-between border-b border-white/10 pb-2">
+                      <span className="text-rose-200">Auspicious Day:</span>
+                      <span className="font-bold">{product.ritual.wearDay}</span>
+                    </div>
+                  )}
+                  {(product.ritual?.wearHand || product.ritual?.hand) && (
+                    <div className="flex justify-between border-b border-white/10 pb-2">
+                      <span className="text-rose-200">Hand/Side:</span>
+                      <span className="font-bold">{product.ritual.wearHand || product.ritual.hand}</span>
+                    </div>
+                  )}
+                  {product.ritual?.instruction && (
+                    <p className="italic text-sm text-center pt-2 text-rose-200">"{product.ritual.instruction}"</p>
+                  )}
+                </div>
+              </div>
+            </section>
+          )}
 
         {/* ---------------- FOOTER SECTION ---------------- */}
         <footer className="text-center py-20 border-t border-gray-100">
-          <h2 className="text-4xl font-serif italic text-[#5D101D] mb-6">
-            "{product.footerQuote}"
-          </h2>
-          <p className="text-gray-500 max-w-2xl mx-auto uppercase tracking-widest text-xs leading-loose">
-            {product.footerNote}
-          </p>
+          <h2 className="text-4xl font-serif italic text-[#5D101D] mb-6">"{product.footerQuote}"</h2>
+          <p className="text-gray-500 max-w-2xl mx-auto uppercase tracking-widest text-xs leading-loose">{product.footerNote}</p>
         </footer>
 
       </div>

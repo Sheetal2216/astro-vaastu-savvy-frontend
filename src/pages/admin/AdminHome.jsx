@@ -2,17 +2,17 @@ import { useNavigate } from "react-router-dom";
 
 const AdminHome = () => {
   const navigate = useNavigate();
-  
-  // 2. Get the role from localStorage
+
   const role = localStorage.getItem("adminRole");
 
-  // 1. Logout Logic
   const handleLogout = () => {
     localStorage.removeItem("adminToken");
     localStorage.removeItem("adminRole");
     navigate("/admin-login");
   };
-console.log("Admin Role:", role);
+
+  console.log("Admin Role:", role);
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6 relative">
       {/* Logout Button */}
@@ -24,7 +24,7 @@ console.log("Admin Role:", role);
       </button>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 max-w-7xl w-full">
-        
+
         {/* --- SUPER ADMIN ONLY SECTIONS --- */}
         {role === "super-admin" && (
           <>
@@ -70,6 +70,19 @@ console.log("Admin Role:", role);
                 Potli Orders
               </h2>
               <p className="text-gray-600">Manage potli purchases.</p>
+            </div>
+
+            {/* ── NEW: Manage Products ── */}
+            <div
+              onClick={() => navigate("/admin/products")}
+              className="cursor-pointer bg-white p-8 rounded-xl shadow hover:shadow-lg transition border border-yellow-600/30"
+            >
+              <h2 className="text-2xl font-semibold text-yellow-700 mb-2">
+                Manage Products
+              </h2>
+              <p className="text-gray-600">
+                Add, edit or delete bracelets, rudraksha &amp; potli products.
+              </p>
             </div>
           </>
         )}

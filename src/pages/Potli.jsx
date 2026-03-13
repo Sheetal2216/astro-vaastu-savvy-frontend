@@ -12,9 +12,6 @@ function Potli() {
       try {
         const res = await api.get("/api/products?category=potli");
 
-        console.log("Potli API Response:", res.data);
-
-        // ✅ Handle both response formats
         if (Array.isArray(res.data)) {
           setPotlis(res.data);
         } else if (res.data.products && Array.isArray(res.data.products)) {
@@ -22,7 +19,6 @@ function Potli() {
         } else {
           setPotlis([]);
         }
-
       } catch (err) {
         console.error("Potli fetch error:", err);
         setPotlis([]);
@@ -69,7 +65,7 @@ function Potli() {
           {potlis.map((product) => (
             <div
               key={product._id}
-              onClick={() => navigate(`/potli/${product._id}`)}
+              onClick={() => navigate(`/potli/${product.slug || product._id}`)} // ← slug with _id fallback
               className="group cursor-pointer bg-white rounded-[2.5rem] shadow-xl border border-gray-100 overflow-hidden hover:-translate-y-2 transition-all duration-500"
             >
               {/* IMAGE */}
@@ -86,18 +82,15 @@ function Potli() {
                 <h2 className="text-2xl font-serif font-bold text-[#5D101D]">
                   {product.name}
                 </h2>
-
                 <p className="text-gray-600 text-sm line-clamp-3">
                   {product.shortDescription || product.description}
                 </p>
-
                 <div className="flex justify-between items-center pt-4">
                   <span className="text-xl font-bold text-[#8B0000]">
                     {product.price
                       ? `₹${product.price.toLocaleString()}`
                       : "Call for Price"}
                   </span>
-
                   <span className="text-xs uppercase tracking-widest text-[#B27D62] font-semibold">
                     View Details →
                   </span>

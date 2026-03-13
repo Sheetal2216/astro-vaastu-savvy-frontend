@@ -9,11 +9,10 @@ function Bracelets() {
   useEffect(() => {
     api.get("/api/products?category=bracelet")
       .then(res => {
-  if (res.data.success) {
-    setProducts(res.data.products);
-  }
-})
-
+        if (res.data.success) {
+          setProducts(res.data.products);
+        }
+      })
       .catch(err => console.error(err));
   }, []);
 
@@ -27,7 +26,7 @@ function Bracelets() {
         {products.map(product => (
           <div
             key={product._id}
-            onClick={() => navigate(`/product/${product._id}`)}
+            onClick={() => navigate(`/product/${product.slug || product._id}`)}
             className="bg-white rounded-2xl shadow-md overflow-hidden cursor-pointer hover:scale-105 transition"
           >
             <img
@@ -35,14 +34,9 @@ function Bracelets() {
               alt={product.name}
               className="w-full h-64 object-cover"
             />
-
             <div className="p-5">
-              <h2 className="text-lg font-semibold">
-                {product.name}
-              </h2>
-              <p className="text-[#BC6C25] font-bold mt-2">
-                ₹{product.price}
-              </p>
+              <h2 className="text-lg font-semibold">{product.name}</h2>
+              <p className="text-[#BC6C25] font-bold mt-2">₹{product.price}</p>
             </div>
           </div>
         ))}
